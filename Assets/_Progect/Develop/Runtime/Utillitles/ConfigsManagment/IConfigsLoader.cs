@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IConfigsLoader 
+namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
 {
-    IEnumerator LoadAsync(Action<Dictionary<Type, object>> onConfigsLoaded); 
+    public interface IConfigsLoader
+    {
+        IEnumerator LoadAsync(Action<Dictionary<Type, object>> onConfigsLoaded);
+    }
 }

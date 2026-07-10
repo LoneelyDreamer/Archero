@@ -1,42 +1,63 @@
+using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
+using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+namespace Assets._Progect.Develop.Runtime
 {
-    private ICoroutinesPerformer _coroutinesPerformer;
-    private ResourcesAssetsLoader _resourcesAssetsLoader;
-
-    private void Awake()
+    public class Test : MonoBehaviour
     {
-        _resourcesAssetsLoader = CreateResoursesAssetLoader();
-       
-        _coroutinesPerformer = CreateCoroutinePerformer();
-    }
+        private ICoroutinesPerformer _coroutinesPerformer;
 
-    private ResourcesAssetsLoader CreateResoursesAssetLoader() => new ResourcesAssetsLoader();
+        private ResourcesAssetsLoader _resourcesAssetsLoader;
 
-    private CoroutinesPerformer CreateCoroutinePerformer()
-    {
-        CoroutinesPerformer coroutinesPerformerPrefab = _resourcesAssetsLoader.
-           Load<CoroutinesPerformer>("Utillities/CoroutinesPerformer");
+        private ConfigsProviderServise _configProviderServise;
 
-        return Instantiate(coroutinesPerformerPrefab);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
+        private void Awake()
         {
-            _coroutinesPerformer.StartPerform(TestCoroutine());
+            _resourcesAssetsLoader = CreateResoursesAssetLoader();
+
+            _coroutinesPerformer = CreateCoroutinePerformer();
+
+            _configProviderServise = CreateConfigsProviderServise();
+
+            _coroutinesPerformer.StartPerform(LoadConfigs());
         }
-    }
 
-    private IEnumerator TestCoroutine()
-    {
-        Debug.Log("Start");
-        yield return new WaitForSeconds(1f);
-        Debug.Log("End");
+        private ConfigsProviderServise CreateConfigsProviderServise()
+        {
+            ResourcesConfigsLoader resourcesConfigsLoader = new ResourcesConfigsLoader(_resourcesAssetsLoader);
 
+            return new ConfigsProviderServise(resourcesConfigsLoader);
+        }
+
+        private ResourcesAssetsLoader CreateResoursesAssetLoader() => new ResourcesAssetsLoader();
+
+        private CoroutinesPerformer CreateCoroutinePerformer()
+        {
+            CoroutinesPerformer coroutinesPerformerPrefab = _resourcesAssetsLoader.
+               Load<CoroutinesPerformer>("Utillities/CoroutinesPerformer");
+
+            return Instantiate(coroutinesPerformerPrefab);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                TestConfig testConfig = _configProviderServise.GetConfig<TestConfig>();
+                Debug.Log(testConfig.Damage);
+            }
+        }
+
+        private IEnumerator LoadConfigs()
+        {
+            Debug.Log("StartLoadConfigs");
+            yield return _configProviderServise.LoadAsync();
+            Debug.Log("EndLoadConfigs");
+
+        }
     }
 }

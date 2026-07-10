@@ -2,33 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEngine;
 
-public class ConfigsProviderServise
+namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
 {
-    private readonly Dictionary<Type, object> _configs = new();
-
-    private readonly IConfigsLoader[] _loaders;
-
-    public ConfigsProviderServise(params  IConfigsLoader[] loaders)
+    public class ConfigsProviderServise
     {
-        _loaders = loaders;
-    }
+        private readonly Dictionary<Type, object> _configs = new();
 
-    public IEnumerator LoadAsync()
-    {
-        _configs.Clear();
+        private readonly IConfigsLoader[] _loaders;
 
-        foreach (IConfigsLoader loader in _loaders)
-            yield return loader.LoadAsync(loadedConfigs => _configs.AddRange(loadedConfigs));
-        
-    }
+        public ConfigsProviderServise(params IConfigsLoader[] loaders)
+        {
+            _loaders = loaders;
+        }
 
-    public T GetConfig<T>() where T : class
-    {
-        if (_configs.ContainsKey(typeof(T)) == false)
-            throw new InvalidOperationException($"Not found config by {typeof(T)}");
+        public IEnumerator LoadAsync()
+        {
+            _configs.Clear();
 
-        return (T)_configs[typeof(T)];
+            foreach (IConfigsLoader loader in _loaders)
+                yield return loader.LoadAsync(loadedConfigs => _configs.AddRange(loadedConfigs));
+
+        }
+
+        public T GetConfig<T>() where T : class
+        {
+            if (_configs.ContainsKey(typeof(T)) == false)
+                throw new InvalidOperationException($"Not found config by {typeof(T)}");
+
+            return (T)_configs[typeof(T)];
+        }
     }
 }
