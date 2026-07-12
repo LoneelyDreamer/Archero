@@ -1,36 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.Infrastructure.DI
 {
     public class DIContainer
     {
         private readonly Dictionary<Type, Registration> _container = new();
-    }
 
-    public class Registration
-    {
-        private Func<DIContainer, object> _creator;
-        private object _cashedInstance;
+        private readonly List<Type> _requests = new();
 
-        public Registration(Func<DIContainer, object> creator) => _creator = creator;
-       
-        public object CreatObjectFrom(DIContainer container)
+        private readonly DIContainer _parant;
+
+        public DIContainer() : this(null)
         {
-            if(_cashedInstance != null)
+        }
+
+        public DIContainer(DIContainer parant) => _parant = parant;
+        
+
+        public bool IsAlreadyRegister<T>()
+        {
+            if(_container.ContainsKey(typeof(T)))
+                return true;
+
+            if(_parant != null)
+                return _parant.IsAlreadyRegister<T>();
+
+            return false;
+        }
+
+        public void RegisterAsSingle<T>(Func<DIContainer, T> creator)
+        {
+            if (IsAlreadyRegister<T>())
+                throw new InvalidOperationException($"{typeof(T)} already registered");
+
+            Registration registration = new Registration(container => creator.Invoke(container));
+            _container.Add(typeof(T), registration);
+        }
+
+        public T Resolve<T>()
+        {
+            if (_requests.Contains(typeof(T)))
+                throw new InvalidOperationException($"Cycle resolve for {typeof(T)}");
+
+            _requests.Add(typeof(T));
+
+            try
             {
-                return _cashedInstance;
+                if (_container.TryGetValue(typeof(T), out Registration registration))
+                    return (T)registration.CreatInstanceFrom(this);
+
+                if(_parant != null)
+                    return _parant.Resolve<T>();
+
             }
+            finally
+            {
+                _requests.Remove(typeof(T));
+            }          
 
-            if (_creator == null)
-                throw new InvalidOperationException("Not has instance or creator");
-
-            _cashedInstance = _creator.Invoke(container);
-
-            return _cashedInstance;
+            throw new InvalidOperationException($"Registration for {typeof(T)} not exsist");
         }
     }
 
