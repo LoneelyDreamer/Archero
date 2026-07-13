@@ -2,7 +2,9 @@
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,6 +13,8 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
     public class MainMenuBootstrap : SceneBootstrap
     {
         private DIContainer _container;
+
+        private ReactiveVeriable<int> _field;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -28,7 +32,15 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
 
         public override void Run()
         {
-            Debug.Log("Start MainMenu Scene");     
+            Debug.Log("Start MainMenu Scene");
+
+            _field = new ReactiveVeriable<int>(5);
+            _field.Subscribe(OnFieldChanged);
+        }
+
+        private void OnFieldChanged(int arg1, int arg2)
+        {
+            Debug.Log($"Field changed old -{arg1} new -{arg2}");
         }
 
         private void Update()
@@ -38,6 +50,11 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
                 SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2)));
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _field.Value++;
             }
         }
     }
