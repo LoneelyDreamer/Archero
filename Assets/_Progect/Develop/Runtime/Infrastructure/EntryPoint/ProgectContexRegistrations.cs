@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
+using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
@@ -26,7 +27,22 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateSceneSwitherService);
 
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
+
+            container.RegisterAsSingle(CreateSCupchaServisce);
+
         }
+
+        private static CupchaServisce CreateSCupchaServisce(DIContainer c)
+        {
+            ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
+            GameModeConfig config = configsProviderServise.GetConfig<GameModeConfig>();
+            return new CupchaServisce(config.chars);
+        }
+       
+
+
+
+
 
         private static SceneLoaderServise CreateSceneLoaderService(DIContainer c)
             => new SceneLoaderServise();

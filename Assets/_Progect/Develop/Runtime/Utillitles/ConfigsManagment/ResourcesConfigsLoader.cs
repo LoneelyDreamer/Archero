@@ -12,7 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
 
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
-
+            {typeof(GameModeConfig),"GameMode1" }
         };
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
         {
