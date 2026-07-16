@@ -1,11 +1,14 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.LoadingScreen;
+using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -26,7 +29,21 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateSceneSwitherService);
 
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
+
+            container.RegisterAsSingle(CreateWalletServise);
+
+
         }
+
+        private static WalletServise CreateWalletServise(DIContainer c)
+        {
+            Dictionary<CurrenceTypes, ReactiveVeriable<int>> currencies = new();
+            foreach (CurrenceTypes currenceTypes in Enum.GetValues(typeof(CurrenceTypes)))
+                currencies[currenceTypes] = new ReactiveVeriable<int>();
+
+            return new WalletServise(currencies);
+        }
+
 
         private static SceneLoaderServise CreateSceneLoaderService(DIContainer c)
             => new SceneLoaderServise();

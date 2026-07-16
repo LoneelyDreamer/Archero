@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet
 {
-    public enum CurrenceType
+    public enum CurrenceTypes
     {
         Gold,
         Dimond
     }
+
 }
