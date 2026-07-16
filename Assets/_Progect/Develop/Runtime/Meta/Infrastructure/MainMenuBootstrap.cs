@@ -3,11 +3,12 @@ using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
-using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.Serializers;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
@@ -16,6 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
     {
         private DIContainer _container;
         private WalletServise _walletServise;
+        private PlayerData _playerData;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -29,6 +31,13 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
             Debug.Log("Initialize MainMenu Scene");
 
             _walletServise =_container.Resolve<WalletServise>();
+
+            _playerData =new PlayerData();
+            _playerData.WalletData = new Dictionary<CurrenceTypes, int>()
+            {
+                { CurrenceTypes.Gold, 10 },
+                { CurrenceTypes.Dimond, 150 },
+            };
 
             yield break;
         }
@@ -62,7 +71,6 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
                     Debug.Log("Current gold" + _walletServise.GetCurrence(CurrenceTypes.Gold).Value);
                 }      
             }
-
         }
     }
 }

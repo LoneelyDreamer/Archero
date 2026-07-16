@@ -10,6 +10,6 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.DataManagment
 {
     public class PlayerData
     {
-        private readonly Dictionary<CurrenceTypes, int> _walletData;
+        public Dictionary<CurrenceTypes, int> WalletData;
     }
 }
