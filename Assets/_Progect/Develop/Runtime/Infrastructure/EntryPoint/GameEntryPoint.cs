@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.LoadingScreen;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System.Collections;
@@ -32,12 +33,22 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
         {
             ILoadingScreen loadingScreen = container.Resolve<ILoadingScreen>();
             SceneSwitherService sceneSwitherService = container.Resolve<SceneSwitherService>();
+            PlayerDataProvider playerDataProvider = container.Resolve<PlayerDataProvider>();
 
             loadingScreen.Show();
 
             Debug.Log("Начинается инициализация сервисов");
 
             yield return container.Resolve<ConfigsProviderServise>().LoadAsync();
+
+            bool isPlayerDataSaveExists = false;
+
+            yield return playerDataProvider.Exists(result => isPlayerDataSaveExists = result);
+
+            if(isPlayerDataSaveExists)
+                yield return playerDataProvider.Load();
+            else
+                playerDataProvider.Reset();
 
             yield return new WaitForSeconds(1f);
 

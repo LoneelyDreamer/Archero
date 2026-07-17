@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Utillitles.DataManagment.KeyStorage
 {
-    public class MapDataKeysStarage : IDataKeySorage
+    public class MapDataKeysStarage : IDataKeysSorage
     {
         private readonly Dictionary<Type, string> Keys = new Dictionary<Type, string>()
         {
