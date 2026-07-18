@@ -35,7 +35,7 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
-            container.RegisterAsSingle(CreateWalletServise);
+            container.RegisterAsSingle(CreateWalletServise).NonLazy();
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
@@ -64,7 +64,7 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             foreach (CurrenceTypes currenceTypes in Enum.GetValues(typeof(CurrenceTypes)))
                 currencies[currenceTypes] = new ReactiveVeriable<int>();
 
-            return new WalletServise(currencies);
+            return new WalletServise(currencies, c.Resolve<PlayerDataProvider>());
         }
 
 

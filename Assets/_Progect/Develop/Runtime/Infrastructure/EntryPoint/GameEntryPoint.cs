@@ -19,6 +19,7 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             Debug.Log("Process of servises registration");
             DIContainer projectContainer = new DIContainer();
             ProgectContexRegistrations.Process(projectContainer);
+            projectContainer.Initialize();
 
             projectContainer.Resolve<ICoroutinesPerformer>().StartPerform(Initialize(projectContainer));
         }
