@@ -1,3 +1,4 @@
+using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using System;
 using System.Collections;
@@ -13,6 +14,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
             {typeof(GameModeConfig),"GameMode1" }
+            { typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig"}
         };
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
         {

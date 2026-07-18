@@ -39,6 +39,8 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.SceneManagment
             DIContainer sceneContainer = new DIContainer(_projectContainer);
 
             sceneBootstrap.ProcessRegisration(sceneContainer,sceneArgs, mode);
+            sceneBootstrap.ProcessRegisration(sceneContainer,sceneArgs);
+            sceneBootstrap.Initialize();
 
             yield return sceneBootstrap.Initialize();
 

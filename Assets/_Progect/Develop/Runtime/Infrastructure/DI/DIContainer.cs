@@ -29,13 +29,15 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.DI
             return false;
         }
 
-        public void RegisterAsSingle<T>(Func<DIContainer, T> creator)
+        public IRegistrationOptions RegisterAsSingle<T>(Func<DIContainer, T> creator)
         {
             if (IsAlreadyRegister<T>())
                 throw new InvalidOperationException($"{typeof(T)} already registered");
 
             Registration registration = new Registration(container => creator.Invoke(container));
             _container.Add(typeof(T), registration);
+
+            return registration;
         }
 
         public T Resolve<T>()
@@ -61,6 +63,14 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.DI
 
             throw new InvalidOperationException($"Registration for {typeof(T)} not exsist");
         }
-    }
+        public void Initialize()
+        {
+            foreach (Registration registration in _container.Values)
+            {
+                if (registration.IsNonLazy)
+                    registration.CreatInstanceFrom(this);
+            }
+        }
 
+    }
 }

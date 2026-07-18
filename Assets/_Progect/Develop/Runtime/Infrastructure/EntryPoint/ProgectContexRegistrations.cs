@@ -1,12 +1,21 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataRepository;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.KeyStorage;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.Serializers;
 using Assets._Progect.Develop.Runtime.Utillitles.LoadingScreen;
+using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -29,6 +38,12 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
             container.RegisterAsSingle(CreateSCupchaServisce);
+            
+            container.RegisterAsSingle(CreateWalletServise).NonLazy();
+
+            container.RegisterAsSingle(CreatePlayerDataProvider);
+
+            container.RegisterAsSingle<ISaveLoadServise>(CreateSaveLoadServise);
 
         }
 
@@ -39,9 +54,29 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             return new CupchaServisce(config.chars);
         }
        
+        public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
+            =>new PlayerDataProvider(c.Resolve<ISaveLoadServise>(), c.Resolve<ConfigsProviderServise>());        
 
+        private static SaveLoadServise CreateSaveLoadServise(DIContainer c)
+        {
+            IDataSerializer dataSerializer = new JsonSerializer();
+            IDataKeysSorage dataKeysSorage = new MapDataKeysStarage();
 
+            string saveFolderPath = Application.isEditor ? Application.dataPath : Application.persistentDataPath; 
 
+            IDataRepository dataRepository = new LocalFileDataRepository(saveFolderPath, "json");
+
+            return new SaveLoadServise(dataSerializer, dataKeysSorage, dataRepository);
+        }
+
+        private static WalletServise CreateWalletServise(DIContainer c)
+        {
+            Dictionary<CurrenceTypes, ReactiveVeriable<int>> currencies = new();
+            foreach (CurrenceTypes currenceTypes in Enum.GetValues(typeof(CurrenceTypes)))
+                currencies[currenceTypes] = new ReactiveVeriable<int>();
+
+            return new WalletServise(currencies, c.Resolve<PlayerDataProvider>());
+        }
 
 
         private static SceneLoaderServise CreateSceneLoaderService(DIContainer c)
