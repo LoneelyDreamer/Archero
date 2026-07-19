@@ -1,6 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
-﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
@@ -14,7 +13,6 @@ using Assets._Progect.Develop.Runtime.Utillitles.LoadingScreen;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;

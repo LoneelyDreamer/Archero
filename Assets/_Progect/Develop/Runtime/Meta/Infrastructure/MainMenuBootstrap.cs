@@ -53,14 +53,7 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
 
         private void Update()
         {
-            //if (Input.GetKeyDown(KeyCode.F))
-            //{
-            //    SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
-            //    ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-            //    coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2)));
-            //}
-
-            if(Input.GetKeyDown(KeyCode.Alpha1))
+            if(Input.GetKeyDown(KeyCode.Alpha3))
             {
                 _walletServise.Add(CurrenceTypes.Gold, 10);
                 Debug.Log("Current gold" + _walletServise.GetCurrence(CurrenceTypes.Gold).Value);
@@ -79,7 +72,7 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2), new GameplayInputArgs(2)));
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 if(_walletServise.Enough(CurrenceTypes.Gold, 10))
                 {

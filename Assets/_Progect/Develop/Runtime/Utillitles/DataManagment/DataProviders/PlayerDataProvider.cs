@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
+﻿using Assets._Progect.Develop.Runtime.Configs.Meta.Caunter;
+using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
@@ -23,8 +24,21 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders
             return new PlayerData()
             {
                 WalletData = InitWalletData(),
+                CauntersData = InitCauntersData()
             };
 
+        }
+
+        private Dictionary<CauntersTypes, int> InitCauntersData()
+        {
+            StartCauntersConfig cauntersConfig = _configsProviderServise.GetConfig<StartCauntersConfig>();
+
+            Dictionary<CauntersTypes, int> cauntersData = new();
+
+            foreach (CauntersTypes cauntersTypes in Enum.GetValues(typeof(CauntersTypes)))
+                cauntersData[cauntersTypes] = cauntersConfig.GetValuesFor(cauntersTypes);
+
+            return cauntersData;
         }
 
         private Dictionary<CurrenceTypes, int> InitWalletData()

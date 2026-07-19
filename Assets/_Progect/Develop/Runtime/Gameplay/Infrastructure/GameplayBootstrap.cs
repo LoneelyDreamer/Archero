@@ -55,13 +55,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private string _currentText = string.Empty;
 
         private void Update()
-        {
-            //if (Input.GetKeyDown(KeyCode.F))
-            //{
-            //    SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
-            //    ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-            //    coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
-            //}
+        {         
 
             foreach (char c in Input.inputString)
             {
