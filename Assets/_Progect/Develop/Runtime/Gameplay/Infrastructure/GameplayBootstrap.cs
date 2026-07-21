@@ -1,11 +1,14 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
@@ -15,8 +18,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
         private GameplayInputArgs _mode;
-
-
+        private WinAndLoseCauntersServise _winAndLoseCauntersServise;
+        private PlayerDataProvider _playerDataProvider;
+        private ICoroutinesPerformer _coroutinesPerformer;
+        private SceneSwitherService _sceneSwitherService;
+        private BonusAndPenaltyServise _bonusAndPenaltyServise;
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null, IInputSceneArgs sceneArgs2 = null)
         {
             _container = container;
@@ -39,6 +45,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log($"Вы попали на уровень {_inputArgs.LevalNumber}");
 
             Debug.Log("Initialize Gameplay Scene");
+            _cupchaServisce = _container.Resolve<CupchaServisce>();
+            _winAndLoseCauntersServise = _container.Resolve<WinAndLoseCauntersServise>();
+            _playerDataProvider = _container.Resolve<PlayerDataProvider>();
+            _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            _sceneSwitherService = _container.Resolve<SceneSwitherService>();
+            _bonusAndPenaltyServise = _container.Resolve<BonusAndPenaltyServise>();
 
             yield break;
         }
@@ -47,7 +59,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         public override void Run()
         {
             Debug.Log("Start Gameplay Scene");
-            _cupchaServisce = _container.Resolve<CupchaServisce>();
+            
             string cupchaText = _cupchaServisce.GanerateCupcha(_mode.LevalNumber);
             Debug.Log("Введите - " + cupchaText);
         }
@@ -70,16 +82,23 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                     if (_cupchaServisce.CupchaCheak(_currentText))
                     {
                         Debug.Log("Победа");
-                        SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
-                        ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                        coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
+                        _winAndLoseCauntersServise.Caunt(CauntersTypes.Wins);
+
+                        _bonusAndPenaltyServise.AddGoldBonus();
+
+                        _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+                        _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
+
                     }
                     else
                     {
                         Debug.Log("Поражение");
-                        SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
-                        ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                        coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1), new GameplayInputArgs(_mode.LevalNumber)));
+                        _winAndLoseCauntersServise.Caunt(CauntersTypes.Loses);
+
+                        _bonusAndPenaltyServise.AddGoldPenalty();
+
+                        _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+                        _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1), new GameplayInputArgs(_mode.LevalNumber)));
                     }
 
                     _currentText = string.Empty;

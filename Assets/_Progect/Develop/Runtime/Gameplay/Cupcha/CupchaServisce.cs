@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
+using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,12 +11,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Cupcha
         public const int MaxExclusive = 10;
 
         private string _chars;
+        private string _numbers;
         private int _leghts;
         private string _cupcha;
 
-        public CupchaServisce(string chars)
+        public CupchaServisce(GameModeConfig GameModeConfig)
         {
-            _chars = chars;
+            _chars = GameModeConfig.Chars;
+            _numbers = GameModeConfig.Numbers;
         }
 
         public string GanerateCupcha(int mode)
@@ -31,8 +34,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Cupcha
             {
                 for (int i = 0; i < _leghts; i++)
                 {
-                    int random = GetRundomNumber();
-                    stringBuilder.Append(random);
+                    int random = GetRundonChar(_numbers);
+                    stringBuilder.Append(_numbers[random]);
                 }
 
                 _cupcha = stringBuilder.ToString();
@@ -43,7 +46,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Cupcha
             {
                 for (int i = 0; i < _leghts; i++)
                 {
-                    int random = GetRundonChar();
+                    int random = GetRundonChar(_chars);
                     stringBuilder.Append(_chars[random]);
                 }
 
@@ -61,9 +64,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Cupcha
             return Random.Range(MinInclusive, MaxExclusive);
         }
 
-        private int GetRundonChar()
+        private int GetRundonChar(string simvols)
         {
-            return Random.Range(0, _chars.Length);
+            return Random.Range(0, simvols.Length);
         }
 
         public bool CupchaCheak(string x)

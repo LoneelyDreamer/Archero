@@ -1,6 +1,10 @@
 {
   "WalletData": {
-    "Gold": 30,
+    "Gold": 70,
     "Dimond": 25
+  },
+  "CauntersData": {
+    "Wins": 1,
+    "Loses": 0
   }
 }

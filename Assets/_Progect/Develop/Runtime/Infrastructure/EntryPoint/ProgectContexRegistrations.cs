@@ -1,5 +1,10 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
+﻿using Assets._Progect.Develop.Runtime.Configs.Meta.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Configs.Meta.ShopPrises;
+using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Shop;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
@@ -35,23 +40,58 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
-            container.RegisterAsSingle(CreateSCupchaServisce);
+            container.RegisterAsSingle(CreateCupchaServisce);
+
+            container.RegisterAsSingle(CreateBonusAndPenaltyServise);
             
             container.RegisterAsSingle(CreateWalletServise).NonLazy();
 
+            container.RegisterAsSingle(CreateWinAndLoseCauntersServise).NonLazy();
+
             container.RegisterAsSingle(CreatePlayerDataProvider);
+
+            container.RegisterAsSingle(CreateShopServise);
 
             container.RegisterAsSingle<ISaveLoadServise>(CreateSaveLoadServise);
 
         }
 
-        private static CupchaServisce CreateSCupchaServisce(DIContainer c)
+        private static WinAndLoseCauntersServise CreateWinAndLoseCauntersServise(DIContainer c)
+        {
+            Dictionary<CauntersTypes, ReactiveVeriable<int>> caunters = new();
+            foreach (CauntersTypes caunterTypes in Enum.GetValues(typeof(CauntersTypes)))
+                caunters[caunterTypes] = new ReactiveVeriable<int>();
+
+            return new WinAndLoseCauntersServise(caunters, c.Resolve<PlayerDataProvider>());
+        }
+
+        private static CupchaServisce CreateCupchaServisce(DIContainer c)
         {
             ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
             GameModeConfig config = configsProviderServise.GetConfig<GameModeConfig>();
-            return new CupchaServisce(config.chars);
+            return new CupchaServisce(config);
         }
-       
+
+        private static ShopServise CreateShopServise(DIContainer c)
+        {
+            ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
+            ShopPricesConfig config = configsProviderServise.GetConfig<ShopPricesConfig>();
+            return new ShopServise(
+                c.Resolve<WalletServise>(),
+                c.Resolve<WinAndLoseCauntersServise>(),
+                config,
+                c.Resolve<PlayerDataProvider>(),
+                c.Resolve<ICoroutinesPerformer>());
+        }
+
+        private static BonusAndPenaltyServise CreateBonusAndPenaltyServise(DIContainer c)
+        {
+            ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
+            BonusAndPenaltyStartConfig config = configsProviderServise.GetConfig<BonusAndPenaltyStartConfig>();
+            return new BonusAndPenaltyServise(c.Resolve<WalletServise>(), config);
+        }
+
+
         public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
             =>new PlayerDataProvider(c.Resolve<ISaveLoadServise>(), c.Resolve<ConfigsProviderServise>());        
 

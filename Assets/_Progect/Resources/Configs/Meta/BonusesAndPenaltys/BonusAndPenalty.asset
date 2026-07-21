@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf1215ddcfe95343b5ea3c9cbe7bd45, type: 3}
-  m_Name: GameMode1
+  m_Script: {fileID: 11500000, guid: 2beea6c8aa4e83e43bc90a0d683a1e8d, type: 3}
+  m_Name: BonusAndPenalty
   m_EditorClassIdentifier: 
-  <Chars>k__BackingField: asf
-  <Numbers>k__BackingField: 123
+  <WinGoldBonus>k__BackingField: 15
+  <LoseGoldPenalty>k__BackingField: 10

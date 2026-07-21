@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter
 {
@@ -24,6 +25,12 @@ namespace Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter
         public void Caunt(CauntersTypes type)
         {
             _caunters[type].Value += 1;
+        }
+
+        public void ResetCaunters()
+        {
+            foreach (KeyValuePair<CauntersTypes, ReactiveVeriable<int>> cunts in _caunters)
+                _caunters[cunts.Key].Value = 0;
         }
 
         public IReadOnlyVeriable<int> GetCurrence(CauntersTypes type) => _caunters[type];

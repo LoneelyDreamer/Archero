@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf1215ddcfe95343b5ea3c9cbe7bd45, type: 3}
   m_Name: GameMode
   m_EditorClassIdentifier: 
-  <chars>k__BackingField: QWERTYUIOPASDFGHJKLZXCVBNM
+  <Chars>k__BackingField: qwertyuiopasdfghjklzxcvbnm
+  <Numbers>k__BackingField: 0123456789

@@ -1,29 +1,26 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
-using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
-using Assets._Progect.Develop.Runtime.Utillitles.DataManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
-using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.Serializers;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Shop;
 
 namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
 {
     public class MainMenuBootstrap : SceneBootstrap
     {
         private DIContainer _container;
-        private WalletServise _walletServise;
 
         private PlayerDataProvider _playerDataProvider;
         private ICoroutinesPerformer _coroutinesPerformer;
-
-        private int _gameMode;
+        private WinAndLoseCauntersServise _winAndLoseCauntersServise;
+        private WalletServise _walletServise;
+        private ShopServise _shopServise;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null, IInputSceneArgs sceneArgs2 = null)
         {
@@ -36,11 +33,11 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
         {
             Debug.Log("Initialize MainMenu Scene");
 
-            _walletServise =_container.Resolve<WalletServise>();
-
             _playerDataProvider = _container.Resolve<PlayerDataProvider>();
             _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-
+            _winAndLoseCauntersServise = _container.Resolve<WinAndLoseCauntersServise>();
+            _walletServise = _container.Resolve<WalletServise>();
+            _shopServise = _container.Resolve<ShopServise>();
 
             yield break;
         }
@@ -53,11 +50,6 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                _walletServise.Add(CurrenceTypes.Gold, 10);
-                Debug.Log("Current gold" + _walletServise.GetCurrence(CurrenceTypes.Gold).Value);
-            }
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -72,20 +64,29 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2), new GameplayInputArgs(2)));
             }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                if(_walletServise.Enough(CurrenceTypes.Gold, 10))
-                {
-                    _walletServise.Spend(CurrenceTypes.Gold, 10);
-                    Debug.Log("Current gold" + _walletServise.GetCurrence(CurrenceTypes.Gold).Value);
-                }      
-            }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
                 _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
                 Debug.Log("Save");
-            }  
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                Debug.Log("Wins = " + _winAndLoseCauntersServise.GetCurrence(CauntersTypes.Wins).Value);
+                Debug.Log("Looses = " + _winAndLoseCauntersServise.GetCurrence(CauntersTypes.Loses).Value);
+            } 
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("Gold = " + _walletServise.GetCurrence(CurrenceTypes.Gold).Value);
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                _shopServise.BuyCountersReset();
+            }
+
         }
     }
 }
