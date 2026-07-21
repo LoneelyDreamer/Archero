@@ -677,6 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73311a7657880c3469a2f520ab427c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currencyView: {fileID: 1798059213}
 --- !u!4 &2001738646
 Transform:
   m_ObjectHideFlags: 0
