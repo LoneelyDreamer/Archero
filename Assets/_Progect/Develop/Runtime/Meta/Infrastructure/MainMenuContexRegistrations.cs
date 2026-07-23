@@ -1,6 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
-using Assets._Progect.Develop.Runtime.UI.CommonView;
-using Assets._Progect.Develop.Runtime.UI.Wallet;
+using Assets._Progect.Develop.Runtime.UI.MainMenu;
+using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
@@ -10,18 +10,19 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
         public static void Process(DIContainer container)
         {
             Debug.Log("Процесс регистрации сервисов на сцене меню");
-            //container.RegisterAsSingle(CreateWalletPresenor).NonLazy();
+            container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
         }
 
-        //private static WalletPresentor CreateWalletPresenor(DIContainer c)
-        //{
-        //    IconTextListView walletView = Object.FindObjectOfType<IconTextListView>();
+        private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
+        {
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
+
+            MainMenuUIRoot mainMenuUIRootPrefab = resourcesAssetsLoader.
+               Load<MainMenuUIRoot>("UI/MainMenu/MainMenuUIRoot");
+
+            return Object.Instantiate(mainMenuUIRootPrefab);
+        }
 
 
-        //    WalletPresentor walletPresentor = c.Resolve<ProjectPresentorFactory>().CreateWalletPresentor(walletView);
-
-
-        //    return walletPresentor;
-        //}
     }
 }
