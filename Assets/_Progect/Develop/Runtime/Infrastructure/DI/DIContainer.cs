@@ -63,14 +63,23 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.DI
 
             throw new InvalidOperationException($"Registration for {typeof(T)} not exsist");
         }
+
+
         public void Initialize()
         {
             foreach (Registration registration in _container.Values)
             {
                 if (registration.IsNonLazy)
                     registration.CreatInstanceFrom(this);
+
+                registration.OnInitialize();
             }
         }
 
+        public void Dispose()
+        {
+            foreach (Registration registration in _container.Values)            
+                registration.OnDispose();           
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
@@ -42,12 +43,17 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateProgectPresentorFactory);
 
+            container.RegisterAsSingle(CreateViewsFactory);
+
             container.RegisterAsSingle<ISaveLoadServise>(CreateSaveLoadServise);
 
         }
 
-        public static ProgectPresentorFactory CreateProgectPresentorFactory(DIContainer c)
-            => new ProgectPresentorFactory(c);
+        public static ViewsFactory CreateViewsFactory(DIContainer c)
+            => new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
+        
+        public static ProjectPresentorFactory CreateProgectPresentorFactory(DIContainer c)
+            => new ProjectPresentorFactory(c);
         public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
             =>new PlayerDataProvider(c.Resolve<ISaveLoadServise>(), c.Resolve<ConfigsProviderServise>());        
 

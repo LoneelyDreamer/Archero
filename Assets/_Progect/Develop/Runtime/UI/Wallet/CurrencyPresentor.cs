@@ -1,12 +1,13 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.CommonView;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 
 namespace Assets._Progect.Develop.Runtime.UI.Wallet
 {
-    public class CurrencyPresentor
+    public class CurrencyPresentor : IPresentor
     {
         private readonly IReadOnlyVeriable<int> _currency;
         private readonly CurrenceTypes _currenceTypes;
@@ -27,7 +28,9 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
             _view = view;
         }
 
-        public void Enable()
+        public IconTextView View => _view;
+
+        public void Initialise()
         {
             UpdateValue(_currency.Value);
             _view.SetIcon(_currencyIconConfig.GetSpriteFor(_currenceTypes));
@@ -36,7 +39,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
         }
 
 
-        public void Disable()
+        public void Dispose()
         {
             _disposable.Dispose();
         }

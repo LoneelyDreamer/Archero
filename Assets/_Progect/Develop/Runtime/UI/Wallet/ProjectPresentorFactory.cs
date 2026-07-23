@@ -2,21 +2,17 @@
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.CommonView;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.UI.Wallet
 {
-    public class ProgectPresentorFactory
+    public class ProjectPresentorFactory
     {
         private readonly DIContainer _container;
 
-        public ProgectPresentorFactory(DIContainer container)
+        public ProjectPresentorFactory(DIContainer container)
         {
             _container = container;
         }
@@ -30,6 +26,15 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
                 currency,
                 currenceTypes,
                 _container.Resolve<ConfigsProviderServise>().GetConfig<CurrencyIconConfig>(),
+                view);
+        }
+
+        public WalletPresentor CreateWalletPresentor(IconTextListView view)
+        {
+            return new WalletPresentor(
+                _container.Resolve<WalletServise>(),
+                this,
+                _container.Resolve<ViewsFactory>(),
                 view);
         }
     }
