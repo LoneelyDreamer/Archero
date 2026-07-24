@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.MainMenu;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
         {
             Debug.Log("Процесс регистрации сервисов на сцене меню");
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
+            container.RegisterAsSingle(CreateMainMenuPresentorFactory);
+            container.RegisterAsSingle(CreateMainMenuScreenPresentor).NonLazy();
         }
 
         private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
@@ -23,6 +26,23 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
             return Object.Instantiate(mainMenuUIRootPrefab);
         }
 
+        private static MainMenuPresentorFactory CreateMainMenuPresentorFactory(DIContainer c)
+        {
+            return new MainMenuPresentorFactory(c);
+        }
 
+        private static MainMenuScreenPresentor CreateMainMenuScreenPresentor(DIContainer c)
+        {
+            MainMenuUIRoot uiRoot = c.Resolve<MainMenuUIRoot>();
+            MainMenuScreenView view = c
+                .Resolve<ViewsFactory>()
+                .Create<MainMenuScreenView>(ViewIDs.MainMenuScreen, uiRoot.HUDLayer);
+
+            MainMenuScreenPresentor presentor = c
+                .Resolve<MainMenuPresentorFactory>()
+                .CreateMainMenuScreen(view);
+
+            return presentor;
+        }
     }
 }
