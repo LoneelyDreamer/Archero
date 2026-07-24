@@ -16,7 +16,8 @@ namespace Assets._Progect.Develop.Runtime.UI.MainMenu
         {
             return new MainMenuScreenPresentor(
                 view,
-                _container.Resolve<ProjectPresentorFactory>());
+                _container.Resolve<ProjectPresentorFactory>(),
+                _container.Resolve<MainMenuPopupServise>());
         }
     }
 }

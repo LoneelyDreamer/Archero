@@ -7,26 +7,39 @@ namespace Assets._Progect.Develop.Runtime.UI.MainMenu
     public class MainMenuScreenPresentor : IPresentor
     {
         private readonly MainMenuScreenView _screen;
+
         private readonly ProjectPresentorFactory _projectPresentorFactory;
+
+        private readonly MainMenuPopupServise _popupServise;
+
         private readonly List<IPresentor> _childPresenters = new();
 
         public MainMenuScreenPresentor(
             MainMenuScreenView screen,
-            ProjectPresentorFactory projectPresentorFactory)
+            ProjectPresentorFactory projectPresentorFactory,
+            MainMenuPopupServise popupServise)
         {
             _screen = screen;
             _projectPresentorFactory = projectPresentorFactory;
+            _popupServise = popupServise;
         }
 
         public void Initialise()
         {
+            _screen.OpenTestPopupButtonClicked += OnOpenTestPopupButtonClicked;
+
             CreateWallet();
+
 
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Initialise();
         }
+
+
         public void Dispose()
         {
+            _screen.OpenTestPopupButtonClicked -= OnOpenTestPopupButtonClicked;
+
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Dispose();
 
@@ -40,6 +53,10 @@ namespace Assets._Progect.Develop.Runtime.UI.MainMenu
             _childPresenters.Add(walletPresentor);
         }
 
-       
+        private void OnOpenTestPopupButtonClicked()
+        {
+            _popupServise.OpenTestPopup();
+        }
+
     }
 }

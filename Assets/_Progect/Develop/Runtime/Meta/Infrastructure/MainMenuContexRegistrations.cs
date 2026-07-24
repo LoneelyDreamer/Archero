@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.MainMenu;
+using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using UnityEngine;
 
@@ -14,7 +15,17 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
             container.RegisterAsSingle(CreateMainMenuPresentorFactory);
             container.RegisterAsSingle(CreateMainMenuScreenPresentor).NonLazy();
+            container.RegisterAsSingle(CreateMainMenuPopupServise);
         }
+
+        private static MainMenuPopupServise CreateMainMenuPopupServise(DIContainer c)
+        {
+            return new MainMenuPopupServise(
+                c.Resolve<ViewsFactory>(), 
+                c.Resolve<ProjectPresentorFactory>(),
+                c.Resolve<MainMenuUIRoot>());
+        }
+
 
         private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
         {
