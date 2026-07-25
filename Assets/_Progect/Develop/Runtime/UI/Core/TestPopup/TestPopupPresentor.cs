@@ -1,10 +1,12 @@
-﻿namespace Assets._Progect.Develop.Runtime.UI.Core.TestPopup
+﻿using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+
+namespace Assets._Progect.Develop.Runtime.UI.Core.TestPopup
 {
     public class TestPopupPresentor : PopupPresentorBase
     {
         private readonly TestPopupView _view;
 
-        public TestPopupPresentor(TestPopupView view)
+        public TestPopupPresentor(TestPopupView view, ICoroutinesPerformer coroutinesPerformer) : base(coroutinesPerformer)
         {
             _view = view;
         }
