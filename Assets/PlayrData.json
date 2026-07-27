@@ -6,5 +6,6 @@
   "CauntersData": {
     "Wins": 1,
     "Loses": 0
-  }
+  },
+  "CompletedLevels": [1,2]
 }

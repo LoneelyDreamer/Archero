@@ -25,6 +25,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders
             {
                 WalletData = InitWalletData(),
                 CauntersData = InitCauntersData()
+                CompletedLevels = new(),
             };
 
         }

@@ -1,11 +1,13 @@
-﻿using Assets._Progect.Develop.Runtime.Configs.Meta.BonusAndPenalty;
 using Assets._Progect.Develop.Runtime.Configs.Meta.ShopPrises;
 using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
 using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Shop;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
+using Assets._Progect.Develop.Runtime.UI.Core;
+using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
@@ -51,9 +53,13 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
             container.RegisterAsSingle(CreateShopServise);
+            container.RegisterAsSingle(CreateProgectPresentorFactory);
+
+            container.RegisterAsSingle(CreateViewsFactory);
 
             container.RegisterAsSingle<ISaveLoadServise>(CreateSaveLoadServise);
 
+            container.RegisterAsSingle(CreateLevelsProgressionServise).NonLazy();
         }
 
         private static WinAndLoseCauntersServise CreateWinAndLoseCauntersServise(DIContainer c)
@@ -93,6 +99,16 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
 
         public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
+        private static LevelsProgressionServise CreateLevelsProgressionServise(DIContainer c)
+            => new LevelsProgressionServise(c.Resolve<PlayerDataProvider>());
+       
+
+        private static ViewsFactory CreateViewsFactory(DIContainer c)
+            => new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
+
+        private static ProjectPresentorFactory CreateProgectPresentorFactory(DIContainer c)
+            => new ProjectPresentorFactory(c);
+        private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
             =>new PlayerDataProvider(c.Resolve<ISaveLoadServise>(), c.Resolve<ConfigsProviderServise>());        
 
         private static SaveLoadServise CreateSaveLoadServise(DIContainer c)
