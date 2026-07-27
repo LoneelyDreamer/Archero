@@ -6,5 +6,6 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.DataManagment
     public class PlayerData : ISaveData
     {
         public Dictionary<CurrenceTypes, int> WalletData;
+        public List<int> CompletedLevels;
     }
 }

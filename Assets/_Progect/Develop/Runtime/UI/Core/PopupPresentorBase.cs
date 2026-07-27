@@ -46,6 +46,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
         {
             KillProcess();
 
+            //_process = _coroutinesPerformer.StartPerform(ProcessHide(callback));
             _process = _coroutinesPerformer.StartPerform(ProcessHide(callback));
         }
 

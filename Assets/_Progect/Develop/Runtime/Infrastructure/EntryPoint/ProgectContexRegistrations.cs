@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
@@ -47,14 +48,19 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle<ISaveLoadServise>(CreateSaveLoadServise);
 
+            container.RegisterAsSingle(CreateLevelsProgressionServise).NonLazy();
         }
 
-        public static ViewsFactory CreateViewsFactory(DIContainer c)
+        private static LevelsProgressionServise CreateLevelsProgressionServise(DIContainer c)
+            => new LevelsProgressionServise(c.Resolve<PlayerDataProvider>());
+       
+
+        private static ViewsFactory CreateViewsFactory(DIContainer c)
             => new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
-        
-        public static ProjectPresentorFactory CreateProgectPresentorFactory(DIContainer c)
+
+        private static ProjectPresentorFactory CreateProgectPresentorFactory(DIContainer c)
             => new ProjectPresentorFactory(c);
-        public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
+        private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
             =>new PlayerDataProvider(c.Resolve<ISaveLoadServise>(), c.Resolve<ConfigsProviderServise>());        
 
         private static SaveLoadServise CreateSaveLoadServise(DIContainer c)

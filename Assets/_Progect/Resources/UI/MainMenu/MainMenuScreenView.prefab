@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7745293248126510745}
   - component: {fileID: 5594613229733410005}
   m_Layer: 5
-  m_Name: ButtonOpenTestPpopu
+  m_Name: ButtonOpenLevelsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <WalletView>k__BackingField: {fileID: 1608508740483666488}
-  _openTestPopupButton: {fileID: 5594613229733410005}
+  _openLevelsMenuButton: {fileID: 5594613229733410005}
 --- !u!222 &4205094219202071422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Open TEST POPUP
+  m_text: Open Levels Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
