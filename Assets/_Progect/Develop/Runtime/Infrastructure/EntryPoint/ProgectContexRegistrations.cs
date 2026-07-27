@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Assets._Progect.Develop.Runtime.Configs.Meta.BonusAndPenalty;
 
 namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 {
@@ -97,11 +98,8 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             return new BonusAndPenaltyServise(c.Resolve<WalletServise>(), config);
         }
 
-
-        public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
         private static LevelsProgressionServise CreateLevelsProgressionServise(DIContainer c)
-            => new LevelsProgressionServise(c.Resolve<PlayerDataProvider>());
-       
+            => new LevelsProgressionServise(c.Resolve<PlayerDataProvider>());      
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)
             => new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
