@@ -3,7 +3,9 @@ using Assets._Progect.Develop.Runtime.Configs.Meta.ShopPrises;
 using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
 using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Shop;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
@@ -97,8 +99,7 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             return new BonusAndPenaltyServise(c.Resolve<WalletServise>(), config);
         }
 
-
-        public static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)
+       
         private static LevelsProgressionServise CreateLevelsProgressionServise(DIContainer c)
             => new LevelsProgressionServise(c.Resolve<PlayerDataProvider>());
        

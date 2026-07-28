@@ -1,3 +1,4 @@
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Progect.Develop.Runtime.Configs.Meta.BonusAndPenalty;
 using Assets._Progect.Develop.Runtime.Configs.Meta.Caunter;
 using Assets._Progect.Develop.Runtime.Configs.Meta.ShopPrises;
@@ -16,8 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
 
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
-            {typeof(GameModeConfig),"GameMode" },
-            { typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig"},
+            {typeof(GameModeConfig),"GameMode" },           
             { typeof(StartCauntersConfig), "Configs/Meta/Caunters/StartCauntersConfig"},
             { typeof(BonusAndPenaltyStartConfig), "Configs/Meta/BonusesAndPenaltys/BonusAndPenalty"},
             { typeof(ShopPricesConfig), "Configs/Meta/ShopPrices/ShopPricesConfig"},
