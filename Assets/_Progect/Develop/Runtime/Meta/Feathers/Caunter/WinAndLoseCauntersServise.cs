@@ -22,6 +22,8 @@ namespace Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter
             playerDataProvider.RegisterReader(this);
         }
 
+        public List<CauntersTypes> AvalableCaunters => _caunters.Keys.ToList();
+
         public void Caunt(CauntersTypes type)
         {
             _caunters[type].Value += 1;
@@ -33,7 +35,7 @@ namespace Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter
                 _caunters[cunts.Key].Value = 0;
         }
 
-        public IReadOnlyVeriable<int> GetCurrence(CauntersTypes type) => _caunters[type];
+        public IReadOnlyVeriable<int> GetCaunter(CauntersTypes type) => _caunters[type];
 
 
         public void ReadFrom(PlayerData data)

@@ -1,11 +1,13 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.CommonView;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Core.TestPopup;
 using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
+using Assets._Progect.Develop.Runtime.UI.WinAndLoseCaunters;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
@@ -34,10 +36,28 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
                 view);
         }
 
+        public RatePresentor CreateWinAndLoseRatePresentor(
+            IReadOnlyVeriable<int> rate,
+            CauntersTypes cauntersTypes,
+            TextTextView view)
+        {
+
+            return new RatePresentor(rate, cauntersTypes, view);
+        }
+
         public WalletPresentor CreateWalletPresentor(IconTextListView view)
         {
             return new WalletPresentor(
                 _container.Resolve<WalletServise>(),
+                this,
+                _container.Resolve<ViewsFactory>(),
+                view);
+        }
+
+        public WinAndLoseCauntersPresentor CreateWinAndLoseCauntersPresentor(TextTextListView view)
+        {
+            return new WinAndLoseCauntersPresentor(
+                _container.Resolve<WinAndLoseCauntersServise>(),
                 this,
                 _container.Resolve<ViewsFactory>(),
                 view);

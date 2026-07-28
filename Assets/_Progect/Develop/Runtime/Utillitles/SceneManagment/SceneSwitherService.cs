@@ -44,7 +44,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.SceneManagment
 
             sceneBootstrap.ProcessRegisration(_currentSceneContainer, sceneArgs, mode);
             sceneBootstrap.Initialize();
-            //sceneBootstrap.ProcessRegisration(_currentSceneContainer, sceneArgs);
+
             _currentSceneContainer.Initialize();
 
             yield return sceneBootstrap.Initialize();

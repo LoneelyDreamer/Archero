@@ -69,43 +69,43 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private void Update()
         {         
 
-            foreach (char c in Input.inputString)
-            {
-                if (c == '\b')
-                {
-                    if (_currentText.Length > 0)
-                        _currentText = _currentText.Remove(_currentText.Length - 1);
-                }
-                else if (c == '\n' || c == '\r')
-                {
-                    Debug.Log("Введено " + _currentText);
-                    if (_cupchaServisce.CupchaCheak(_currentText))
-                    {
-                        Debug.Log("Победа");
-                        _winAndLoseCauntersServise.Caunt(CauntersTypes.Wins);
+            //foreach (char c in Input.inputString)
+            //{
+            //    if (c == '\b')
+            //    {
+            //        if (_currentText.Length > 0)
+            //            _currentText = _currentText.Remove(_currentText.Length - 1);
+            //    }
+            //    else if (c == '\n' || c == '\r')
+            //    {
+            //        Debug.Log("Введено " + _currentText);
+            //        if (_cupchaServisce.CupchaCheak(_currentText))
+            //        {
+            //            Debug.Log("Победа");
+            //            _winAndLoseCauntersServise.Caunt(CauntersTypes.Wins);
 
-                        _bonusAndPenaltyServise.AddGoldBonus();
+            //            _bonusAndPenaltyServise.AddGoldBonus();
 
-                        _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
-                        _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
+            //            _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+            //            _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
 
-                    }
-                    else
-                    {
-                        Debug.Log("Поражение");
-                        _winAndLoseCauntersServise.Caunt(CauntersTypes.Loses);
+            //        }
+            //        else
+            //        {
+            //            Debug.Log("Поражение");
+            //            _winAndLoseCauntersServise.Caunt(CauntersTypes.Loses);
 
-                        _bonusAndPenaltyServise.AddGoldPenalty();
+            //            _bonusAndPenaltyServise.AddGoldPenalty();
 
-                        _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
-                        _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1), new GameplayInputArgs(_mode.LevalNumber)));
-                    }
+            //            _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+            //            _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1), new GameplayInputArgs(_mode.LevalNumber)));
+            //        }
 
-                    _currentText = string.Empty;
-                }
-                else
-                    _currentText += c;
-            }
+            //        _currentText = string.Empty;
+            //    }
+            //    else
+            //        _currentText += c;
+            //}
         }
     }
 }

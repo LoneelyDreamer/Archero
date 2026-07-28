@@ -16,7 +16,9 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             {ViewIDs.MainMenuScreen,"UI/MainMenu/MainMenuScreenView" },
             {ViewIDs.TestPopup,"UI/TestPopup" },
             {ViewIDs.LevelTile,"UI/LevelsMenuPopup/LevelTile" },
-            {ViewIDs.LevelsMenuPopup,"UI/LevelsMenuPopup/LevelsMenuPopup" }
+            {ViewIDs.LevelsMenuPopup,"UI/LevelsMenuPopup/LevelsMenuPopup" },
+            {ViewIDs.CaunterView,"UI/WinAndLoseRate/CaunterView" },
+            {ViewIDs.CupchaPopup,"UI/Cupcha/CupchaPopup" }
         };
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)
         {

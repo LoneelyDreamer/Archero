@@ -2,9 +2,6 @@
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
-using Assets._Progect.Develop.Runtime.UI.CommonView;
-using Assets._Progect.Develop.Runtime.UI.Core;
-using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
@@ -42,7 +39,6 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
             _walletServise = _container.Resolve<WalletServise>();
             _shopServise = _container.Resolve<ShopServise>();
 
-
             yield break;
         }
 
@@ -67,28 +63,6 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
                 SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2), new GameplayInputArgs(2)));
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
-                Debug.Log("Save");
-            }
-
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                Debug.Log("Wins = " + _winAndLoseCauntersServise.GetCurrence(CauntersTypes.Wins).Value);
-                Debug.Log("Looses = " + _winAndLoseCauntersServise.GetCurrence(CauntersTypes.Loses).Value);
-            } 
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                Debug.Log("Gold = " + _walletServise.GetCurrence(CurrenceTypes.Gold).Value);
-            }
-
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                _shopServise.BuyCountersReset();
             }
 
         }

@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core.TestPopup;
+using Assets._Progect.Develop.Runtime.UI.CupchPopup;
 using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
@@ -31,6 +32,11 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
 
             return popup;
         }
+
+        //public CupchaPopupPresentor OpenCupchaPopup()
+        //{
+        //    CupchaPopupPresentor popup = _presentorsFactory.CreateCu
+        //}
 
         public LevelsMenuPopupPresentor OpenLevelsMenuPopup()
         {
