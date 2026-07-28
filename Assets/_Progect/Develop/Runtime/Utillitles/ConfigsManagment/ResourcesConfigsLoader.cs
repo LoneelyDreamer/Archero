@@ -21,6 +21,9 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
             { typeof(StartCauntersConfig), "Configs/Meta/Caunters/StartCauntersConfig"},
             { typeof(BonusAndPenaltyStartConfig), "Configs/Meta/BonusesAndPenaltys/BonusAndPenalty"},
             { typeof(ShopPricesConfig), "Configs/Meta/ShopPrices/ShopPricesConfig"},
+            { typeof(StartWalletConfig), "Configs/Meta/Wallet/StartWalletConfig"},
+            { typeof(CurrencyIconConfig), "Configs/Meta/Wallet/CurrencyIconConfig"},
+            { typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig"},
         };
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
         {

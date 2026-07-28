@@ -2,6 +2,9 @@
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
+using Assets._Progect.Develop.Runtime.UI.CommonView;
+using Assets._Progect.Develop.Runtime.UI.Core;
+using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
@@ -38,6 +41,7 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
             _winAndLoseCauntersServise = _container.Resolve<WinAndLoseCauntersServise>();
             _walletServise = _container.Resolve<WalletServise>();
             _shopServise = _container.Resolve<ShopServise>();
+
 
             yield break;
         }
