@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
+using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
@@ -59,7 +60,7 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             Debug.Log("Начинается переход на другую сцену");
 
-            yield return sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu);
+            yield return sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
 
         }
     }

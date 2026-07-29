@@ -11,7 +11,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
     public class GameplayBootstrap : SceneBootstrap
     {
         private DIContainer _container;
-        private GameplayInputArgs _inputArgs; 
+        private GameplayInputArgs _inputArgs;
+        [SerializeField] private TestGameplay _testGameplay;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -31,6 +32,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             Debug.Log("Initialize Gameplay Scene");
 
+            _testGameplay.Initialze(_container);
+
             yield break;
         }
 
@@ -38,6 +41,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         public override void Run()
         {
             Debug.Log("Start Gameplay Scene");
+
+            _testGameplay.Run();
         }
 
         private void Update()
