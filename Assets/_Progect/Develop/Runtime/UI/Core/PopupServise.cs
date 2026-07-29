@@ -33,10 +33,16 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             return popup;
         }
 
-        //public CupchaPopupPresentor OpenCupchaPopup()
-        //{
-        //    CupchaPopupPresentor popup = _presentorsFactory.CreateCu
-        //}
+        public CupchaPopupPresentor OpenCupchaPopup(int mode)
+        {
+            CupchPopupView view = ViewsFactory.Create<CupchPopupView>(ViewIDs.CupchaPopup, PopuoLayer);
+
+            CupchaPopupPresentor popup = _presentorsFactory.CreateCupchaPopupPresentor(view, mode);
+
+            OnPopupCreated(popup, view);
+
+            return popup;
+        }
 
         public LevelsMenuPopupPresentor OpenLevelsMenuPopup()
         {

@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Shop;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.MainMenu;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
@@ -19,10 +20,9 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
             _container = container;
         }
 
-        public GameplayScreenPresentor CreateMainMenuScreen(MainMenuScreenView view)
+        public GameplayScreenPresentor CreateGameplayScreenPresentor(GameplayScreenView view)
         {
-            return new GameplayScreenPresentor();
+            return new GameplayScreenPresentor(view);
         }
-            
     }
 }

@@ -41,7 +41,8 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
             CupchPopupView view,
             BonusAndPenaltyServise bonusAndPenaltyServise,
             WinAndLoseCauntersServise winAndLoseCauntersServise,
-            PlayerDataProvider playerDataProvider) : base(coroutinesPerformer)
+            PlayerDataProvider playerDataProvider,
+            int mode) : base(coroutinesPerformer)
         {
             _cupchaServisce = cupchaServisce;
             _sceneSwitherService = sceneSwitherService;
@@ -50,6 +51,7 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
             _bonusAndPenaltyServise = bonusAndPenaltyServise;
             _winAndLoseCauntersServise = winAndLoseCauntersServise;
             _playerDataProvider = playerDataProvider;
+            _mode = mode;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -63,6 +65,8 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
             string cupcha = _cupchaServisce.GanerateCupcha(_mode);
 
             _view.SetCupcha(cupcha);
+
+            Subscribe();
         }
 
         public override void Dispose()
@@ -70,10 +74,13 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
             base.Dispose();
 
             _view.TextEntered -= TextEntered;
+
+            Unsubscribe();
         }
 
-        public void Subscribe()
+        public void Subscribe()       
         {
+
             _view.TextEntered += TextEntered;
         }
 

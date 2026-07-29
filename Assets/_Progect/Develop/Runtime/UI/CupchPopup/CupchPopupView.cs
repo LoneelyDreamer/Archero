@@ -19,17 +19,22 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _cupchText;
         [SerializeField] private TMP_InputField _inputField;
+        [SerializeField] private Button _inputTextbutton;
+
+        private string _currentText;
 
         public void SetTitle(string title) => _title.text = title;
         public void SetCupcha(string cupcha) => _cupchText.text = cupcha;
 
         private void OnEnable()
         {
-            _inputField.onEndEdit.AddListener(OnTextEntered);
+            _inputTextbutton.onClick.AddListener(OnTextEntered);
+            //_inputField.onEndEdit.AddListener(OnTextEntered);      
         }
         private void OnDisable()
         {
-            _inputField.onEndEdit.RemoveListener(OnTextEntered);
+            _inputTextbutton.onClick.RemoveListener(OnTextEntered);
+            //_inputField.onEndEdit.RemoveListener(OnTextEntered);
         }
 
         public void ResetText()
@@ -37,9 +42,15 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
             _inputField.text = string.Empty;
         }
 
-        private void OnTextEntered(string text) => TextEntered?.Invoke(text);
+        private void OnTextEntered()
+        {
+            _currentText = _inputField.text;
+            TextEntered?.Invoke(_currentText);
 
+            Debug.Log("Click");
+            Debug.Log("_currentText =" + _currentText);
 
+        }
 
     }
 }

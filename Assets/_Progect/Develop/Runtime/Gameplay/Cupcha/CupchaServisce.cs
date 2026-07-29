@@ -1,5 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
+using System;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -55,8 +57,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Cupcha
                 return _cupcha;
 
             }
+            else            
+                throw new ArgumentException(nameof(mode));
 
-            return stringBuilder.ToString();
         }
 
         private int GetRundomNumber()
