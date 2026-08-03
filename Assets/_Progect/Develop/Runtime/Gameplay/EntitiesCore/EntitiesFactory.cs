@@ -26,6 +26,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             entity.AddComponent(new MoveDirection() { Value = new ReactiveVeriable<Vector3>(Vector3.forward)})
                   .AddComponent(new MoveSpeed() { Value = new ReactiveVeriable<float>(10) });
 
+            entity.AddSystem(new MovementSystem());
+
             return entity;
         }
 

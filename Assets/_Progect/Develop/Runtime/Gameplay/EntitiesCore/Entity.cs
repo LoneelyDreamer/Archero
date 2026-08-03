@@ -1,11 +1,46 @@
-﻿using System;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
+using System;
 using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
-    public class Entity
+    public class Entity : IDisposable
     {
         private readonly Dictionary<Type, IEntityComponent> _componets = new();
+
+        private readonly List<IEntitySystem> _systems = new();
+        private readonly List<IInitializableSystem> _initializables = new();
+        private readonly List<IUpdatableSystem> _updatables = new();
+        private readonly List<IDisposableSystem> _disposables = new();
+
+        private bool _isInit;
+
+        public void Initialize()
+        {
+            foreach (IInitializableSystem initializable in _initializables)
+                initializable.OnInit(this);
+
+            _isInit = true;
+        }
+
+        public void OnUpdate(float deltaTime)
+        {
+            if( _isInit == false)
+                return;
+
+            foreach(IUpdatableSystem updatable in _updatables)
+                updatable.OnUpdate(deltaTime);
+        }
+
+
+        public void Dispose()
+        {
+            foreach(IDisposableSystem disposable in _disposables)
+                disposable.OnDispose();
+
+            _isInit = false;
+        }
+
 
         public Entity AddComponent<TComponent>(TComponent component) where TComponent : class, IEntityComponent 
         {
@@ -37,5 +72,31 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             return component;
         }
+
+        public Entity AddSystem(IEntitySystem system)
+        {
+            if (_systems.Contains(system))
+                throw new ArgumentException(system.GetType().ToString());
+
+            _systems.Add(system);
+
+            if (system is IInitializableSystem initializable)
+            {
+                _initializables.Add(initializable);
+
+                if (_isInit)                
+                    initializable.OnInit(this); 
+            }
+
+            if (system is IUpdatableSystem updatable)
+                _updatables.Add(updatable);
+
+            if (system is IDisposableSystem disposable)
+                _disposables.Add(disposable);
+
+            return this;
+        }
+
+       
     }
 }
