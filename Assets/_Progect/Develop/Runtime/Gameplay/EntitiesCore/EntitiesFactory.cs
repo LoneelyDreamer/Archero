@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
@@ -15,15 +16,20 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
         private readonly DIContainer _container;
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
+        private readonly MonoEntitesFactory _monoEntitiesactory;
+
         public EntitiesFactory(DIContainer container)
         {
             _container = container;
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _monoEntitiesactory = _container.Resolve<MonoEntitesFactory>();
         }
 
-        public Entity CreateTestEntity()
+        public Entity CreateTestEntity(Vector3 position)
         {
             Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/TestEntity");
 
             entity.AddComponent(new MoveDirection() { Value = new ReactiveVeriable<Vector3>(Vector3.forward)})
                   .AddComponent(new MoveSpeed() { Value = new ReactiveVeriable<float>(10) });

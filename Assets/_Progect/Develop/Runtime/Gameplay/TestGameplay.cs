@@ -19,7 +19,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            Entity entity = _entitiesFactory.CreateTestEntity();
+            Entity entity = _entitiesFactory.CreateTestEntity(Vector3.zero);
 
             Debug.Log("Направление движения: " +  entity.GetComponent<MoveDirection>().Value.Value.ToString());
             Debug.Log("Скорость движения: " +  entity.GetComponent<MoveSpeed>().Value.Value.ToString());

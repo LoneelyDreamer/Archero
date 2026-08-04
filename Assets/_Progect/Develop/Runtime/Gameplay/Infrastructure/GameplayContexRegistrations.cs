@@ -1,5 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
@@ -11,6 +13,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Процесс регистрации сервисов на сцене геймплея");
             container.RegisterAsSingle(CreateEntitiesFactory);
             container.RegisterAsSingle(CreateEntitiesLifeContext);
+            container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static MonoEntitesFactory CreateEntitesFactory(DIContainer c)
+        {
+            return new MonoEntitesFactory(
+                c.Resolve<ResourcesAssetsLoader>(),
+                c.Resolve<EntitiesLifeContext>());
         }
 
         private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c)
