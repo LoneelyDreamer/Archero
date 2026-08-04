@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Infrastructure;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
@@ -12,7 +13,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
     {
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
+
         [SerializeField] private TestGameplay _testGameplay;
+        private EntitiesLifeContext _entitiesLifeContext;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -34,6 +37,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             _testGameplay.Initialze(_container);
 
+            _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+
             yield break;
         }
 
@@ -47,6 +52,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
+            _entitiesLifeContext?.Update(Time.deltaTime);
+
             if (Input.GetKeyDown(KeyCode.F))
             {
                 SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();

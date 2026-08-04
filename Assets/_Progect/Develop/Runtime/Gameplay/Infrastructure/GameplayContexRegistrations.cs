@@ -10,6 +10,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Процесс регистрации сервисов на сцене геймплея");
             container.RegisterAsSingle(CreateEntitiesFactory);
+            container.RegisterAsSingle(CreateEntitiesLifeContext);
+        }
+
+        private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c)
+        {
+            return new EntitiesLifeContext();
         }
 
         private static EntitiesFactory CreateEntitiesFactory(DIContainer c)

@@ -13,10 +13,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
     public class EntitiesFactory
     {
         private readonly DIContainer _container;
+        private readonly EntitiesLifeContext _entitiesLifeContext;
 
         public EntitiesFactory(DIContainer container)
         {
             _container = container;
+            _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
         public Entity CreateTestEntity()
@@ -27,6 +29,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                   .AddComponent(new MoveSpeed() { Value = new ReactiveVeriable<float>(10) });
 
             entity.AddSystem(new MovementSystem());
+
+            _entitiesLifeContext.Add(entity);
 
             return entity;
         }
