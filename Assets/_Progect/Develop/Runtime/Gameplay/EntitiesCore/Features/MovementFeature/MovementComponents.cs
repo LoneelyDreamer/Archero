@@ -14,10 +14,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         public ReactiveVeriable<float> Value;
     }
 
-    public class RigidBodyComponent : IEntityComponent
-    {
-        public Rigidbody Value;
-    }
+ 
 
 
 }

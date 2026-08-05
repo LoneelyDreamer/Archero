@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
-    public class Entity : IDisposable
+    public partial class Entity : IDisposable
     {
         private readonly Dictionary<Type, IEntityComponent> _componets = new();
 
@@ -13,7 +13,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
         private readonly List<IUpdatableSystem> _updatables = new();
         private readonly List<IDisposableSystem> _disposables = new();
 
-        private bool _isInit;
+        private bool _isInit;     
 
         public void Initialize()
         {
