@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.RotationFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
@@ -33,10 +34,31 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVeriable<float>(10));
+                .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddRotationSpeed(new ReactiveVeriable<float>(5));
                
 
             entity.AddSystem(new RigidbodyMovementSystem());
+            entity.AddSystem(new RigidbodyRotationSystem());
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+        public Entity CreateTestEntity2(Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/TestEntity CharacterController");
+
+            entity
+                .AddMoveDirection()
+                .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddRotationSpeed(new ReactiveVeriable<float>(5));
+               
+
+            entity.AddSystem(new CharacterControllerMovmentSystem());
+            entity.AddSystem(new CharacterControllerRotationSystem());
 
             _entitiesLifeContext.Add(entity);
 
