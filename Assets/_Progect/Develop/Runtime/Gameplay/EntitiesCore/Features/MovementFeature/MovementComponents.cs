@@ -14,7 +14,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         public ReactiveVeriable<float> Value;
     }
 
- 
+    public class RotationDirection : IEntityComponent
+    {
+        public ReactiveVeriable<Vector3> Value;
+    }
+
+    public class RotationSpeed : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
 
 
 }
