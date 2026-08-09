@@ -10,14 +10,29 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
     public class CurrentHealth : IEntityComponent
     {
         public ReactiveVeriable<float> Value;
-    }
+    }  
 
-    public class MacHealth : IEntityComponent
+    public class MaxHealth : IEntityComponent
     {
         public ReactiveVeriable<float> Value;
     }
 
     public class IsDead : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
+    }
+
+    public class DeathProcessInitialTime : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
+
+    public class DeathProcessCurrentTime : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
+
+    public class InDeadProcess : IEntityComponent
     {
         public ReactiveVeriable<bool> Value;
     }

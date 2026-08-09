@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
@@ -35,12 +36,22 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVeriable<float>(10))
                 .AddRotationDirection()
-                .AddRotationSpeed(new ReactiveVeriable<float>(900));
-               
+                .AddRotationSpeed(new ReactiveVeriable<float>(900))
+                .AddMaxHealth(new ReactiveVeriable<float>(100))
+                .AddCurrentHealth(new ReactiveVeriable<float>(100))
+                .AddIsDead()
+                .AddInDeadProcess()
+                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
+                .AddDeathProcessCurrentTime();
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())
-                .AddSystem(new RigidBodyRotationSystem());
+                .AddSystem(new RigidBodyRotationSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+
 
             _entitiesLifeContext.Add(entity);
 

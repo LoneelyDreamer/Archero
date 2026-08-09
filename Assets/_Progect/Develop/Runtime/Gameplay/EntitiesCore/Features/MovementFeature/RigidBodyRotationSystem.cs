@@ -10,15 +10,21 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         private ReactiveVeriable<float> _rotationSpeed;
         private Rigidbody _rigidbody;
 
+        private ReactiveVeriable<bool> _isDead;
+
         public void OnInit(Entity entity)
         {
             _rigidbody = entity.Rigidbody;
             _direction = entity.RotationDirection;
             _rotationSpeed = entity.RotationSpeed;
+            _isDead = entity.IsDead;
         }
 
         public void OnUpdate(float deltaTime)
         {
+            if (_isDead.Value)           
+                return;            
+
             if (_direction.Value == Vector3.zero)
                 return;
 
