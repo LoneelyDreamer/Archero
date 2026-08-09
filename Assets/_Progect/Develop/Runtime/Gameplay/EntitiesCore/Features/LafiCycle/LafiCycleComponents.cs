@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
+﻿using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
+using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
     public class IsDead : IEntityComponent
     {
         public ReactiveVeriable<bool> Value;
+    }
+
+    public class MustDie : IEntityComponent
+    {
+        public ICompositCondition Value;
+    }
+    public class MustSelfRelease : IEntityComponent
+    {
+        public ICompositCondition Value;
     }
 
     public class DeathProcessInitialTime : IEntityComponent

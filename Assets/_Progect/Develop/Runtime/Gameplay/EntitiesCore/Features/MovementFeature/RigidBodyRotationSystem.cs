@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
+using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using UnityEngine;
 
@@ -10,19 +11,19 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         private ReactiveVeriable<float> _rotationSpeed;
         private Rigidbody _rigidbody;
 
-        private ReactiveVeriable<bool> _isDead;
+        private ICompositCondition _canRotate;
 
         public void OnInit(Entity entity)
         {
             _rigidbody = entity.Rigidbody;
             _direction = entity.RotationDirection;
             _rotationSpeed = entity.RotationSpeed;
-            _isDead = entity.IsDead;
+            _canRotate = entity.CanRotate;
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_isDead.Value)           
+            if (_canRotate.Evaluate() == false)           
                 return;            
 
             if (_direction.Value == Vector3.zero)

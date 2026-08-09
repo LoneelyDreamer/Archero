@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
+using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle
@@ -9,9 +10,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
 
         private Entity _entity;
 
-        private ReactiveVeriable<bool> _isDead;
-
-        private ReactiveVeriable<bool> _inDeathProcess; 
+        private ICompositCondition _mustSelfRelease;
 
         public SelfReleaseSystem(EntitiesLifeContext entitiesLifeContext)
         {
@@ -21,13 +20,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
         public void OnInit(Entity entity)
         {
             _entity = entity;
-            _isDead = _entity.IsDead;
-            _inDeathProcess = _entity.InDeadProcess;
+            _mustSelfRelease = entity.MustSelfRelease;
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_isDead.Value && _inDeathProcess.Value == false)
+            if (_mustSelfRelease.Evaluate())
                 _entitiesLifeContext.Relese(_entity);
         }
     }

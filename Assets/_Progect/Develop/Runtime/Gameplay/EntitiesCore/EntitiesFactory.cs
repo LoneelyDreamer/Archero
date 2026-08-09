@@ -2,6 +2,7 @@
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,25 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddInDeadProcess()
                 .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
                 .AddDeathProcessCurrentTime();
+
+            ICompositCondition canMove = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition canRotate = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition mustDie = new CompositCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositCondition mustSelfRealese = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
+
+            entity
+                .AddCanMove(canMove)
+                .AddCanRotate(canRotate)
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRealese);
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())

@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.Common;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
+using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using UnityEngine;
 
@@ -11,18 +12,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         private ReactiveVeriable<float> _moveSpeed;
         private Rigidbody _rigidbody;
 
-        private ReactiveVeriable<bool> _isDead;
+        private ICompositCondition _canMove;
         public void OnInit(Entity entity)
         {
             _moveDirection = entity.MoveDirection;
             _moveSpeed = entity.MoveSpeed;
             _rigidbody = entity.Rigidbody;
-            _isDead = entity.IsDead;
+            _canMove = entity.CanMove;
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if(_isDead.Value)
+            if(_canMove.Evaluate() == false)
             {
                 _rigidbody.velocity = Vector3.zero;
                 return;

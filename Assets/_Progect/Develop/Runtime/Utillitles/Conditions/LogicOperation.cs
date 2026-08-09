@@ -1,0 +1,10 @@
+﻿namespace Assets._Progect.Develop.Runtime.Utillitles.Conditions
+{
+    public class LogicOperation
+    {
+        public static bool And(bool a, bool b) => a && b;
+        public static bool Or(bool a, bool b) => a || b;
+        
+    }
+
+}
