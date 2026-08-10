@@ -13,14 +13,21 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Процесс регистрации сервисов на сцене геймплея");
             container.RegisterAsSingle(CreateEntitiesFactory);
             container.RegisterAsSingle(CreateEntitiesLifeContext);
+            container.RegisterAsSingle(CreatrCollidersRegestryService);
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static CollidersRegestryService CreatrCollidersRegestryService(DIContainer c)
+        {
+            return new CollidersRegestryService();
         }
 
         private static MonoEntitesFactory CreateEntitesFactory(DIContainer c)
         {
             return new MonoEntitesFactory(
                 c.Resolve<ResourcesAssetsLoader>(),
-                c.Resolve<EntitiesLifeContext>());
+                c.Resolve<EntitiesLifeContext>(),
+                c.Resolve<CollidersRegestryService>());
         }
 
         private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c)

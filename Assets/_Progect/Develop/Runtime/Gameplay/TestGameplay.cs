@@ -22,7 +22,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _entity = _entitiesFactory.CreateGhost(Vector3.zero);
+            _entity = _entitiesFactory.CreateHero(Vector3.zero);
+            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
 
             _isRunning = true;
         }
@@ -32,12 +33,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                _entity.CurrentHealth.Value -= 50;
-                Debug.Log("CurrentHealth :" + _entity.CurrentHealth.Value.ToString());
+            if(Input.GetKeyDown(KeyCode.Space))           
+                _entity.TakeDamegeRequest.Invoke(50);
 
-            }
+            
 
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             _entity.MoveDirection.Value = input;

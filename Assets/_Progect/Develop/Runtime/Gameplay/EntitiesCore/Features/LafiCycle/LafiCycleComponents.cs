@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle
 {
@@ -46,4 +47,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
     {
         public ReactiveVeriable<bool> Value;
     }
+
+    public class DisableCollidersOnDeath : IEntityComponent
+    {
+        public List<Collider> Value;
+    }
+
+
 }
