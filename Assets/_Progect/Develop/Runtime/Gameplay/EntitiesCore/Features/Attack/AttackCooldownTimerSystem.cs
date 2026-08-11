@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 {
-    public class AttackCooldownTimerSystem : IInitializableSystem, IDisposable, IUpdatableSystem
+    public class AttackCooldownTimerSystem : IInitializableSystem, IDisposableSystem, IUpdatableSystem
     {
         private ReactiveVeriable<float> _currentTime;
         private ReactiveVeriable<float> _initialTime;
@@ -53,11 +53,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
         private bool CooldownIsOver() => _currentTime.Value <= 0;
 
-        public void Dispose()
+        public void OnDispose()
         {
             _endAttackEventDisposable.Dispose();
         }
-
-      
     }
 }

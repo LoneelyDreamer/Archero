@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 {
-    public class AttackProcessTimerSystem : IInitializableSystem, IDisposable, IUpdatableSystem
+    public class AttackProcessTimerSystem : IInitializableSystem, IDisposableSystem, IUpdatableSystem
     {
         private ReactiveVeriable<float> _currentTime;
 
@@ -28,11 +28,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
             _startAttackEventDisposable = _startAttackEvent.Subscribe(OnStartAttackProcess);
         }
 
-        public void Dispose()
-        {
-            _startAttackEventDisposable.Dispose();
-        }
-
         private void OnStartAttackProcess()
         {
             _currentTime.Value = 0;
@@ -44,6 +39,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
                 return;
 
             _currentTime.Value += deltaTime;            
+        }
+
+        public void OnDispose()
+        {
+            _startAttackEventDisposable.Dispose();
         }
     }
 }

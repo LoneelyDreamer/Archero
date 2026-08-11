@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 {
-    public class EndAttackSystem : IInitializableSystem, IDisposable
+    public class EndAttackSystem : IInitializableSystem, IDisposableSystem
     {
         private ReactiveEvent _endAttackEvent;
         private ReactiveVeriable<bool> _inAttackProcess;
@@ -25,10 +25,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
             _timerDisposable = _attackProcessCurrentTime.Subscribe(OnTimerChanged);
         }
-        public void Dispose()
-        {
-            _timerDisposable.Dispose();
-        }
 
         private void OnTimerChanged(float arg1, float currentTime)
         {
@@ -42,7 +38,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
         private bool TimerIsDone(float currentTime) => currentTime >= _attackProcessInitialTime.Value;
 
-
-
+        public void OnDispose()
+        {
+            _timerDisposable.Dispose();
+        }
     }
 }

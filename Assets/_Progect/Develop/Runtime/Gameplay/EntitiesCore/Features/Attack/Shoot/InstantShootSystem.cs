@@ -5,15 +5,21 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot
 {
-    public class InstantShootSystem : IInitializableSystem, IDisposable
+    public class InstantShootSystem : IInitializableSystem, IDisposableSystem
     {
+        private readonly EntitiesFactory _entitiesFactory;
+
         private ReactiveEvent _attckDelayEndEvent;
         private ReactiveVeriable<float> _damage;
         private Transform _shootPoint;
 
         private IDisposable _attackDelayEndDisposable;
 
-      
+        public InstantShootSystem(EntitiesFactory entitiesFactory)
+        {
+            _entitiesFactory = entitiesFactory;
+        }
+
         public void OnInit(Entity entity)
         {
             _attckDelayEndEvent = entity.AttackDelayEndEvent;
@@ -25,13 +31,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
 
         private void OnAttackDealayEnd()
         {
-            Debug.Log($"Shoot, Damage = {_damage.Value} , _shootPoint = {_shootPoint.position}");
+            if (_entitiesFactory == null)
+                throw new Exception(nameof(_entitiesFactory));
+
+            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value);
         }
 
-        public void Dispose()
+
+        public void OnDispose()
         {
             _attackDelayEndDisposable.Dispose();
         }
-
     }
 }

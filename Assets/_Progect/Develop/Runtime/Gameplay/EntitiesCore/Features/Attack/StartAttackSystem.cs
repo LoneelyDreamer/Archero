@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 {
-    public class StartAttackSystem : IInitializableSystem, IDisposable
+    public class StartAttackSystem : IInitializableSystem, IDisposableSystem
     {
         private ReactiveEvent _startAttackRequest;
         private ReactiveEvent _startAttackEvent;
@@ -39,7 +39,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
             }
         }
 
-        public void Dispose()
+        public void OnDispose()
         {
             _attackRequestDispose.Dispose();
         }
