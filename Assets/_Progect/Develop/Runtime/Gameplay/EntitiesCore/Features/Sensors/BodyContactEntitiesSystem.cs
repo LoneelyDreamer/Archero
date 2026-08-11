@@ -38,8 +38,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
                     _contactsEntites.Count++;
                 }
             }
-
-            Debug.Log("Контакты сущностей : " + _contactsEntites.Count);
         }
     }
 }

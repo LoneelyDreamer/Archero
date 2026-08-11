@@ -13,6 +13,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
     public class MoveSpeed : IEntityComponent
     {
         public ReactiveVeriable<float> Value;
+    } 
+    public class IsMoving : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
     }
 
     public class CanMove : IEntityComponent

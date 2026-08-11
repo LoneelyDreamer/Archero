@@ -1,4 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
@@ -37,6 +39,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddIsMoving()
                 .AddRotationDirection()
                 .AddRotationSpeed(new ReactiveVeriable<float>(900))
                 .AddMaxHealth(new ReactiveVeriable<float>(100))
@@ -46,7 +49,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamegeRequest()
-                .AddTakeDamegeEvent();
+                .AddTakeDamegeEvent()
+                .AddAttackProcessInitialTime(new ReactiveVeriable<float>(3))
+                .AddAttackProcessCurrentTime()
+                .AddInAttackProcess()
+                .AddStartAttackRequest()
+                .AddStartAttackEvent()
+                .AddEndAttackEvent()
+                .AddAttackDelayTime(new ReactiveVeriable<float>(1f))
+                .AddAttackDelayEndEvent()
+                .AddInstantAttackDamage(new ReactiveVeriable<float>(50))
+                .AddAttackCanseledEvent();
+
 
 
             ICompositCondition canMove = new CompositCondition()
@@ -63,18 +77,35 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
 
             ICompositCondition canApplyDamage = new CompositCondition()
-            .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition canStartAttack = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false))
+                .Add(new FuncCondition(() => entity.IsMoving.Value == false));
+
+            ICompositCondition mustCansolAttack = new CompositCondition(LogicOperation.Or)
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.IsMoving.Value));
 
             entity
                 .AddCanMove(canMove)
                 .AddCanRotate(canRotate)
                 .AddMustDie(mustDie)
                 .AddMustSelfRelease(mustSelfRealese)
-                .AddCanApplayDamage(canApplyDamage);
+                .AddCanApplayDamage(canApplyDamage)
+                .AddCanStartAttack(canStartAttack)
+                .AddMustCanselAttack(mustCansolAttack);
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidBodyRotationSystem())
+                .AddSystem(new AttackCanselSystem())
+                .AddSystem(new StartAttackSystem())
+                .AddSystem(new AttackProcessTimerSystem())
+                .AddSystem(new InstantShootSystem())
+                .AddSystem(new AttackDelayEndTriggerSystem())
+                .AddSystem(new EndAttackSystem())
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
@@ -95,6 +126,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddIsMoving()
                 .AddRotationDirection()
                 .AddRotationSpeed(new ReactiveVeriable<float>(900))
                 .AddMaxHealth(new ReactiveVeriable<float>(100))

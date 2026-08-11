@@ -31,7 +31,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
 
             RemoveSelfFromContacts();
 
-            Debug.Log("Contacts : " +  _contacts.Count);
         }
 
         private void RemoveSelfFromContacts()

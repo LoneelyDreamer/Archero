@@ -11,6 +11,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         private ReactiveVeriable<Vector3> _moveDirection;
         private ReactiveVeriable<float> _moveSpeed;
         private Rigidbody _rigidbody;
+        private ReactiveVeriable<bool> _isMoving;
 
         private ICompositCondition _canMove;
         public void OnInit(Entity entity)
@@ -19,6 +20,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
             _moveSpeed = entity.MoveSpeed;
             _rigidbody = entity.Rigidbody;
             _canMove = entity.CanMove;
+            _isMoving = entity.IsMoving;
         }
 
         public void OnUpdate(float deltaTime)
@@ -30,6 +32,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
             }
 
             Vector3 velocity = _moveDirection.Value.normalized * _moveSpeed.Value;
+
+            _isMoving.Value = velocity.magnitude > 0;
 
             _rigidbody.velocity = velocity;
         }
