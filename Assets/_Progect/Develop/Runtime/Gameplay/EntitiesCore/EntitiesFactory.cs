@@ -235,7 +235,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
                 .AddSystem(new DealDamageOnContactSystem())
-               // .AddSystem(new DeathSystem())
+                .AddSystem(new DeathMaskTouchDetectorSystem())
+                .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
