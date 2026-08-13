@@ -63,7 +63,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
     {
         public ICompositCondition Value;
     }
-
+    
     public class AttackCanseledEvent : IEntityComponent
     {
         public ReactiveEvent Value;
@@ -82,5 +82,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
     public class InAttackCooldown : IEntityComponent
     {
         public ReactiveVeriable<bool> Value;
+    }
+
+    public class AOEDamageRadius : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
+
+    public class AOEDamage : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
     }
 }

@@ -12,6 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         private EntitiesFactory _entitiesFactory;   
         
         private Entity _entity;
+        private Entity _entityTeleportedGost;
 
         private bool _isRunning;
         public void Initialze(DIContainer container)
@@ -23,7 +24,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         public void Run()
         {
             _entity = _entitiesFactory.CreateHero(Vector3.zero);
-            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 3);
+            _entityTeleportedGost = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 5);
 
             _isRunning = true;
         }
@@ -39,7 +41,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
             if(Input.GetKeyDown(KeyCode.R))           
                 _entity.StartAttackRequest.Invoke();
 
-            
+            if (Input.GetKeyDown(KeyCode.I))
+                _entityTeleportedGost.StartTeleportRequest.Invoke();
+
+
 
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             _entity.MoveDirection.Value = input;

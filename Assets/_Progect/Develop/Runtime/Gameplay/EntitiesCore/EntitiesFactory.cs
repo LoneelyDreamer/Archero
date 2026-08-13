@@ -1,10 +1,13 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOE;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles;
@@ -247,5 +250,78 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
         public Entity CreateEmpty() => new Entity();
 
+        public Entity CreateTeleportGhost(Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/Teleported Gost");
+
+            entity
+                .AddMaxHealth(new ReactiveVeriable<float>(100))
+                .AddCurrentHealth(new ReactiveVeriable<float>(100))
+                .AddMaxEnergy(new ReactiveVeriable<float>(100))
+                .AddCurrentEnergy(new ReactiveVeriable<float>(10))
+                .AddEnergyRespawnTimeStep(new ReactiveVeriable<float>(2f))
+                .AddTeleportRadius(new ReactiveVeriable<float>(3f))
+                .AddTeleportSkillPrice(new ReactiveVeriable<float>(15f))
+                .AddStartTeleportRequest()
+                .AddStartTeleportEvent()
+                .AddAOEDamage( new ReactiveVeriable<float>(70f))
+                .AddAOEDamageRadius( new ReactiveVeriable<float>(10f))
+                .AddIsDead()
+                .AddInDeadProcess()
+                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
+                .AddDeathProcessCurrentTime()
+                .AddTakeDamegeRequest()
+                .AddTakeDamegeEvent()                
+                .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddContactColliderBuffer(new Buffer<Collider>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64));
+
+
+            ICompositCondition mustDie = new CompositCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositCondition canUseSkill = new CompositCondition()
+               .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition mustSelfRealese = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
+
+            ICompositCondition canApplyDamage = new CompositCondition()
+            .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition canUseTeleportSkill = new CompositCondition()
+            .Add(new FuncCondition(() => entity.IsDead.Value == false))
+            .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportSkillPrice.Value));
+
+            entity
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRealese)
+                .AddCanUseTeleportSkill(canUseTeleportSkill)
+                .AddCanApplayDamage(canApplyDamage);
+
+            entity
+                //.AddSystem(new BodyContactsDetectingSystem())
+                //.AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
+                //.AddSystem(new DealDamageOnContactSystem())
+                .AddSystem(new EnergySystem())
+                .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new TeleportSystem())
+                .AddSystem(new AOEDetectingSystem(_collidersRegestryService))
+                .AddSystem(new InstantAOESystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+
     }
+
+
 }
