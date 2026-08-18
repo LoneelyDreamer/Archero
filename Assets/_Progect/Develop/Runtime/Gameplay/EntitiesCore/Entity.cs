@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
-    public partial class Entity : IDisposable
+    public partial class Entity : IDisposable, IEquatable<Entity>
     {
         private readonly Dictionary<Type, IEntityComponent> _componets = new();
 
@@ -99,6 +99,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return this;
         }
 
-       
+        public bool Equals(Entity other) => other == this;
     }
 }

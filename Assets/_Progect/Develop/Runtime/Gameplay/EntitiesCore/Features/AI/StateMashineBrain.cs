@@ -19,7 +19,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
 
         public void Disable()
         {
-            _stateMashine.Exsit();
+            _stateMashine.Exit();
             _isEnabled = false;
         }
 

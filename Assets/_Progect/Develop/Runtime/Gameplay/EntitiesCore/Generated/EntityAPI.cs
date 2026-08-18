@@ -525,6 +525,20 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.CanApplayDamage() {Value = value}); 
 		}
 
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget CurrentTargetC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> CurrentTarget => CurrentTargetC.Value;
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget()
+		{
+	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity>() }); 
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget() {Value = value}); 
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.Common.RigidbodyComponent RigidbodyC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.Common.RigidbodyComponent>();
 
 		public global::UnityEngine.Rigidbody Rigidbody => RigidbodyC.Value;
@@ -532,6 +546,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRigidbody(global::UnityEngine.Rigidbody value)
 		{
 	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.Common.RigidbodyComponent() {Value = value}); 
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.Common.TransformComponent TransformC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.Common.TransformComponent>();
+
+		public global::UnityEngine.Transform Transform => TransformC.Value;
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTransform(global::UnityEngine.Transform value)
+		{
+	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.Common.TransformComponent() {Value = value}); 
 		}
 
 	}
