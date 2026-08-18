@@ -13,7 +13,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
         private readonly List<IUpdatableSystem> _updatables = new();
         private readonly List<IDisposableSystem> _disposables = new();
 
-        private bool _isInit;     
+        private bool _isInit;  
+        
+        public bool IsInit => _isInit;
 
         public void Initialize()
         {

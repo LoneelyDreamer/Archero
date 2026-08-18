@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
@@ -12,9 +13,26 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Процесс регистрации сервисов на сцене геймплея");
             container.RegisterAsSingle(CreateEntitiesFactory);
+
             container.RegisterAsSingle(CreateEntitiesLifeContext);
+
             container.RegisterAsSingle(CreatrCollidersRegestryService);
+
+            container.RegisterAsSingle(CreateBrainsFactory);
+
+            container.RegisterAsSingle(CreateAIBrainContex);
+
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static AIBrainContex CreateAIBrainContex(DIContainer c)
+        {
+            return new AIBrainContex();
+        }
+
+        private static BrainsFactory CreateBrainsFactory(DIContainer c)
+        {
+            return new BrainsFactory(c);
         }
 
         private static CollidersRegestryService CreatrCollidersRegestryService(DIContainer c)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States
 {
-    public class RandomMovmentState : State
+    public class RandomMovmentState : State, IUpdatableState
     {
         private ReactiveVeriable<Vector3> _movementDirection;
         private ReactiveVeriable<Vector3> _rotationDirection;

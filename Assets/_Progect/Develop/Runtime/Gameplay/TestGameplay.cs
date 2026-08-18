@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
@@ -10,20 +11,23 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
     {
         private DIContainer _container;
         private EntitiesFactory _entitiesFactory;   
+        private BrainsFactory _brainsFactory;
         
         private Entity _entity;
+        private Entity _ghost;
 
         private bool _isRunning;
         public void Initialze(DIContainer container)
         {
             _container = container;
             _entitiesFactory = _container.Resolve<EntitiesFactory>();
+            _brainsFactory = _container.Resolve<BrainsFactory>();
         }
 
         public void Run()
         {
             _entity = _entitiesFactory.CreateHero(Vector3.zero);
-            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
 
             _isRunning = true;
         }
@@ -38,6 +42,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
 
             if(Input.GetKeyDown(KeyCode.R))           
                 _entity.StartAttackRequest.Invoke();
+
+            if (Input.GetKeyDown(KeyCode.I))
+                _brainsFactory.CreateGostBrain(_ghost);
 
             
 

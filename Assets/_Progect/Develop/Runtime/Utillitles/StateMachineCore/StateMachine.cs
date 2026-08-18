@@ -13,6 +13,13 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.StateMachineCore
 
         private bool _isRunning;
 
+        private List<IDisposable> _disposables;
+
+        protected StateMachine(List<IDisposable> disposables)
+        {
+            _disposables = new List<IDisposable>(disposables);
+        }
+
         protected TState CurrentState => _currentState.State;
 
         public void AddState(TState state) => _states.Add(new StateNode<TState>(state));
@@ -38,7 +45,12 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.StateMachineCore
                     break;
                 }
             }
+
+            UpdateLogic(deltaTime);
         }
+
+        protected virtual void UpdateLogic(float deltaTime) { }
+        
 
         public void Dispose()
         {
@@ -49,6 +61,11 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.StateMachineCore
                     disposableState.Dispose();
 
             _states.Clear();
+
+            foreach (IDisposable disposabl in _disposables)
+                disposabl.Dispose();
+
+            _disposables.Clear();
         }
 
         public void Enter()
