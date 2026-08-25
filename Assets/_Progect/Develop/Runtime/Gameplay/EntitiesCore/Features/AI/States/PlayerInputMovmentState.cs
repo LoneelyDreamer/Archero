@@ -29,7 +29,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
         {
             base.Exit();
 
-            _rotationDirection.Value = Vector3.zero;
+            _movementDirection.Value = Vector3.zero;
         }
     }
 }
