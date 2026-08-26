@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
@@ -17,6 +18,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         private Entity _entity;
         private Entity _ghost;
 
+        [SerializeField] private HeroConfig _heroConfig;
+        [SerializeField] private GostConfig _gostConfig;
+
         private bool _isRunning;
         public void Initialze(DIContainer container)
         {
@@ -27,11 +31,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _entity = _entitiesFactory.CreateHero(Vector3.zero);
+            _entity = _entitiesFactory.CreateHero(Vector3.zero, _heroConfig);
             _entity.AddCurrentTarget();
             _brainsFactory.CreateMainHeroBrain(_entity, new NearestDamageableTargetSelector(_entity));
 
-            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5, _gostConfig);
 
             _isRunning = true;
         }
