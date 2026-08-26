@@ -53,19 +53,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
             if (Input.GetKeyDown(KeyCode.I))
                 _brainsFactory.CreateGostBrain(_ghost);
 
-            
 
-            //Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            //_entity.MoveDirection.Value = input;
-            //_entity.RotationDirection.Value = input;
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.J))
                 _entityTeleportedGost.StartTeleportRequest.Invoke();
-
-
-
-            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            _entity.MoveDirection.Value = input;
-            _entity.RotationDirection.Value = input;
         }
     }
 }

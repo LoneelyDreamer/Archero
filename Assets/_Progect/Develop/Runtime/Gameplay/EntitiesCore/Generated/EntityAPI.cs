@@ -12,65 +12,115 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> TeleportRadius => TeleportRadiusC.Value;
 
+		public bool TryGetTeleportRadius(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportRadius component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRadius()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportRadius() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportRadius() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRadius(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportRadius() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportRadius() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice TeleportSkillPriceC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> TeleportSkillPrice => TeleportSkillPriceC.Value;
 
+		public bool TryGetTeleportSkillPrice(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportSkillPrice()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportSkillPrice(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportSkillPrice() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.CanUseTeleportSkill CanUseTeleportSkillC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.CanUseTeleportSkill>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition CanUseTeleportSkill => CanUseTeleportSkillC.Value;
 
+		public bool TryGetCanUseTeleportSkill(out ICompositCondition value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.CanUseTeleportSkill component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ICompositCondition);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanUseTeleportSkill(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.CanUseTeleportSkill() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.CanUseTeleportSkill() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest StartTeleportRequestC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent StartTeleportRequest => StartTeleportRequestC.Value;
 
+		public bool TryGetStartTeleportRequest(out ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveEvent);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartTeleportRequest()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartTeleportRequest(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportRequest() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent StartTeleportEventC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent StartTeleportEvent => StartTeleportEventC.Value;
 
+		public bool TryGetStartTeleportEvent(out ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveEvent);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartTeleportEvent()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartTeleportEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider BodyColliderC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider>();
@@ -560,42 +610,72 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> CurrentEnergy => CurrentEnergyC.Value;
 
+		public bool TryGetCurrentEnergy(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.CurrentEnergy component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentEnergy()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.CurrentEnergy() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.CurrentEnergy() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentEnergy(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.CurrentEnergy() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.CurrentEnergy() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy MaxEnergyC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> MaxEnergy => MaxEnergyC.Value;
 
+		public bool TryGetMaxEnergy(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMaxEnergy()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMaxEnergy(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.MaxEnergy() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep EnergyRespawnTimeStepC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> EnergyRespawnTimeStep => EnergyRespawnTimeStepC.Value;
 
+		public bool TryGetEnergyRespawnTimeStep(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnergyRespawnTimeStep()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnergyRespawnTimeStep(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy.EnergyRespawnTimeStep() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage.BodyContactDamage BodyContactDamageC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage.BodyContactDamage>();
@@ -995,28 +1075,48 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> AOEDamageRadius => AOEDamageRadiusC.Value;
 
+		public bool TryGetAOEDamageRadius(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamageRadius component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamageRadius()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamageRadius() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamageRadius() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamageRadius(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamageRadius() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamageRadius() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage AOEDamageC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> AOEDamage => AOEDamageC.Value;
 
+		public bool TryGetAOEDamage(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamage()
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() }); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
-	return AddComponent (new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage() {Value = value}); 
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOEDamage() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest TakeDamegeRequestC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest>();
