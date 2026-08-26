@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AOE;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot;
@@ -33,7 +34,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _collidersRegestryService = _container.Resolve<CollidersRegestryService>();
         }
 
-        public Entity CreateHero(Vector3 position)
+        public Entity CreateHero(Vector3 position, HeroConfig heroConfig)
         {
             Entity entity = CreateEmpty();
 
@@ -41,29 +42,29 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddMoveSpeed(new ReactiveVeriable<float>(heroConfig.MoveSpeed))
                 .AddIsMoving()
                 .AddRotationDirection()
-                .AddRotationSpeed(new ReactiveVeriable<float>(900))
-                .AddMaxHealth(new ReactiveVeriable<float>(100))
-                .AddCurrentHealth(new ReactiveVeriable<float>(100))
+                .AddRotationSpeed(new ReactiveVeriable<float>(heroConfig.RotationSpeed))
+                .AddMaxHealth(new ReactiveVeriable<float>(heroConfig.MaxHealth))
+                .AddCurrentHealth(new ReactiveVeriable<float>(heroConfig.MaxHealth))
                 .AddIsDead()
                 .AddInDeadProcess()
-                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
+                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(heroConfig.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamegeRequest()
                 .AddTakeDamegeEvent()
-                .AddAttackProcessInitialTime(new ReactiveVeriable<float>(3))
+                .AddAttackProcessInitialTime(new ReactiveVeriable<float>(heroConfig.AttackProcessTime))
                 .AddAttackProcessCurrentTime()
                 .AddInAttackProcess()
                 .AddStartAttackRequest()
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
-                .AddAttackDelayTime(new ReactiveVeriable<float>(1f))
+                .AddAttackDelayTime(new ReactiveVeriable<float>(heroConfig.AttackDelayTime))
                 .AddAttackDelayEndEvent()
-                .AddInstantAttackDamage(new ReactiveVeriable<float>(50))
+                .AddInstantAttackDamage(new ReactiveVeriable<float>(heroConfig.InstantAttackDamage))
                 .AddAttackCanseledEvent()
-                .AddAttackCooldownInitialTime(new ReactiveVeriable<float>(2))
+                .AddAttackCooldownInitialTime(new ReactiveVeriable<float>(heroConfig.AttackColdown))
                 .AddAttackCooldownCurrentTime()
                 .AddInAttackCooldown();
 
@@ -126,7 +127,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateGhost(Vector3 position)
+        public Entity CreateGhost(Vector3 position, GostConfig gostConfig)
         {
             Entity entity = CreateEmpty();
 
@@ -134,22 +135,22 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddMoveSpeed(new ReactiveVeriable<float>(gostConfig.MoveSpeed))
                 .AddIsMoving()
                 .AddRotationDirection()
-                .AddRotationSpeed(new ReactiveVeriable<float>(900))
-                .AddMaxHealth(new ReactiveVeriable<float>(100))
-                .AddCurrentHealth(new ReactiveVeriable<float>(100))
+                .AddRotationSpeed(new ReactiveVeriable<float>(gostConfig.RotationSpeed))
+                .AddMaxHealth(new ReactiveVeriable<float>(gostConfig.MaxHealth))
+                .AddCurrentHealth(new ReactiveVeriable<float>(gostConfig.MaxHealth))
                 .AddIsDead()
                 .AddInDeadProcess()
-                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
+                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(gostConfig.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamegeRequest()
                 .AddTakeDamegeEvent()
                 .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                .AddBodyContactDamage(new ReactiveVeriable<float>(50));
+                .AddBodyContactDamage(new ReactiveVeriable<float>(gostConfig.BodyContactDamage));
 
 
             ICompositCondition canMove = new CompositCondition()

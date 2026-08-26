@@ -40,7 +40,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
                     _entityToBrains[i].Brain.Dispose();
                     _entityToBrains[i] = _entityToBrains[lastIndex];
 
-                    _entityToBrains.ElementAt(lastIndex);
+                    _entityToBrains.RemoveAt(lastIndex);
                     i--;
                     continue;
                 }
