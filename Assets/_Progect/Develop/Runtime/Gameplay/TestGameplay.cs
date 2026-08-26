@@ -36,10 +36,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
             _entity.AddCurrentTarget();
             _brainsFactory.CreateMainHeroBrain(_entity, new NearestDamageableTargetSelector(_entity));
 
-            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
-            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 3);
-            _entityTeleportedGost = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 5);
+            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 3, _gostConfig);
             _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5, _gostConfig);
+
+            _entityTeleportedGost = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 5);
 
             _isRunning = true;
         }
