@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
@@ -16,6 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
         [SerializeField] private TestGameplay _testGameplay;
         private EntitiesLifeContext _entitiesLifeContext;
+        private AIBrainContex _brainContex;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -38,6 +40,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             _testGameplay.Initialze(_container);
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _brainContex = _container.Resolve<AIBrainContex>();
 
             yield break;
         }
@@ -52,6 +55,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
+            _brainContex?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.F))

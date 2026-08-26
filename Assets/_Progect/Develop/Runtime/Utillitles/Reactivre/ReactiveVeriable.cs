@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,26 @@ using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.Utillitles.Reactivre
 {
-    public class ReactiveVeriable<T> : IReadOnlyVeriable<T> where T : IEquatable<T>
+    public class ReactiveVeriable<T> : IReadOnlyVeriable<T>
     {
         private readonly List<Subscriber<T, T>> _subsribers = new();
         private readonly List<Subscriber<T, T>> _toAdd = new();
         private readonly List<Subscriber<T, T>> _toRemove = new();
 
-        public T _value;
-        public ReactiveVeriable() => _value = default;
-        public ReactiveVeriable(T value) => _value = value;
+        private T _value;
+        private IEqualityComparer<T> _comparer;
+        public ReactiveVeriable() : this(default)
+        {
+        }
+        public ReactiveVeriable(T value) : this(value, EqualityComparer<T>.Default)
+        {
+        }
+
+        public ReactiveVeriable(T value, IEqualityComparer<T> comparer)
+        {
+            _value = value;
+            _comparer = comparer;
+        }
 
         public T Value
         { 
@@ -24,7 +36,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.Reactivre
                 T oldValue = _value;
                 _value = value;
 
-                if (_value.Equals(oldValue) == false)
+                if (_comparer.Equals(oldValue, value) == false)
                     Invoke(oldValue, value);
             }
         }
