@@ -144,7 +144,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamegeRequest()
                 .AddTakeDamegeEvent()
-                .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddContactsDetectingMask(Layers.CharactersMask)
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddBodyContactDamage(new ReactiveVeriable<float>(gostConfig.BodyContactDamage));
@@ -203,11 +203,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddRotationDirection(new ReactiveVeriable<Vector3>(direction))
                 .AddRotationSpeed(new ReactiveVeriable<float>(9999))
                 .AddIsDead()
-                .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddContactsDetectingMask(Layers.CharactersMask)
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddBodyContactDamage(new ReactiveVeriable<float>(damage))
-                .AddDeathMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddDeathMask(Layers.CharactersMask)
                 .AddIsTouchDeathMask();
 
 
