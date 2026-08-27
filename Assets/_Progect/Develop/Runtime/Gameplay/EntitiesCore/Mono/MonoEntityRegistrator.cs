@@ -9,6 +9,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features
 {
     public abstract class MonoEntityRegistrator : MonoBehaviour
     {
-        public abstract void Register(Entity entity);
+        public abstract void Register(EntityLifeContext entity);
     }
 }

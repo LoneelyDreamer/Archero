@@ -12,7 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
         private ICompositCondition _mustCanselAttack;
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _inAttackProcess = entity.InAttackProcess;
             _attcakCanseledEvent = entity.AttackCanseledEvent;

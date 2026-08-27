@@ -27,11 +27,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public StateMashineBrain CreateMainHeroBrain(Entity entity, ITargetSelector targetSelector)
+        public StateMashineBrain CreateMainHeroBrain(EntityLifeContext entity, ITargetSelector targetSelector)
         {
             AIStateMashine combastState = CreateAutoAttackStateMashine(entity);
             PlayerInputMovmentState movementState = new PlayerInputMovmentState(entity, _inputService);
-            ReactiveVeriable<Entity> currentTurget = entity.CurrentTarget;
+            ReactiveVeriable<EntityLifeContext> currentTurget = entity.CurrentTarget;
 
             ICompositCondition fromMovmentToCombatStateCondition = new CompositCondition()
                 .Add(new FuncCondition(() => currentTurget.Value != null))
@@ -62,7 +62,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             return brain;
         }
 
-        public StateMashineBrain CreateGostBrain(Entity entity)
+        public StateMashineBrain CreateGostBrain(EntityLifeContext entity)
         {
             AIStateMashine stateMashine = CreateRundomMovmentStateMashine(entity);
             StateMashineBrain brain = new StateMashineBrain(stateMashine);
@@ -72,7 +72,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             return brain;
         }
 
-        private AIStateMashine CreateRundomMovmentStateMashine(Entity entity)
+        private AIStateMashine CreateRundomMovmentStateMashine(EntityLifeContext entity)
         {
             List<IDisposable> disposables = new List<IDisposable>();
 
@@ -102,7 +102,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             return stateMashine;
         }
 
-        private AIStateMashine CreateAutoAttackStateMashine(Entity entity)
+        private AIStateMashine CreateAutoAttackStateMashine(EntityLifeContext entity)
         {
             RotateToTargetState rotateToTargetState = new RotateToTargetState(entity);
 
@@ -110,13 +110,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
 
             ICondition canAttack = entity.CanStartAttack;
             Transform transform = entity.Transform;
-            ReactiveVeriable<Entity> currentTarget = entity.CurrentTarget;
+            ReactiveVeriable<EntityLifeContext> currentTarget = entity.CurrentTarget;
 
             ICompositCondition fromRotateToAttackCondition = new CompositCondition()
                 .Add(canAttack)
                 .Add(new FuncCondition(() =>
                 {
-                    Entity target = currentTarget.Value;
+                    EntityLifeContext target = currentTarget.Value;
 
                     if (target == null)
                         return false;

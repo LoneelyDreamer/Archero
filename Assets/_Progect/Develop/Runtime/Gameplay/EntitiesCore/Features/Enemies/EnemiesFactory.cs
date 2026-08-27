@@ -28,9 +28,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public Entity Create(Vector3 position, EntityConfig config)
+        public EntityLifeContext Create(Vector3 position, EntityConfig config)
         {
-            Entity entity = null;
+            EntityLifeContext entity = null;
 
             switch(config)
             {

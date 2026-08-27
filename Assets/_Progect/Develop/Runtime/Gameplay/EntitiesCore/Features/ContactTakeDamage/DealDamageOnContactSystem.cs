@@ -9,26 +9,26 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Contact
 {
     public class DealDamageOnContactSystem : IInitializableSystem, IUpdatableSystem
     {
-        private Entity _entity;
-        private Buffer<Entity> _contacts;
+        private EntityLifeContext _entity;
+        private Buffer<EntityLifeContext> _contacts;
         private ReactiveVeriable<float> _damage;
 
-        private List<Entity> _processedEntities;
+        private List<EntityLifeContext> _processedEntities;
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _entity = entity;
             _contacts = entity.ContactEntitiesBuffer;
             _damage = entity.BodyContactDamage;
 
-            _processedEntities = new List<Entity>(_contacts.Items.Length);
+            _processedEntities = new List<EntityLifeContext>(_contacts.Items.Length);
         }
 
         public void OnUpdate(float deltaTime)
         {
             for (int i = 0; i < _contacts.Count; i++)
             {
-                Entity contactEntity = _contacts.Items[i];
+                EntityLifeContext contactEntity = _contacts.Items[i];
 
                 if (_processedEntities.Contains(contactEntity) == false)
                 {
@@ -45,7 +45,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Contact
 
   
 
-        public bool ContainInContacts(Entity entity)
+        public bool ContainInContacts(EntityLifeContext entity)
         {
             for (int i = 0; i < _contacts.Count; i++)
                 if(_contacts.Items[i] == entity)

@@ -7,7 +7,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Common
 {
     public class RigidbodyEntityRegistrator : MonoEntityRegistrator
     {
-        public override void Register(Entity entity)
+        public override void Register(EntityLifeContext entity)
         {
             entity.AddRigidbody(GetComponent<Rigidbody>());
         }

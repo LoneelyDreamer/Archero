@@ -14,8 +14,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         private EntitiesFactory _entitiesFactory;   
         private BrainsFactory _brainsFactory;
         
-        private Entity _entity;
-        private Entity _ghost;
+        private EntityLifeContext _entity;
+        private EntityLifeContext _ghost;
 
         [SerializeField] private HeroConfig _heroConfig;
         [SerializeField] private GostConfig _gostConfig;

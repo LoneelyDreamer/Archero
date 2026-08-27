@@ -7,7 +7,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
     public class BodyContactEntitiesSystem : IInitializableSystem, IUpdatableSystem
     {
         private Buffer<Collider> _contacts;
-        private Buffer<Entity> _contactsEntites;
+        private Buffer<EntityLifeContext> _contactsEntites;
 
         private readonly CollidersRegestryService _collidersRegestryService;
 
@@ -16,7 +16,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
             _collidersRegestryService = collidersRegestryService;
         }
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _contacts = entity.ContactColliderBuffer;
             _contactsEntites = entity.ContactEntitiesBuffer;
@@ -30,7 +30,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
             {
                 Collider collider = _contacts.Items[i];
 
-                Entity contactEntity = _collidersRegestryService.GetBy(collider);
+                EntityLifeContext contactEntity = _collidersRegestryService.GetBy(collider);
 
                 if (contactEntity != null)
                 {

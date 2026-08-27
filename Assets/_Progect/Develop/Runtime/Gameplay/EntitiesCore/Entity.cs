@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
-    public partial class Entity : IDisposable
+    public partial class EntityLifeContext : IDisposable
     {
         private readonly Dictionary<Type, IEntityComponent> _componets = new();
 
@@ -44,7 +44,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
         }
 
 
-        public Entity AddComponent<TComponent>(TComponent component) where TComponent : class, IEntityComponent 
+        public EntityLifeContext AddComponent<TComponent>(TComponent component) where TComponent : class, IEntityComponent 
         {
             _componets.Add(typeof(TComponent), component);
             return this;
@@ -75,7 +75,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return component;
         }
 
-        public Entity AddSystem(IEntitySystem system)
+        public EntityLifeContext AddSystem(IEntitySystem system)
         {
             if (_systems.Contains(system))
                 throw new ArgumentException(system.GetType().ToString());

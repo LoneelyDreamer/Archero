@@ -12,7 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
 
         private CapsuleCollider _body;
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _contacts = entity.ContactColliderBuffer;
             _mask = entity.ContactsDetectingMask;

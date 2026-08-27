@@ -4,7 +4,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
 {
     public class CurrentTarget : IEntityComponent
     {
-        public ReactiveVeriable<Entity> Value;
+        public ReactiveVeriable<EntityLifeContext> Value;
     }
 
 }

@@ -34,9 +34,9 @@ namespace Assets._Progect.Develop.Ediror
                 sb.AppendLine("using System.Collections.Generic;");
                 sb.AppendLine();
 
-                sb.AppendLine($"namespace {typeof(Entity).Namespace}");
+                sb.AppendLine($"namespace {typeof(EntityLifeContext).Namespace}");
                 sb.AppendLine("{");
-                sb.AppendLine($"\tpublic partial class {typeof(Entity).Name}");
+                sb.AppendLine($"\tpublic partial class {typeof(EntityLifeContext).Name}");
                 sb.AppendLine("\t{");
 
                 Assembly assembly = Assembly.Load(AssemblyName);
@@ -73,7 +73,7 @@ namespace Assets._Progect.Develop.Ediror
 
                         if (HasEmptyConstructor(field.FieldType))
                         {
-                            sb.AppendLine($"\t\tpublic {typeof(Entity).FullName} Add{componentName}()");
+                            sb.AppendLine($"\t\tpublic {typeof(EntityLifeContext).FullName} Add{componentName}()");
                             sb.AppendLine("\t\t{");
                             sb.AppendLine($"\t\t\treturn AddComponent(new {fullTypeName}() {{ {field.Name} = new {GetValidTypeName(field.FieldType)}() }});");
                             sb.AppendLine("\t\t}");
@@ -84,7 +84,7 @@ namespace Assets._Progect.Develop.Ediror
                     string componentParametrs = GetParametrs(componetsType);
                     if (!string.IsNullOrEmpty(componentParametrs))
                     {
-                        sb.AppendLine($"\t\tpublic {typeof(Entity).FullName} Add{componentName}({componentParametrs})");
+                        sb.AppendLine($"\t\tpublic {typeof(EntityLifeContext).FullName} Add{componentName}({componentParametrs})");
                         sb.AppendLine("\t\t{");
                         sb.AppendLine($"\t\t\treturn AddComponent(new {fullTypeName}() {GetInitializer(componetsType)});");
                         sb.AppendLine("\t\t}");

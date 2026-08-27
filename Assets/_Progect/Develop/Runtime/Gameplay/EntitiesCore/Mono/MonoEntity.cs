@@ -5,16 +5,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono
 {
     public class MonoEntity : MonoBehaviour
     {
-        private Entity _linkedEntity;
+        private EntityLifeContext _linkedEntity;
         private CollidersRegestryService _collidersRegestryService;
 
-        public Entity LinkedEntity => _linkedEntity;
+        public EntityLifeContext LinkedEntity => _linkedEntity;
 
         public void Initialize(CollidersRegestryService collidersRegestryService)
         {
             _collidersRegestryService = collidersRegestryService;
         }
-        public void Link(Entity entity)
+        public void Link(EntityLifeContext entity)
         {
             _linkedEntity = entity;
 
@@ -30,7 +30,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
         }
 
-        public void Cleanup(Entity entity)
+        public void Cleanup(EntityLifeContext entity)
         {
             foreach (Collider collider in GetComponentsInChildren<Collider>())
                 _collidersRegestryService.Unregester(collider);

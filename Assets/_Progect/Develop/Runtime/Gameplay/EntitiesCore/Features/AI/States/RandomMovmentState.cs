@@ -14,7 +14,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
         private float _time;
 
         public RandomMovmentState(
-            Entity entity, 
+            EntityLifeContext entity, 
             float cooldownBetweenDirectionGeneration)
         {
             _movementDirection = entity.MoveDirection;

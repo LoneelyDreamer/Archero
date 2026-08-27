@@ -15,7 +15,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
         private readonly CollidersRegestryService _colllidersRegestryService;
 
-        private readonly Dictionary<Entity, MonoEntity> _entityToMono = new();
+        private readonly Dictionary<EntityLifeContext, MonoEntity> _entityToMono = new();
 
         public MonoEntitesFactory(
             ResourcesAssetsLoader resources, 
@@ -27,7 +27,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono
             _colllidersRegestryService = colllidersRegestryService;
         }
 
-        public MonoEntity Create(Entity entity, Vector3 position, string path)
+        public MonoEntity Create(EntityLifeContext entity, Vector3 position, string path)
         {
             MonoEntity prefab = _resources.Load<MonoEntity>(path);
 
@@ -47,14 +47,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono
             _entitiesLifeContext.Released += OnEntityReleased;
         }   
 
-        private void CleanupFor(Entity entity)
+        private void CleanupFor(EntityLifeContext entity)
         {
             MonoEntity monoEntity = _entityToMono[entity];
             monoEntity.Cleanup(entity);
             Object.Destroy(monoEntity.gameObject);
         }
 
-        private void OnEntityReleased(Entity entity)
+        private void OnEntityReleased(EntityLifeContext entity)
         {
             CleanupFor(entity);
 
@@ -65,7 +65,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono
         {
             _entitiesLifeContext.Released -= OnEntityReleased;
 
-            foreach (Entity entity in _entityToMono.Keys)
+            foreach (EntityLifeContext entity in _entityToMono.Keys)
                 CleanupFor(entity);
 
             _entityToMono.Clear();

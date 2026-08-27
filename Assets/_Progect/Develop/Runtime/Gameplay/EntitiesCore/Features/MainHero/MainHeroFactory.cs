@@ -26,11 +26,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public Entity Create(Vector3 position)
+        public EntityLifeContext Create(Vector3 position)
         {
             HeroConfig config = _configProvidersServise.GetConfig<HeroConfig>();
 
-            Entity entity = _entitiesFactory.CreateHero(position, config);
+            EntityLifeContext entity = _entitiesFactory.CreateHero(position, config);
 
             entity.AddCurrentTarget();
 

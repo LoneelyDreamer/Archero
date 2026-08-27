@@ -11,7 +11,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
         private ReactiveVeriable<Vector3> _movementDirection;
         private ReactiveVeriable<Vector3> _rotationDirection;
 
-        public PlayerInputMovmentState(Entity entity, IInputService inputService)
+        public PlayerInputMovmentState(EntityLifeContext entity, IInputService inputService)
         {
             _inputService = inputService;
             _movementDirection = entity.MoveDirection;

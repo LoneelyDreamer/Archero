@@ -12,7 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
         private ReactiveEvent _attckDelayEndEvent;
         private ReactiveVeriable<float> _damage;
         private Transform _shootPoint;
-        private Entity _entity;
+        private EntityLifeContext _entity;
 
         private IDisposable _attackDelayEndDisposable;
 
@@ -21,7 +21,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
             _entitiesFactory = entitiesFactory;
         }
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _entity = entity;
             _attckDelayEndEvent = entity.AttackDelayEndEvent;

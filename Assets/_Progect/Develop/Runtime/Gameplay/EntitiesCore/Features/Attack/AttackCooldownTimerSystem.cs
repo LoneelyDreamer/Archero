@@ -20,7 +20,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
         private IDisposable _endAttackEventDisposable;
 
       
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _currentTime = entity.AttackCooldownCurrentTime;
             _initialTime = entity.AttackCooldownInitialTime;

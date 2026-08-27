@@ -16,7 +16,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
        
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _endAttackEvent = entity.EndAttackEvent;
             _inAttackProcess = entity.InAttackProcess;

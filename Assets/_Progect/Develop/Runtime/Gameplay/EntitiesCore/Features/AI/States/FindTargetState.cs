@@ -7,12 +7,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
     {
         private ITargetSelector _targetSelector;
         private EntitiesLifeContext _entitiesLifeContext;
-        private ReactiveVeriable<Entity> _currentTarget;
+        private ReactiveVeriable<EntityLifeContext> _currentTarget;
 
         public FindTargetState(
             ITargetSelector targetSelector,
             EntitiesLifeContext entitiesLifeContext,
-            Entity entity)
+            EntityLifeContext entity)
         {
             _targetSelector = targetSelector;
             _entitiesLifeContext = entitiesLifeContext;

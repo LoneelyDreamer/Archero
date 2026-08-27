@@ -5,15 +5,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
     public class EntitiesLifeContext : IDisposable
     {
-        public event Action<Entity> Added;
-        public event Action<Entity> Released;
+        public event Action<EntityLifeContext> Added;
+        public event Action<EntityLifeContext> Released;
 
-        private readonly List<Entity> _entities = new();
-        private readonly List<Entity> _releaseRequest = new();
+        private readonly List<EntityLifeContext> _entities = new();
+        private readonly List<EntityLifeContext> _releaseRequest = new();
 
-        public IReadOnlyList<Entity> Entities => _entities;
+        public IReadOnlyList<EntityLifeContext> Entities => _entities;
 
-        public void Add(Entity entity)
+        public void Add(EntityLifeContext entity)
         {
             _entities.Add(entity);
 
@@ -29,7 +29,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 _entities[i].OnUpdate(deltaTime);
             }
 
-            foreach (Entity entity in _releaseRequest)
+            foreach (EntityLifeContext entity in _releaseRequest)
             {
                 _entities.Remove(entity);
                 entity.Dispose();
@@ -39,14 +39,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _releaseRequest.Clear();
         }
 
-        public void Relese(Entity entity)
+        public void Relese(EntityLifeContext entity)
         {
             _releaseRequest.Add(entity);
         }
 
         public void Dispose()
         {
-            foreach (Entity entity in _entities)
+            foreach (EntityLifeContext entity in _entities)
                 entity.Dispose();
 
             _entities.Clear();      

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
-	public partial class Entity
+	public partial class EntityLifeContext
 	{
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team TeamC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team>();
 
@@ -24,12 +24,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeam()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTeam()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Teams>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeam(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Teams> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTeam(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Teams> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team() { Value = value });
 		}
@@ -48,7 +48,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBodyCollider(global::UnityEngine.CapsuleCollider value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddBodyCollider(global::UnityEngine.CapsuleCollider value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider() { Value = value });
 		}
@@ -67,7 +67,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddContactsDetectingMask(global::UnityEngine.LayerMask value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddContactsDetectingMask(global::UnityEngine.LayerMask value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.ContactsDetectingMask() { Value = value });
 		}
@@ -86,26 +86,26 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddContactColliderBuffer(global::Assets._Progect.Develop.Runtime.Utillitles.Buffer<global::UnityEngine.Collider> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddContactColliderBuffer(global::Assets._Progect.Develop.Runtime.Utillitles.Buffer<global::UnityEngine.Collider> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.ContactColliderBuffer() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.ContactEntitiesBuffer ContactEntitiesBufferC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.ContactEntitiesBuffer>();
 
-		public global::Assets._Progect.Develop.Runtime.Utillitles.Buffer<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> ContactEntitiesBuffer => ContactEntitiesBufferC.Value;
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Buffer<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext> ContactEntitiesBuffer => ContactEntitiesBufferC.Value;
 
-		public bool TryGetContactEntitiesBuffer(out Buffer<Entity> value)
+		public bool TryGetContactEntitiesBuffer(out Buffer<EntityLifeContext> value)
 		{
 			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.ContactEntitiesBuffer component);
 			if (result)
 				value = component.Value;
 			else
-				value = default(Buffer<Entity>);
+				value = default(Buffer<EntityLifeContext>);
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddContactEntitiesBuffer(global::Assets._Progect.Develop.Runtime.Utillitles.Buffer<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddContactEntitiesBuffer(global::Assets._Progect.Develop.Runtime.Utillitles.Buffer<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.ContactEntitiesBuffer() { Value = value });
 		}
@@ -124,7 +124,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDeathMask(global::UnityEngine.LayerMask value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDeathMask(global::UnityEngine.LayerMask value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.DeathMask() { Value = value });
 		}
@@ -143,12 +143,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchDeathMask()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsTouchDeathMask()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchDeathMask() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchDeathMask(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsTouchDeathMask(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchDeathMask() { Value = value });
 		}
@@ -167,12 +167,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchAnotherTeam()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsTouchAnotherTeam()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchAnotherTeam(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsTouchAnotherTeam(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam() { Value = value });
 		}
@@ -191,12 +191,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMoveDirection()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMoveDirection()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveDirection() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMoveDirection(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMoveDirection(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveDirection() { Value = value });
 		}
@@ -215,12 +215,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMoveSpeed()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMoveSpeed()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveSpeed() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMoveSpeed(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMoveSpeed(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveSpeed() { Value = value });
 		}
@@ -239,12 +239,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsMoving()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsMoving()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.IsMoving() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsMoving(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsMoving(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.IsMoving() { Value = value });
 		}
@@ -263,7 +263,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanMove(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCanMove(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.CanMove() { Value = value });
 		}
@@ -282,12 +282,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddRotationDirection()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.RotationDirection() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddRotationDirection(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.RotationDirection() { Value = value });
 		}
@@ -306,12 +306,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddRotationSpeed()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.RotationSpeed() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddRotationSpeed(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.RotationSpeed() { Value = value });
 		}
@@ -330,7 +330,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanRotate(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCanRotate(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.CanRotate() { Value = value });
 		}
@@ -351,12 +351,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentHealth()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCurrentHealth()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.CurrentHealth() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentHealth(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCurrentHealth(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.CurrentHealth() { Value = value });
 		}
@@ -375,12 +375,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMaxHealth()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMaxHealth()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.MaxHealth() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMaxHealth(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMaxHealth(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.MaxHealth() { Value = value });
 		}
@@ -399,12 +399,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsDead()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsDead()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.IsDead() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsDead(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddIsDead(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.IsDead() { Value = value });
 		}
@@ -423,7 +423,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustDie(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMustDie(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.MustDie() { Value = value });
 		}
@@ -442,7 +442,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustSelfRelease(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMustSelfRelease(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.MustSelfRelease() { Value = value });
 		}
@@ -461,12 +461,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDeathProcessInitialTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDeathProcessInitialTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.DeathProcessInitialTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDeathProcessInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDeathProcessInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.DeathProcessInitialTime() { Value = value });
 		}
@@ -485,12 +485,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDeathProcessCurrentTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDeathProcessCurrentTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.DeathProcessCurrentTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDeathProcessCurrentTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDeathProcessCurrentTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.DeathProcessCurrentTime() { Value = value });
 		}
@@ -509,12 +509,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInDeadProcess()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInDeadProcess()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.InDeadProcess() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInDeadProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInDeadProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.InDeadProcess() { Value = value });
 		}
@@ -533,12 +533,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDisableCollidersOnDeath()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.DisableCollidersOnDeath() { Value = new global::System.Collections.Generic.List<global::UnityEngine.Collider>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath(global::System.Collections.Generic.List<global::UnityEngine.Collider> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddDisableCollidersOnDeath(global::System.Collections.Generic.List<global::UnityEngine.Collider> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.DisableCollidersOnDeath() { Value = value });
 		}
@@ -557,12 +557,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBodyContactDamage()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddBodyContactDamage()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage.BodyContactDamage() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBodyContactDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddBodyContactDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage.BodyContactDamage() { Value = value });
 		}
@@ -581,12 +581,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartAttackRequest()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddStartAttackRequest()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.StartAttackRequest() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartAttackRequest(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddStartAttackRequest(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.StartAttackRequest() { Value = value });
 		}
@@ -605,12 +605,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartAttackEvent()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddStartAttackEvent()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.StartAttackEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartAttackEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddStartAttackEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.StartAttackEvent() { Value = value });
 		}
@@ -629,7 +629,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanStartAttack(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCanStartAttack(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.CanStartAttack() { Value = value });
 		}
@@ -648,12 +648,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEndAttackEvent()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddEndAttackEvent()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.EndAttackEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEndAttackEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddEndAttackEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.EndAttackEvent() { Value = value });
 		}
@@ -672,12 +672,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessInitialTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackProcessInitialTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessInitialTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackProcessInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessInitialTime() { Value = value });
 		}
@@ -696,12 +696,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessCurrentTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackProcessCurrentTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessCurrentTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessCurrentTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackProcessCurrentTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessCurrentTime() { Value = value });
 		}
@@ -720,12 +720,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInAttackProcess()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInAttackProcess()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InAttackProcess() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInAttackProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInAttackProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InAttackProcess() { Value = value });
 		}
@@ -744,12 +744,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackDelayTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackDelayTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayTime() { Value = value });
 		}
@@ -768,12 +768,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayEndEvent()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackDelayEndEvent()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayEndEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayEndEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackDelayEndEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayEndEvent() { Value = value });
 		}
@@ -792,12 +792,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstantAttackDamage()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInstantAttackDamage()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantAttackDamage() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstantAttackDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInstantAttackDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantAttackDamage() { Value = value });
 		}
@@ -816,7 +816,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddShootPoint(global::UnityEngine.Transform value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddShootPoint(global::UnityEngine.Transform value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.ShootPoint() { Value = value });
 		}
@@ -835,7 +835,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustCanselAttack(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddMustCanselAttack(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.MustCanselAttack() { Value = value });
 		}
@@ -854,12 +854,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCanseledEvent()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackCanseledEvent()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCanseledEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCanseledEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackCanseledEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCanseledEvent() { Value = value });
 		}
@@ -878,12 +878,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCooldownInitialTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackCooldownInitialTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownInitialTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCooldownInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackCooldownInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownInitialTime() { Value = value });
 		}
@@ -902,12 +902,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCooldownCurrentTime()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackCooldownCurrentTime()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownCurrentTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCooldownCurrentTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddAttackCooldownCurrentTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownCurrentTime() { Value = value });
 		}
@@ -926,12 +926,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInAttackCooldown()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInAttackCooldown()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InAttackCooldown() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInAttackCooldown(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddInAttackCooldown(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InAttackCooldown() { Value = value });
 		}
@@ -950,12 +950,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTakeDamegeRequest()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTakeDamegeRequest()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTakeDamegeRequest(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTakeDamegeRequest(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest() { Value = value });
 		}
@@ -974,12 +974,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTakeDamegeEvent()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTakeDamegeEvent()
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::System.Single>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTakeDamegeEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::System.Single> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTakeDamegeEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeEvent() { Value = value });
 		}
@@ -998,31 +998,31 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanApplayDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCanApplayDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.CanApplayDamage() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget CurrentTargetC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget>();
 
-		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> CurrentTarget => CurrentTargetC.Value;
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext> CurrentTarget => CurrentTargetC.Value;
 
-		public bool TryGetCurrentTarget(out ReactiveVeriable<Entity> value)
+		public bool TryGetCurrentTarget(out ReactiveVeriable<EntityLifeContext> value)
 		{
 			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget component);
 			if (result)
 				value = component.Value;
 			else
-				value = default(ReactiveVeriable<Entity>);
+				value = default(ReactiveVeriable<EntityLifeContext>);
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget()
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCurrentTarget()
 		{
-			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity>() });
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext>() });
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddCurrentTarget(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget() { Value = value });
 		}
@@ -1041,7 +1041,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRigidbody(global::UnityEngine.Rigidbody value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddRigidbody(global::UnityEngine.Rigidbody value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.Common.RigidbodyComponent() { Value = value });
 		}
@@ -1060,7 +1060,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTransform(global::UnityEngine.Transform value)
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.EntityLifeContext AddTransform(global::UnityEngine.Transform value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.Common.TransformComponent() { Value = value });
 		}

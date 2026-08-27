@@ -2,7 +2,7 @@
 {
     public interface IInitializableSystem : IEntitySystem
     {
-        void OnInit(Entity entity);
+        void OnInit(EntityLifeContext entity);
     }
 
 

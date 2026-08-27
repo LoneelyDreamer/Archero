@@ -13,7 +13,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
 
         private IDisposable _isDeadChangedDisposable;
 
-        public void OnInit(Entity entity)
+        public void OnInit(EntityLifeContext entity)
         {
             _colliders = entity.DisableCollidersOnDeath;
             _isDead = entity.IsDead;

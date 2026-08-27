@@ -21,7 +21,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
     }
     public class ContactEntitiesBuffer : IEntityComponent
     {
-        public Buffer<Entity> Value;
+        public Buffer<EntityLifeContext> Value;
     }
 
     public class DeathMask : IEntityComponent
