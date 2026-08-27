@@ -32,6 +32,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
     public class IsTouchDeathMask : IEntityComponent
     {
         public ReactiveVeriable<bool> Value;
+    } 
+    public class IsTouchAnotherTeam : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
     }
 
 }

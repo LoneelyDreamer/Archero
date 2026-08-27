@@ -2,12 +2,38 @@ using UnityEngine;
 using Assets._Progect.Develop.Runtime.Utillitles;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using System.Collections.Generic;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
 	public partial class Entity
 	{
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team TeamC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Teams> Team => TeamC.Value;
+
+		public bool TryGetTeam(out ReactiveVeriable<Teams> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<Teams>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeam()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Teams>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeam(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Teams> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory.Team() { Value = value });
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider BodyColliderC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider>();
 
 		public global::UnityEngine.CapsuleCollider BodyCollider => BodyColliderC.Value;
@@ -125,6 +151,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchDeathMask(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchDeathMask() { Value = value });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam IsTouchAnotherTeamC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> IsTouchAnotherTeam => IsTouchAnotherTeamC.Value;
+
+		public bool TryGetIsTouchAnotherTeam(out ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchAnotherTeam()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchAnotherTeam(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveDirection MoveDirectionC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveDirection>();
@@ -284,6 +334,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.CanRotate() { Value = value });
 		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero IsMainHeroC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero>();
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.CurrentHealth CurrentHealthC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.CurrentHealth>();
 

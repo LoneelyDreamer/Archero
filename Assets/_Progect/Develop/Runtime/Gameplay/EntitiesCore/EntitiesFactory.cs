@@ -6,6 +6,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTake
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles;
@@ -119,8 +120,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
-            _entitiesLifeContext.Add(entity);
-
             return entity;
         }
 
@@ -185,12 +184,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
-            _entitiesLifeContext.Add(entity);
-
             return entity;
         }
 
-        public Entity CreateProjectile(Vector3 position, Vector3 direction, float damage)
+        public Entity CreateProjectile(Vector3 position, Vector3 direction, float damage, Entity owner)
         {
             Entity entity = CreateEmpty();
 
@@ -203,12 +200,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddRotationDirection(new ReactiveVeriable<Vector3>(direction))
                 .AddRotationSpeed(new ReactiveVeriable<float>(9999))
                 .AddIsDead()
-                .AddContactsDetectingMask(Layers.CharactersMask)
+                .AddContactsDetectingMask(Layers.CharactersMask | Layers.EnviromentMask)
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddBodyContactDamage(new ReactiveVeriable<float>(damage))
-                .AddDeathMask(Layers.CharactersMask)
-                .AddIsTouchDeathMask();
+                .AddDeathMask(Layers.EnviromentMask)
+                .AddIsTouchDeathMask()
+                .AddIsTouchAnotherTeam()
+                .AddTeam(new ReactiveVeriable<Teams>(owner.Team.Value));
 
 
 
@@ -218,8 +217,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             ICompositCondition canRotate = new CompositCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
-            ICompositCondition mustDie = new CompositCondition()
-                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value));
+            ICompositCondition mustDie = new CompositCondition(LogicOperation.Or)
+                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value))
+                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value));
+
 
             ICompositCondition mustSelfRealese = new CompositCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value));
@@ -237,6 +238,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
+                .AddSystem(new AnotherTeamTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));

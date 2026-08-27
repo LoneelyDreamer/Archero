@@ -12,6 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
         private ReactiveEvent _attckDelayEndEvent;
         private ReactiveVeriable<float> _damage;
         private Transform _shootPoint;
+        private Entity _entity;
 
         private IDisposable _attackDelayEndDisposable;
 
@@ -22,6 +23,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
 
         public void OnInit(Entity entity)
         {
+            _entity = entity;
             _attckDelayEndEvent = entity.AttackDelayEndEvent;
             _damage = entity.InstantAttackDamage;
             _shootPoint = entity.ShootPoint;
@@ -34,7 +36,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
             if (_entitiesFactory == null)
                 throw new Exception(nameof(_entitiesFactory));
 
-            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value);
+            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value, _entity);
         }
 
 

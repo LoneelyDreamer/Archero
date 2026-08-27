@@ -29,6 +29,8 @@ namespace Assets._Progect.Develop.Ediror
                 sb.AppendLine("using Assets._Progect.Develop.Runtime.Utillitles;");
                 sb.AppendLine("using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;");
                 sb.AppendLine("using Assets._Progect.Develop.Runtime.Utillitles.Conditions;");
+                sb.AppendLine("using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;");
+                sb.AppendLine("using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;");
                 sb.AppendLine("using System.Collections.Generic;");
                 sb.AppendLine();
 

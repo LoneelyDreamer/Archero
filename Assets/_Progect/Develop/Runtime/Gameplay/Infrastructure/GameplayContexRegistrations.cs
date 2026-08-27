@@ -1,6 +1,8 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
@@ -23,9 +25,23 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateAIBrainContex);
 
+            container.RegisterAsSingle(CreateEnemiesFactory);
+
+            container.RegisterAsSingle(CreateMainHeroFactory);
+
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static EnemiesFactory CreateEnemiesFactory(DIContainer c)
+        {
+            return new EnemiesFactory(c);
+        }
+
+        private static MainHeroFactory CreateMainHeroFactory(DIContainer c)
+        {
+            return new MainHeroFactory(c);
         }
 
         private static DeckstopInput CreateDeckstopInput(DIContainer c)

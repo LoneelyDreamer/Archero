@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
 using Assets._Progect.Develop.Runtime.Utillitles;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
@@ -8,6 +9,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Contact
 {
     public class DealDamageOnContactSystem : IInitializableSystem, IUpdatableSystem
     {
+        private Entity _entity;
         private Buffer<Entity> _contacts;
         private ReactiveVeriable<float> _damage;
 
@@ -15,6 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Contact
 
         public void OnInit(Entity entity)
         {
+            _entity = entity;
             _contacts = entity.ContactEntitiesBuffer;
             _damage = entity.BodyContactDamage;
 
@@ -31,8 +34,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Contact
                 {
                     _processedEntities.Add(contactEntity);
 
-                    if (contactEntity.HasComponent<TakeDamegeRequest>())
-                        contactEntity.TakeDamegeRequest.Invoke(_damage.Value);
+                    EntitiesHelper.TryTakeDamageFrom(_entity, contactEntity, _damage.Value);
                 }
             }
 
@@ -40,6 +42,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Contact
                 if (ContainInContacts(_processedEntities[i]) == false)
                     _processedEntities.RemoveAt(i);
         }
+
+  
 
         public bool ContainInContacts(Entity entity)
         {
