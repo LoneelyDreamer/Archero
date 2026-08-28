@@ -90,6 +90,15 @@ namespace Assets._Progect.Develop.Ediror
                         sb.AppendLine("\t\t}");
                         sb.AppendLine();
                     }
+
+                    if (string.IsNullOrEmpty(componentParametrs) && HasEmptyConstructor(componetsType))
+                    {
+                        sb.AppendLine($"\t\tpublic {typeof(Entity).FullName} Add{componentName}()");
+                        sb.AppendLine("\t\t{");
+                        sb.AppendLine($"\t\t\treturn AddComponent(new {fullTypeName}());");
+                        sb.AppendLine("\t\t}");
+                        sb.AppendLine();
+                    }
                 }
 
                 sb.AppendLine("\t}");
