@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
@@ -7,14 +8,19 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeatu
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
+using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 {
     public class GameplayContexRegistrations
     {
+        private static GameplayInputArgs _inputArgs;
+
         public static void Process(DIContainer container, GameplayInputArgs gameplayInputArgs)
         {
+            _inputArgs = gameplayInputArgs;
+
             Debug.Log("Процесс регистрации сервисов на сцене геймплея");
             container.RegisterAsSingle(CreateEntitiesFactory);
 
@@ -32,9 +38,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStagesFactory);
 
+            container.RegisterAsSingle(CreateStageProviderService);
+
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static StageProviderService CreateStageProviderService(DIContainer c)
+        {
+            return new StageProviderService(
+                c.Resolve<ConfigsProviderServise>().GetConfig<LevelsListConfig>().GetBy(_inputArgs.LevalNumber),
+                c.Resolve<StagesFactory>());
         }
 
         private static StagesFactory CreateStagesFactory(DIContainer c)
