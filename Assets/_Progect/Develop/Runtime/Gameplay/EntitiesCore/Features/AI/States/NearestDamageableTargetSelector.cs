@@ -13,18 +13,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
 {
     public class NearestDamageableTargetSelector : ITargetSelector
     {
-        private EntityLifeContext _sourse;
+        private Entity _sourse;
         private Transform _sourseTransform;
 
-        public NearestDamageableTargetSelector(EntityLifeContext entity)
+        public NearestDamageableTargetSelector(Entity entity)
         {
             _sourse = entity;
             _sourseTransform = entity.Transform;
         }
 
-        public EntityLifeContext SelectTargetFrom(IEnumerable<EntityLifeContext> targets)
+        public Entity SelectTargetFrom(IEnumerable<Entity> targets)
         {
-            IEnumerable<EntityLifeContext> selectedTargets = targets.Where(target =>
+            IEnumerable<Entity> selectedTargets = targets.Where(target =>
             {
                 bool result = target.HasComponent<TakeDamegeRequest>();
 
@@ -47,10 +47,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
             if (selectedTargets.Any() == false)
                 return null;
 
-            EntityLifeContext closestTarget = selectedTargets.First();
+            Entity closestTarget = selectedTargets.First();
             float minDistance = GetDistanceTo(closestTarget);
 
-            foreach (EntityLifeContext target in selectedTargets)
+            foreach (Entity target in selectedTargets)
             {
                 float distance = GetDistanceTo(target);
 
@@ -63,6 +63,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
             return closestTarget;
         }
 
-        private float GetDistanceTo(EntityLifeContext target) => (_sourseTransform.position - target.Transform.position).magnitude;
+        private float GetDistanceTo(Entity target) => (_sourseTransform.position - target.Transform.position).magnitude;
     }
 }

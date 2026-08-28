@@ -18,7 +18,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDa
         private IDisposable _requestDisposable;
               
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _damageRequest = entity.TakeDamegeRequest;
             _damageEvent = entity.TakeDamegeEvent;

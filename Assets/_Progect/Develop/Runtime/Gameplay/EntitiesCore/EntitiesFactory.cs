@@ -32,9 +32,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _collidersRegestryService = _container.Resolve<CollidersRegestryService>();
         }
 
-        public EntityLifeContext CreateHero(Vector3 position, HeroConfig heroConfig)
+        public Entity CreateHero(Vector3 position, HeroConfig heroConfig)
         {
-            EntityLifeContext entity = CreateEmpty();
+            Entity entity = CreateEmpty();
 
             _monoEntitiesactory.Create(entity, position, "Entities/Hero");
 
@@ -123,9 +123,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public EntityLifeContext CreateGhost(Vector3 position, GostConfig gostConfig)
+        public Entity CreateGhost(Vector3 position, GostConfig gostConfig)
         {
-            EntityLifeContext entity = CreateEmpty();
+            Entity entity = CreateEmpty();
 
             _monoEntitiesactory.Create(entity, position, "Entities/Ghost");
 
@@ -145,7 +145,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTakeDamegeEvent()
                 .AddContactsDetectingMask(Layers.CharactersMask)
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
-                .AddContactEntitiesBuffer(new Buffer<EntityLifeContext>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddBodyContactDamage(new ReactiveVeriable<float>(gostConfig.BodyContactDamage));
 
 
@@ -187,9 +187,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public EntityLifeContext CreateProjectile(Vector3 position, Vector3 direction, float damage, EntityLifeContext owner)
+        public Entity CreateProjectile(Vector3 position, Vector3 direction, float damage, Entity owner)
         {
-            EntityLifeContext entity = CreateEmpty();
+            Entity entity = CreateEmpty();
 
             _monoEntitiesactory.Create(entity, position, "Entities/Projectile");
 
@@ -202,7 +202,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddIsDead()
                 .AddContactsDetectingMask(Layers.CharactersMask | Layers.EnviromentMask)
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
-                .AddContactEntitiesBuffer(new Buffer<EntityLifeContext>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddBodyContactDamage(new ReactiveVeriable<float>(damage))
                 .AddDeathMask(Layers.EnviromentMask)
                 .AddIsTouchDeathMask()
@@ -248,7 +248,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public EntityLifeContext CreateEmpty() => new EntityLifeContext();
+        public Entity CreateEmpty() => new Entity();
 
     }
 }

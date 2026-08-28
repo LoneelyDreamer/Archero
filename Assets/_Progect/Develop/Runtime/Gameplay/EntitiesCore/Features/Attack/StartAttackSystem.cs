@@ -15,7 +15,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
         private IDisposable _attackRequestDispose;
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _startAttackRequest = entity.StartAttackRequest;
             _startAttackEvent = entity.StartAttackEvent;

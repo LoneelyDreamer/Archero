@@ -8,7 +8,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
     {
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
-        private EntityLifeContext _entity;
+        private Entity _entity;
 
         private ICompositCondition _mustSelfRelease;
 
@@ -17,7 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
             _entitiesLifeContext = entitiesLifeContext;
         }
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _entity = entity;
             _mustSelfRelease = entity.MustSelfRelease;

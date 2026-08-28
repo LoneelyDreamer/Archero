@@ -14,7 +14,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
         private ReactiveVeriable<bool> _isMoving;
 
         private ICompositCondition _canMove;
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _moveDirection = entity.MoveDirection;
             _moveSpeed = entity.MoveSpeed;

@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heroConfig: {fileID: 11400000, guid: 11baebb6274028d4d95f4fbe09760977, type: 2}
-  _gostConfig: {fileID: 11400000, guid: 0171ab41531a7c548808065c04a16a14, type: 2}
+  _stageConfig: {fileID: 11400000, guid: 181ebf009df2d4b4a857906ce0867af1, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
     public class ShootPointEntityRegistrator : MonoEntityRegistrator
     {
         [SerializeField] private Transform _shootPoint;
-        public override void Register(EntityLifeContext entity)
+        public override void Register(Entity entity)
         {
             entity.AddShootPoint(_shootPoint);
         }

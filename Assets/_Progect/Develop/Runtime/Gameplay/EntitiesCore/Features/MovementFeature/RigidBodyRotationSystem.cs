@@ -13,7 +13,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Movemen
 
         private ICompositCondition _canRotate;
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _rigidbody = entity.Rigidbody;
             _direction = entity.RotationDirection;

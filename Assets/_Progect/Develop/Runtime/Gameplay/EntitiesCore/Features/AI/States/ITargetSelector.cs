@@ -4,6 +4,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
 {
     public interface ITargetSelector
     {
-        EntityLifeContext SelectTargetFrom(IEnumerable<EntityLifeContext> targets);
+        Entity SelectTargetFrom(IEnumerable<Entity> targets);
     }
 }

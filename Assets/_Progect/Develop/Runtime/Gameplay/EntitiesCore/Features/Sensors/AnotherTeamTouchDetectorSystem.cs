@@ -12,11 +12,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
 {
     public class AnotherTeamTouchDetectorSystem : IInitializableSystem, IUpdatableSystem
     {
-        private Buffer<EntityLifeContext> _contacts;
+        private Buffer<Entity> _contacts;
         private ReactiveVeriable<bool> _isTouchAnotherTeam;
         private ReactiveVeriable<Teams> _sourceTeam;
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _contacts = entity.ContactEntitiesBuffer;
             _isTouchAnotherTeam = entity.IsTouchAnotherTeam;
@@ -27,7 +27,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
         {
             for (int i = 0; i < _contacts.Count; i++)
             {
-                EntityLifeContext contact = _contacts.Items[i];
+                Entity contact = _contacts.Items[i];
 
                 if (contact.TryGetTeam(out ReactiveVeriable<Teams> anotherTeam))
                 {

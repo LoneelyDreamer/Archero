@@ -5,7 +5,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Common
 {
     public class TransformEntityRegistrator : MonoEntityRegistrator
     {
-        public override void Register(EntityLifeContext entity)
+        public override void Register(Entity entity)
         {
             entity.AddTransform(transform);
         }

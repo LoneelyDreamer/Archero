@@ -12,10 +12,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
     public class RotateToTargetState : State, IUpdatableState
     {
         private ReactiveVeriable<Vector3> _rotationDiraction;
-        private ReactiveVeriable<EntityLifeContext> _currentTarget;
+        private ReactiveVeriable<Entity> _currentTarget;
         private Transform _transform;
 
-        public RotateToTargetState(EntityLifeContext entity)
+        public RotateToTargetState(Entity entity)
         {
             _rotationDiraction = entity.RotationDirection;
             _currentTarget = entity.CurrentTarget;

@@ -11,7 +11,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
     {
         private readonly List<EntityToBrain> _entityToBrains = new();       
 
-        public void SetFor(EntityLifeContext entity, IBrain brain)
+        public void SetFor(Entity entity, IBrain brain)
         {
             foreach (EntityToBrain item in _entityToBrains)
             {
@@ -59,10 +59,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
 
         private class EntityToBrain
         {
-            public EntityLifeContext Entity;
+            public Entity Entity;
             public IBrain Brain;
 
-            public EntityToBrain(EntityLifeContext entity, IBrain brain)
+            public EntityToBrain(Entity entity, IBrain brain)
             {
                 Entity = entity;
                 Brain = brain;

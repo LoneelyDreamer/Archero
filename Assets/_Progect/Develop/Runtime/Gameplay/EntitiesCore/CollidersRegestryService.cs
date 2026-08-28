@@ -5,9 +5,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
     public class CollidersRegestryService
     {
-        private readonly Dictionary<Collider, EntityLifeContext> _colliderToEntity = new();
+        private readonly Dictionary<Collider, Entity> _colliderToEntity = new();
 
-        public void Regester(Collider collider, EntityLifeContext entity)
+        public void Regester(Collider collider, Entity entity)
         {
             _colliderToEntity.Add(collider, entity);
         }
@@ -17,9 +17,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _colliderToEntity.Remove(collider);
         }
 
-        public EntityLifeContext GetBy(Collider collider)
+        public Entity GetBy(Collider collider)
         {
-            if (_colliderToEntity.TryGetValue(collider, out EntityLifeContext entity))
+            if (_colliderToEntity.TryGetValue(collider, out Entity entity))
                 return entity;
 
             return null;

@@ -7,7 +7,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
     {
         private ReactiveEvent _attackRequest;
 
-        public AttackTriggerState(EntityLifeContext entity)
+        public AttackTriggerState(Entity entity)
         {
             _attackRequest = entity.StartAttackRequest;
         }

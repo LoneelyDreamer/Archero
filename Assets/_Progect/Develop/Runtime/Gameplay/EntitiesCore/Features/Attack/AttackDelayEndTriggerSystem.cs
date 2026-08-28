@@ -22,7 +22,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
         private IDisposable _timerDisposable;      
         private IDisposable _startAttackDisposable;      
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _attackDelayEndEvent = entity.AttackDelayEndEvent;
             _delay = entity.AttackDelayTime;

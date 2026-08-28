@@ -5,7 +5,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
     public class EntitiesHelper
     {
-        public static bool TryTakeDamageFrom(EntityLifeContext source, EntityLifeContext damageable, float damage)
+        public static bool TryTakeDamageFrom(Entity source, Entity damageable, float damage)
         {
             if (damageable.TryGetTakeDamegeRequest(out ReactiveEvent<float> takeDamageRequest) == false)
                 return false;

@@ -1,9 +1,12 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Stages;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using System;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay
@@ -14,11 +17,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         private EntitiesFactory _entitiesFactory;   
         private BrainsFactory _brainsFactory;
         
-        private EntityLifeContext _entity;
-        private EntityLifeContext _ghost;
+        private Entity _entity;
+        private Entity _ghost;
 
         [SerializeField] private HeroConfig _heroConfig;
-        [SerializeField] private GostConfig _gostConfig;
+        //[SerializeField] private GostConfig _gostConfig;
+
+        [SerializeField] private StageConfig _stageConfig;
+        private StagesFactory _stagesFactory;
+        private IStage _stage;
 
         private MainHeroFactory _mainHeroFactory;
         private EnemiesFactory _enemiesFactory;
@@ -32,21 +39,34 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
 
             _mainHeroFactory = _container.Resolve<MainHeroFactory>();
             _enemiesFactory = _container.Resolve<EnemiesFactory>();
+
+            _stagesFactory = _container.Resolve<StagesFactory>();
         }
 
         public void Run()
         {
             _entity = _mainHeroFactory.Create(Vector3.zero);
 
-            _ghost = _enemiesFactory.Create(Vector3.zero + Vector3.forward * 5, _gostConfig);
+            //_ghost = _enemiesFactory.Create(Vector3.zero + Vector3.forward * 5, _gostConfig);
+            _stage = _stagesFactory.Create(_stageConfig);
+            _stage.Completed.Subscribe(OnCompleted);
+            _stage.Start();
 
             _isRunning = true;
+        }
+
+        private void OnCompleted()
+        {
+            Debug.Log("Victory");
+            _stage.Cleanup();
         }
 
         private void Update()
         {
             if (_isRunning == false)
                 return;
+
+            _stage.Update(Time.deltaTime);
         }
     }
 }

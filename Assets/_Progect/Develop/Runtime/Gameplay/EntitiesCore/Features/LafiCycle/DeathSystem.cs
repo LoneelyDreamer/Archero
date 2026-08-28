@@ -12,7 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
 
         private ICompositCondition _mustDie;
 
-        public void OnInit(EntityLifeContext entity)
+        public void OnInit(Entity entity)
         {
             _isDead = entity.IsDead;
            // _currentHealth = entity.CurrentHealth;

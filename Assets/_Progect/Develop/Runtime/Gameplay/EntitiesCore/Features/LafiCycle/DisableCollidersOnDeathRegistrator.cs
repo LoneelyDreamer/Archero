@@ -6,7 +6,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
     public class DisableCollidersOnDeathRegistrator : MonoEntityRegistrator
     {
         [SerializeField] private List<Collider> _colliders;
-        public override void Register(EntityLifeContext entity)
+        public override void Register(Entity entity)
         {
             entity.AddDisableCollidersOnDeath(_colliders);
         }

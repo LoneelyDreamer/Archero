@@ -13,30 +13,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
         private ReactiveEvent _completed = new();
 
         private EnemiesFactory _enemiesFactory;
-        private EntityLifeContext _entityLifeContext;
+        private EntitiesLifeContext _entitiesLifeContext;
 
         private bool _inProcess;
 
-        private Dictionary<EntityLifeContext, IDisposable> _spawnedEnemiesToRemoveReason = new();
+        private Dictionary<Entity, IDisposable> _spawnedEnemiesToRemoveReason = new();
 
         public ClearAllEnemiesStage(
             ClearAllEnemiesStageConfig config,
             EnemiesFactory enemiesFactory,
-            EntityLifeContext entityLifeContext)
+            EntitiesLifeContext entityLifeContext)
         {
             _config = config;
             _enemiesFactory = enemiesFactory;
-            _entityLifeContext = entityLifeContext;
+            _entitiesLifeContext = entityLifeContext;
         }
 
         public IReadOnlyEvent Completed => _completed;
 
         public void Cleanup()
         {
-            foreach (KeyValuePair<EntityLifeContext, IDisposable> item in _spawnedEnemiesToRemoveReason)
+            foreach (KeyValuePair<Entity, IDisposable> item in _spawnedEnemiesToRemoveReason)
             {
                 item.Value.Dispose();
-                //_entityLifeContext.Release(item.key);
+                _entitiesLifeContext.Relese(item.Key);
             }
 
             _spawnedEnemiesToRemoveReason.Clear();
@@ -46,7 +46,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
 
         public void Dispose()
         {
-            foreach (KeyValuePair<EntityLifeContext, IDisposable> item in _spawnedEnemiesToRemoveReason)
+            foreach (KeyValuePair<Entity, IDisposable> item in _spawnedEnemiesToRemoveReason)
             {
                 item.Value.Dispose();
             }
@@ -90,7 +90,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
 
         private void SpawnEnemy(EnemyItemConfig enemyItemConfig)
         {
-            EntityLifeContext spawnedEnemy = _enemiesFactory.Create(enemyItemConfig.SpawnPosition, enemyItemConfig.EnemyConfig);
+            Entity spawnedEnemy = _enemiesFactory.Create(enemyItemConfig.SpawnPosition, enemyItemConfig.EnemyConfig);
 
             IDisposable removeReason = spawnedEnemy.IsDead.Subscribe((oldValue, isDead) => 
             {
