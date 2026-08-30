@@ -248,6 +248,26 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
+        public Entity CreateContactTrigger(Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/ContactTrigger");
+
+            entity
+                .AddContactsDetectingMask(Layers.CharactersMask)
+                .AddContactColliderBuffer(new Buffer<Collider>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64));
+
+            entity
+                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService));
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+
         public Entity CreateEmpty() => new Entity();
 
     }
