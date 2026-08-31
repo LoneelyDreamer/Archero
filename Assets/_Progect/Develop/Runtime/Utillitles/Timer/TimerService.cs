@@ -34,7 +34,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.Timer
 
         public IReadOnlyVeriable<float> CurrentTime => _currentTime;
 
-        public bool IsOveer => _currentTime.Value <= 0;
+        public bool IsOver => _currentTime.Value <= 0;
 
         public void Dispose()
         {
@@ -58,7 +58,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.Timer
         {
             _currentTime.Value = _cooldown;
 
-            while (IsOveer == false) 
+            while (IsOver == false) 
             {
                 _currentTime.Value -= Time.deltaTime;
                 yield return null;

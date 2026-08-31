@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Energy;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
+using Assets._Progect.Develop.Runtime.Utillitles.MathfOperations;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Telepor
 {
     public class TeleportSystem : IInitializableSystem, IDisposableSystem
     {
-        private ReactiveVeriable<float> _teleportRadius;
         private ReactiveVeriable<float> _teleportSkillPrice;
         private ReactiveVeriable<float> _currentEnergy;
+        private ReactiveVeriable<bool> _inTeleportProcess;
+        private ReactiveVeriable<Vector3> _teleportionTarget;
 
         private ReactiveEvent _startTeleportRequest;
         private ReactiveEvent _startTeleportEvent;
@@ -25,13 +27,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Telepor
 
         private ICompositCondition _canUseTeleportSkill;
 
-        private IDisposable _teleportRequestDispose;     
+        private IDisposable _teleportRequestDispose;
 
         public void OnInit(Entity entity)
         {
-            _teleportRadius = entity.TeleportRadius;
+            _inTeleportProcess = entity.InTeleportProcess;
             _teleportSkillPrice = entity.TeleportSkillPrice;
             _currentEnergy = entity.CurrentEnergy;
+            _teleportionTarget = entity.TeleportionTarget;
 
             _canUseTeleportSkill = entity.CanUseTeleportSkill;
 
@@ -44,23 +47,24 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Telepor
         }
 
         private void OnTeleportStarted()
-        {
-            if(_canUseTeleportSkill.Evaluate() == false)
+        {           
+
+            if (!_canUseTeleportSkill.Evaluate())
+            {
+                _inTeleportProcess.Value = false;
+                Debug.Log("Teleport skill not available, resetting flag");
                 return;
+            }
 
             _startTeleportEvent.Invoke();
-
             _currentEnergy.Value -= _teleportSkillPrice.Value;
 
-            Vector3 currentPositiopn = _rigidbody.transform.position;
-            float newX = Random.Range(-_teleportRadius.Value, _teleportRadius.Value);
-            float newZ = Random.Range(-_teleportRadius.Value, _teleportRadius.Value);
-            Vector3 teleportationPosition = new Vector3(currentPositiopn.x + newX, currentPositiopn.y, currentPositiopn.z + newZ);
+            Vector3 targetPos = _teleportionTarget.Value;
 
-            _rigidbody.transform.position = teleportationPosition;
-
-            Debug.Log("teleportationPosition = " + teleportationPosition.ToString());
-        }
+            _rigidbody.transform.position = targetPos;
+            _inTeleportProcess.Value = false;
+            Debug.Log($"Teleported to {targetPos}");
+        }       
 
         public void OnDispose()
         {

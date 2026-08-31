@@ -29,7 +29,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
 
         public StateMashineBrain CreateMainHeroBrain(Entity entity, ITargetSelector targetSelector)
         {
-            AIStateMashine combastState = CreateAutoAttackStateMashine(entity);
+            AIStateMashine combatState = CreateAutoAttackStateMashine(entity);
             PlayerInputMovmentState movementState = new PlayerInputMovmentState(entity, _inputService);
             ReactiveVeriable<Entity> currentTurget = entity.CurrentTarget;
 
@@ -44,10 +44,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             AIStateMashine behavior = new AIStateMashine();
 
             behavior.AddState(movementState);
-            behavior.AddState(combastState);
+            behavior.AddState(combatState);
 
-            behavior.AddTransition(movementState,combastState, fromMovmentToCombatStateCondition);
-            behavior.AddTransition(combastState, movementState, fromCombatToMovmentStateCondition);
+            behavior.AddTransition(movementState, combatState, fromMovmentToCombatStateCondition);
+            behavior.AddTransition(combatState, movementState, fromCombatToMovmentStateCondition);
 
             FindTargetState findTargenState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
             AIParallelState parallelState = new AIParallelState(findTargenState, behavior);
@@ -62,17 +62,97 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             return brain;
         }
 
-        public StateMashineBrain CreateGostBrain(Entity entity)
+        public StateMashineBrain CreateGhostBrain(Entity entity)
         {
-            AIStateMashine stateMashine = CreateRundomMovmentStateMashine(entity);
+            AIStateMashine stateMashine = CreateRandomMovmentStateMashine(entity);
             StateMashineBrain brain = new StateMashineBrain(stateMashine);
 
-            _brainContex.SetFor(entity,brain);
+            _brainContex.SetFor(entity, brain);
 
             return brain;
         }
 
-        private AIStateMashine CreateRundomMovmentStateMashine(Entity entity)
+        public StateMashineBrain CreateSmartTeleportGhostBrain(Entity entity, ITargetSelector targetSelector)
+        {
+            List<IDisposable> disposables = new List<IDisposable>();
+
+            EmptyState waitingState = new EmptyState();
+            TeleportToTargetState teleportToTargetState = new TeleportToTargetState(entity);
+
+            TimerService idleTimer = _timerServiceFactory.Create(3f);
+            disposables.Add(idleTimer);
+            disposables.Add(waitingState.Entered.Subscribe(idleTimer.Restart));
+            ReactiveVeriable<Entity> currentTurget = entity.CurrentTarget;
+
+            ICompositCondition fromWaitingToTeleportingStateCondition = new CompositCondition(LogicOperation.And)
+                .Add(new FuncCondition(() => currentTurget.Value != null))
+                .Add(new FuncCondition(() => idleTimer.IsOver))
+                .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.MaxEnergy.Value * 0.4f))
+                .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportSkillPrice.Value));
+
+            ICompositCondition fromTeleportingToWaitingStateCondition = new CompositCondition(LogicOperation.And)               
+                .Add(new FuncCondition(() => entity.InTeleportProcess.Value == false));
+
+            AIStateMashine behavior = new AIStateMashine(disposables);
+
+            behavior.AddState(waitingState);
+            behavior.AddState(teleportToTargetState);
+
+            behavior.AddTransition(waitingState, teleportToTargetState, fromWaitingToTeleportingStateCondition);
+            behavior.AddTransition(teleportToTargetState, waitingState, fromTeleportingToWaitingStateCondition);
+
+            FindTargetState findTargenState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
+
+            AIParallelState parallelState = new AIParallelState(findTargenState, behavior);
+
+            AIStateMashine rootStateMashine = new AIStateMashine();
+            rootStateMashine.AddState(parallelState);
+
+            StateMashineBrain brain = new StateMashineBrain(rootStateMashine);
+
+            _brainContex.SetFor(entity, brain);
+
+            return brain;
+        }
+
+
+        public StateMashineBrain CreateRandomTeleportGhostBrain(Entity entity)
+        {
+            AIStateMashine stateMashine = CreateRandomTeleportStateMashine(entity);
+            StateMashineBrain brain = new StateMashineBrain(stateMashine);
+
+            _brainContex.SetFor(entity, brain);
+
+            return brain;
+        }
+
+        private AIStateMashine CreateRandomTeleportStateMashine(Entity entity)
+        {
+            List<IDisposable> disposables = new List<IDisposable>();
+
+            EmptyState emptyState = new EmptyState();
+            RandomTeleportedState randomTeleportedState = new RandomTeleportedState(entity);
+
+            TimerService idleTimer = _timerServiceFactory.Create(3f);
+            disposables.Add(idleTimer);
+            disposables.Add(emptyState.Entered.Subscribe(idleTimer.Restart));
+
+            FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOver);
+            FuncCondition teleportEndedCondition = new FuncCondition(() => entity.InTeleportProcess.Value == false);
+
+            AIStateMashine stateMashine = new AIStateMashine(disposables);
+
+            stateMashine.AddState(emptyState);
+            stateMashine.AddState(randomTeleportedState);
+
+            stateMashine.AddTransition(emptyState, randomTeleportedState, idleTimerEndedCondition);
+            stateMashine.AddTransition(randomTeleportedState, emptyState, teleportEndedCondition);
+
+
+            return stateMashine;
+        }
+
+        private AIStateMashine CreateRandomMovmentStateMashine(Entity entity)
         {
             List<IDisposable> disposables = new List<IDisposable>();
 
@@ -88,8 +168,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             disposables.Add(idleTimer);
             disposables.Add(emptyState.Entered.Subscribe(idleTimer.Restart));
 
-            FuncCondition movmentTimerEndedCondition = new FuncCondition(() => movementTimer.IsOveer);
-            FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOveer);
+            FuncCondition movmentTimerEndedCondition = new FuncCondition(() => movementTimer.IsOver);
+            FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOver);
 
             AIStateMashine stateMashine = new AIStateMashine(disposables);
 

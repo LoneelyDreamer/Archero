@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport
 {
@@ -33,6 +34,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Telepor
     public class StartTeleportEvent : IEntityComponent
     {
         public ReactiveEvent Value;
+    }
+
+    public class InTeleportProcess : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
+    }
+
+    public class TeleportionTarget : IEntityComponent
+    {
+        public ReactiveVeriable<Vector3> Value;
     }
 
 }

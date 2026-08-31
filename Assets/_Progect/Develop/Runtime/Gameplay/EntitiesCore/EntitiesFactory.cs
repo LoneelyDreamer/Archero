@@ -261,20 +261,22 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddMaxHealth(new ReactiveVeriable<float>(100))
                 .AddCurrentHealth(new ReactiveVeriable<float>(100))
                 .AddMaxEnergy(new ReactiveVeriable<float>(100))
-                .AddCurrentEnergy(new ReactiveVeriable<float>(10))
+                .AddCurrentEnergy(new ReactiveVeriable<float>(20))
                 .AddEnergyRespawnTimeStep(new ReactiveVeriable<float>(2f))
-                .AddTeleportRadius(new ReactiveVeriable<float>(3f))
+                .AddTeleportRadius(new ReactiveVeriable<float>(10f))
                 .AddTeleportSkillPrice(new ReactiveVeriable<float>(15f))
+                .AddTeleportionTarget(new ReactiveVeriable<Vector3>(Vector3.zero))
+                .AddInTeleportProcess()
                 .AddStartTeleportRequest()
                 .AddStartTeleportEvent()
-                .AddAOEDamage( new ReactiveVeriable<float>(70f))
-                .AddAOEDamageRadius( new ReactiveVeriable<float>(10f))
+                .AddAOEDamage(new ReactiveVeriable<float>(70f))
+                .AddAOEDamageRadius(new ReactiveVeriable<float>(10f))
                 .AddIsDead()
                 .AddInDeadProcess()
                 .AddDeathProcessInitialTime(new ReactiveVeriable<float>(2))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamegeRequest()
-                .AddTakeDamegeEvent()                
+                .AddTakeDamegeEvent()
                 .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64));
@@ -291,11 +293,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
 
             ICompositCondition canApplyDamage = new CompositCondition()
-            .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             ICompositCondition canUseTeleportSkill = new CompositCondition()
-            .Add(new FuncCondition(() => entity.IsDead.Value == false))
-            .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportSkillPrice.Value));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.CurrentEnergy.Value >= entity.TeleportSkillPrice.Value));
 
             entity
                 .AddMustDie(mustDie)
@@ -304,9 +306,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddCanApplayDamage(canApplyDamage);
 
             entity
-                //.AddSystem(new BodyContactsDetectingSystem())
-                //.AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
-                //.AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new EnergySystem())
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new TeleportSystem())

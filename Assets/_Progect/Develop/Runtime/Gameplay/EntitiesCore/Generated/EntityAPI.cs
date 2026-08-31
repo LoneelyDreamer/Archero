@@ -123,6 +123,54 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.StartTeleportEvent() { Value = value });
 		}
 
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.InTeleportProcess InTeleportProcessC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.InTeleportProcess>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> InTeleportProcess => InTeleportProcessC.Value;
+
+		public bool TryGetInTeleportProcess(out ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.InTeleportProcess component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInTeleportProcess()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.InTeleportProcess() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInTeleportProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.InTeleportProcess() { Value = value });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportionTarget TeleportionTargetC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportionTarget>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> TeleportionTarget => TeleportionTargetC.Value;
+
+		public bool TryGetTeleportionTarget(out ReactiveVeriable<Vector3> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportionTarget component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<Vector3>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportionTarget()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportionTarget() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportionTarget(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Teleport.TeleportionTarget() { Value = value });
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider BodyColliderC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.BodyCollider>();
 
 		public global::UnityEngine.CapsuleCollider BodyCollider => BodyColliderC.Value;

@@ -18,6 +18,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         private Entity _entity;
         private Entity _ghost;
         private Entity _entityTeleportedGost;
+        private Entity _entityTeleportedGost2;
 
         [SerializeField] private HeroConfig _heroConfig;
         [SerializeField] private GostConfig _gostConfig;
@@ -36,10 +37,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
             _entity.AddCurrentTarget();
             _brainsFactory.CreateMainHeroBrain(_entity, new NearestDamageableTargetSelector(_entity));
 
-            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 3, _gostConfig);
-            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5, _gostConfig);
+            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 2, _gostConfig);
+            _brainsFactory.CreateGhostBrain(_ghost);
 
-            _entityTeleportedGost = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 5);
+            _entityTeleportedGost = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 8);
+            _entityTeleportedGost.AddCurrentTarget();
+            _brainsFactory.CreateSmartTeleportGhostBrain(_entityTeleportedGost, new NearestMinHpInTeleportRadiusTargetSelector(_entityTeleportedGost));
+
+            //_entityTeleportedGost2 = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 8);
+            //_brainsFactory.CreateRandomTeleportGhostBrain(_entityTeleportedGost2);
 
             _isRunning = true;
         }
@@ -48,19 +54,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         {
             if (_isRunning == false)
                 return;
-
-            if(Input.GetKeyDown(KeyCode.Space))           
-                _entity.TakeDamegeRequest.Invoke(50);
-
-            if(Input.GetKeyDown(KeyCode.R))           
-                _entity.StartAttackRequest.Invoke();
-
-            if (Input.GetKeyDown(KeyCode.I))
-                _brainsFactory.CreateGostBrain(_ghost);
-
-
-            if (Input.GetKeyDown(KeyCode.J))
-                _entityTeleportedGost.StartTeleportRequest.Invoke();
         }
     }
 }
