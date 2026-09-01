@@ -12,5 +12,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
         bool IsEnabled { get; set; }
 
         Vector3 Direction { get; }
+
+        Vector3 MousePosition { get; }
+
+        bool IsAttackPressed { get; }
     }
 }

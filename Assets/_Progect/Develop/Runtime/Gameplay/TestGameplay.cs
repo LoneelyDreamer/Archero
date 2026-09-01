@@ -34,11 +34,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay
         public void Run()
         {
             _entity = _entitiesFactory.CreateHero(Vector3.zero, _heroConfig);
-            _entity.AddCurrentTarget();
-            _brainsFactory.CreateMainHeroBrain(_entity, new NearestDamageableTargetSelector(_entity));
+            //_entity.AddCurrentTarget();
+            //_brainsFactory.CreateMainHeroBrain(_entity, new NearestDamageableTargetSelector(_entity));
+            _brainsFactory.CreateFullControllHeroBrain(_entity);
 
-            _ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 2, _gostConfig);
-            _brainsFactory.CreateGhostBrain(_ghost);
+            //_ghost = _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 2, _gostConfig);
+            //_brainsFactory.CreateGhostBrain(_ghost);
 
             _entityTeleportedGost = _entitiesFactory.CreateTeleportGhost(Vector3.zero + Vector3.forward * 8);
             _entityTeleportedGost.AddCurrentTarget();

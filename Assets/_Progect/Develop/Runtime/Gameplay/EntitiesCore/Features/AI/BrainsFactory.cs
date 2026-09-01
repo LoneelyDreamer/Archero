@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
@@ -25,6 +26,38 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             _brainContex = _container.Resolve<AIBrainContex>();
             _inputService = _container.Resolve<IInputService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+        }
+
+        public StateMashineBrain CreateFullControllHeroBrain(Entity entity)
+        {
+            AIStateMashine combatState = CreateFullControllAttackStateMashine(entity);
+            PlayerInputMovmentState movementState = new PlayerInputMovmentState(entity, _inputService);
+
+            ICompositCondition fromMovmentToCombatStateCondition = new CompositCondition()
+               .Add(new FuncCondition(() => _inputService.Direction == Vector3.zero));
+
+            ICompositCondition fromCombatToMovmentStateCondition = new CompositCondition()              
+              .Add(new FuncCondition(() => _inputService.Direction != Vector3.zero));
+
+            AIStateMashine behavior = new AIStateMashine();
+
+            behavior.AddState(movementState);
+            behavior.AddState(combatState);
+
+            behavior.AddTransition(movementState, combatState, fromMovmentToCombatStateCondition);
+            behavior.AddTransition(combatState, movementState, fromCombatToMovmentStateCondition);
+
+            AttackInputCatcherState attackInputCatcherState = new AttackInputCatcherState(_inputService, entity);
+            AIParallelState parallelState = new AIParallelState(attackInputCatcherState, behavior);
+
+            AIStateMashine rootStateMashine = new AIStateMashine();
+            rootStateMashine.AddState(parallelState);
+
+            StateMashineBrain brain = new StateMashineBrain(rootStateMashine);
+
+            _brainContex.SetFor(entity, brain);
+
+            return brain;
         }
 
         public StateMashineBrain CreateMainHeroBrain(Entity entity, ITargetSelector targetSelector)
@@ -182,6 +215,26 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             return stateMashine;
         }
 
+        private AIStateMashine CreateFullControllAttackStateMashine(Entity entity)
+        {
+            PlayerInputRotationState playerInputRotationState = new PlayerInputRotationState(_inputService, entity);
+            EmptyState attackTriggerState = new EmptyState();
+
+            ReactiveVeriable<bool> inAttackProcess = entity.InAttackProcess;
+
+            ICondition fromRotateToAttackStateCondition = new FuncCondition(() => inAttackProcess.Value == true);
+            ICondition fromAttackToRotateStateCondition = new FuncCondition(() => inAttackProcess.Value == false);
+
+            AIStateMashine stateMashine = new AIStateMashine();
+
+            stateMashine.AddState(playerInputRotationState);
+            stateMashine.AddState(attackTriggerState);
+
+            stateMashine.AddTransition(playerInputRotationState, attackTriggerState, fromRotateToAttackStateCondition);
+            stateMashine.AddTransition(attackTriggerState, playerInputRotationState, fromAttackToRotateStateCondition);
+
+            return stateMashine;
+        }
         private AIStateMashine CreateAutoAttackStateMashine(Entity entity)
         {
             RotateToTargetState rotateToTargetState = new RotateToTargetState(entity);

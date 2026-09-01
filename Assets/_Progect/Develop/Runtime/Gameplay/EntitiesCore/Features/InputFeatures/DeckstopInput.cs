@@ -26,5 +26,17 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
             }
         }
 
+        public Vector3 MousePosition
+        {
+            get
+            {
+                if (IsEnabled == false)
+                    return Vector3.zero;
+
+                return Input.mousePosition;
+            }
+        }
+
+        public bool IsAttackPressed => Input.GetMouseButtonDown(0);
     }
 }
