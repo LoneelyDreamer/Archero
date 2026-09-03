@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
@@ -7,11 +8,6 @@ using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.States
 {
@@ -51,6 +47,43 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
                  _container.Resolve<IInputService>(),
                  _container.Resolve<SceneSwitherService>(),
                  _container.Resolve<ICoroutinesPerformer>());
+        }
+
+        public GameplayStateMashine CreateGameplayStateMashine(GameplayInputArgs gameplayInputArgs)
+        {
+            PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
+            StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
+            MainHeroHolderService mainHeroHolderService = _container.Resolve<MainHeroHolderService>();
+
+            GameplayStateMashine coreLoopState = CreateCoreLoopState();
+
+            DefeatState defeatState = CreateDefeatState();
+            WinState winState = CreateWinState(gameplayInputArgs);
+
+            ICompositCondition coreLoopToWinStateCondition = new CompositCondition()
+                .Add(new FuncCondition(() => preparationTrigerService.HasMainHeroContact.Value))
+                .Add(new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResult.Completed))
+                .Add(new FuncCondition(() => stageProviderService.HasNextStage() == false));
+
+            ICompositCondition coreLoopToDefeatStatePosition = new CompositCondition()
+                .Add(new FuncCondition(() =>
+                {
+                    if (mainHeroHolderService.MainHero != null)
+                        return mainHeroHolderService.MainHero.IsDead.Value;
+
+                    return false;
+                }));
+
+            GameplayStateMashine gameplayCycle = new GameplayStateMashine();
+
+            gameplayCycle.AddState(coreLoopState);
+            gameplayCycle.AddState(winState);
+            gameplayCycle.AddState(defeatState);
+
+            gameplayCycle.AddTransition(coreLoopState, winState, coreLoopToWinStateCondition);
+            gameplayCycle.AddTransition(coreLoopState, defeatState, coreLoopToDefeatStatePosition);
+
+            return gameplayCycle;
         }
 
         public GameplayStateMashine CreateCoreLoopState()

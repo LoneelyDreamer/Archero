@@ -1,5 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
+using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
@@ -15,7 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
 
-        [SerializeField] private TestGameplay _testGameplay;
+        private GameplayStatesContext _gameplayStatesContext;
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainContex _brainContex;
 
@@ -37,10 +39,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             Debug.Log("Initialize Gameplay Scene");
 
-            _testGameplay.Initialze(_container);
+            _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainContex = _container.Resolve<AIBrainContex>();
+
+            _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
 
             yield break;
         }
@@ -50,13 +54,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Start Gameplay Scene");
 
-            _testGameplay.Run();
+            _gameplayStatesContext.Run();
         }
 
         private void Update()
         {
             _brainContex?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
+            _gameplayStatesContext?.Update(Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.F))
             {

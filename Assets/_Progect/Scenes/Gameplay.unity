@@ -492,7 +492,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2031669987}
   - component: {fileID: 2031669986}
-  - component: {fileID: 2031669988}
   m_Layer: 0
   m_Name: GamePlayBootstrap
   m_TagString: Untagged
@@ -512,7 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0136cbfea881f0459373a402c2c6847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _testGameplay: {fileID: 2031669988}
 --- !u!4 &2031669987
 Transform:
   m_ObjectHideFlags: 0
@@ -528,20 +526,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2031669988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031669985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e395499b58ca245902d71e26465077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _heroConfig: {fileID: 11400000, guid: 11baebb6274028d4d95f4fbe09760977, type: 2}
-  _stageConfig: {fileID: 11400000, guid: 181ebf009df2d4b4a857906ce0867af1, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

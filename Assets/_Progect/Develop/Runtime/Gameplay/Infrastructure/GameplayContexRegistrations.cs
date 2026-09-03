@@ -6,6 +6,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatur
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
@@ -38,13 +39,34 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStagesFactory);
 
+            container.RegisterAsSingle(CreateGameplayStatesContext);
+
+            container.RegisterAsSingle(CreateMainHeroHolderService).NonLazy();
+
             container.RegisterAsSingle(CreatePreparationTrigerService);
+
+            container.RegisterAsSingle(CreateGameplayStatesFactory);
 
             container.RegisterAsSingle(CreateStageProviderService);
 
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c)
+        {
+            return new GameplayStatesContext(c.Resolve<GameplayStatesFactory>().CreateGameplayStateMashine(_inputArgs));
+        }
+
+        private static GameplayStatesFactory CreateGameplayStatesFactory(DIContainer c)
+        {
+            return new GameplayStatesFactory(c);
+        }
+
+        private static MainHeroHolderService CreateMainHeroHolderService(DIContainer c)
+        {
+            return new MainHeroHolderService(c.Resolve<EntitiesLifeContext>());
         }
 
         private static PreparationTrigerService CreatePreparationTrigerService(DIContainer c)

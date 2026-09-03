@@ -45,10 +45,10 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             bool isPlayerDataSaveExists = false;
 
-            yield return playerDataProvider.Exists(result => isPlayerDataSaveExists = result);
+            yield return playerDataProvider.ExistsAsync(result => isPlayerDataSaveExists = result);
 
             if(isPlayerDataSaveExists)
-                yield return playerDataProvider.Load();
+                yield return playerDataProvider.LoadAsync();
             else
                 playerDataProvider.Reset();
 
@@ -60,7 +60,7 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             Debug.Log("Начинается переход на другую сцену");
 
-            yield return sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
+            yield return sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu);
 
         }
     }
