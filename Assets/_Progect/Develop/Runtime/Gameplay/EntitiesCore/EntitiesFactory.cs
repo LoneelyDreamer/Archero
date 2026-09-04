@@ -123,6 +123,70 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
+        public Entity CreateSimpleEnemy(Vector3 position, SimpleEnemyConfig simpleEnemyConfig)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/SimpleEnemy");
+
+            entity
+               .AddMoveDirection()
+               .AddMoveSpeed(new ReactiveVeriable<float>(simpleEnemyConfig.MoveSpeed))
+               .AddIsMoving()
+               .AddRotationDirection()
+               .AddRotationSpeed(new ReactiveVeriable<float>(simpleEnemyConfig.RotationSpeed))
+               .AddMaxHealth(new ReactiveVeriable<float>(simpleEnemyConfig.MaxHealth))
+               .AddCurrentHealth(new ReactiveVeriable<float>(simpleEnemyConfig.MaxHealth))
+               .AddIsDead()
+               .AddInDeadProcess()
+               .AddDeathProcessInitialTime(new ReactiveVeriable<float>(simpleEnemyConfig.DeathProcessTime))
+               .AddDeathProcessCurrentTime()
+               .AddTakeDamegeRequest()
+               .AddTakeDamegeEvent()
+               .AddContactsDetectingMask(Layers.CharactersMask)
+               .AddContactColliderBuffer(new Buffer<Collider>(64))
+               .AddContactEntitiesBuffer(new Buffer<Entity>(64))
+               .AddBodyContactDamage(new ReactiveVeriable<float>(simpleEnemyConfig.BodyContactDamage));
+
+
+            ICompositCondition canMove = new CompositCondition()
+              .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition canRotate = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositCondition mustDie = new CompositCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositCondition mustSelfRealese = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
+
+            ICompositCondition canApplyDamage = new CompositCondition()
+            .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            entity
+              .AddCanMove(canMove)
+              .AddCanRotate(canRotate)
+              .AddMustDie(mustDie)
+              .AddMustSelfRelease(mustSelfRealese)
+              .AddCanApplayDamage(canApplyDamage);
+
+            entity
+                .AddSystem(new RigidbodyMovementSystem())
+                .AddSystem(new RigidBodyRotationSystem())
+                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
+                .AddSystem(new DealDamageOnContactSystem())
+                .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            return entity;
+        }
+
         public Entity CreateGhost(Vector3 position, GostConfig gostConfig)
         {
             Entity entity = CreateEmpty();

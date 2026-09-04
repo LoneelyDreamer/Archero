@@ -112,5 +112,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
 
             return coreLoopState;
         }
+
+        public GameplayStateMashine CreateTapGameCoreLoopState()
+        {
+            StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
+            return null;
+        }
+
     }
 }
