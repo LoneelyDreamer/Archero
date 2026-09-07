@@ -39,6 +39,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
                     _brainsFactory.CreateGostBrain(entity);
                     break;
 
+                case SimpleEnemyConfig simpleEnemyConfig:
+                    entity = _entitiesFactory.CreateSimpleEnemy(position, simpleEnemyConfig);
+
+                    _brainsFactory.CreateGostBrain(entity);
+                    entity.AddCurrentTarget();
+                    _brainsFactory.CreateSimpleEnemyBrain(entity, new NearestDamageableTargetSelector(entity));
+                    break;
+
+
                 default:
                     throw new ArgumentException($"Not support {config.GetType()} type config");
 

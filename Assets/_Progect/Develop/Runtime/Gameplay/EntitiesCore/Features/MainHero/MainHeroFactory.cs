@@ -6,6 +6,7 @@ using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero
 {
@@ -32,8 +33,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
 
             Entity entity = _entitiesFactory.CreateHero(position, config);
 
-
-
             entity
                 .AddIsMainHero()
                 .AddTeam(new ReactiveVeriable<Teams>(Teams.MainHero));
@@ -42,6 +41,22 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
             entity.AddCurrentTarget();
 
             _brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+
+        public Entity CreateMainHeroBilding(Vector3 position)
+        {
+            BildingHeroConfig config = _configProvidersServise.GetConfig<BildingHeroConfig>();
+
+            Entity entity = _entitiesFactory.CreateBildingHero(position, config);
+
+            entity
+                .AddIsMainHero()
+                .AddTeam(new ReactiveVeriable<Teams>(Teams.MainHero));
+                      
 
             _entitiesLifeContext.Add(entity);
 

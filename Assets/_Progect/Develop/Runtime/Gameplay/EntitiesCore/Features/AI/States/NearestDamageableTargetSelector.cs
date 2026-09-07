@@ -65,4 +65,5 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.Stat
 
         private float GetDistanceTo(Entity target) => (_sourseTransform.position - target.Transform.position).magnitude;
     }
+
 }

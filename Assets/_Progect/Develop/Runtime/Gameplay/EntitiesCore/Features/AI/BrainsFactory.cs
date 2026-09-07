@@ -46,11 +46,31 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             behavior.AddState(movementState);
             behavior.AddState(combastState);
 
-            behavior.AddTransition(movementState,combastState, fromMovmentToCombatStateCondition);
+            behavior.AddTransition(movementState, combastState, fromMovmentToCombatStateCondition);
             behavior.AddTransition(combastState, movementState, fromCombatToMovmentStateCondition);
 
             FindTargetState findTargenState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
             AIParallelState parallelState = new AIParallelState(findTargenState, behavior);
+
+            AIStateMashine rootStateMashine = new AIStateMashine();
+            rootStateMashine.AddState(parallelState);
+
+            StateMashineBrain brain = new StateMashineBrain(rootStateMashine);
+
+            _brainContex.SetFor(entity, brain);
+
+            return brain;
+        }
+
+        public StateMashineBrain CreateSimpleEnemyBrain(Entity entity, ITargetSelector targetSelector)
+        {
+            AIStateMashine behavior = CreateMoveToTargetStateMashine(entity);
+            ReactiveVeriable<Entity> currentTurget = entity.CurrentTarget;
+
+            FindTargetState findTargenState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
+            RotateToTargetState rotateToTargetState = new RotateToTargetState(entity);
+
+            AIParallelState parallelState = new AIParallelState(findTargenState, rotateToTargetState, behavior);
 
             AIStateMashine rootStateMashine = new AIStateMashine();
             rootStateMashine.AddState(parallelState);
@@ -67,9 +87,43 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
             AIStateMashine stateMashine = CreateRundomMovmentStateMashine(entity);
             StateMashineBrain brain = new StateMashineBrain(stateMashine);
 
-            _brainContex.SetFor(entity,brain);
+            _brainContex.SetFor(entity, brain);
 
             return brain;
+        }
+
+        private AIStateMashine CreateMoveToTargetStateMashine(Entity entity)
+        {
+            MoveToTargetState moveToTargetState = new MoveToTargetState(entity);
+
+            EmptyState emptyState = new EmptyState();
+
+            ReactiveVeriable<Entity> currentTarget = entity.CurrentTarget;
+
+            ICompositCondition fromEmptyToMoveCondition = new CompositCondition()
+                .Add(new FuncCondition(() =>
+            {
+                Entity target = currentTarget.Value;
+
+                if (target == null)
+                    return false;
+
+                return true;
+            }));
+
+            ICompositCondition fromMoveToEmptyCondition = new CompositCondition()
+                .Add(new FuncCondition(() => currentTarget.Value != null));
+
+
+            AIStateMashine stateMashine = new AIStateMashine();
+
+            stateMashine.AddState(emptyState);
+            stateMashine.AddState(moveToTargetState);
+
+            stateMashine.AddTransition(emptyState, moveToTargetState, fromEmptyToMoveCondition);
+            stateMashine.AddTransition(moveToTargetState, emptyState, fromMoveToEmptyCondition);
+
+            return stateMashine;
         }
 
         private AIStateMashine CreateRundomMovmentStateMashine(Entity entity)

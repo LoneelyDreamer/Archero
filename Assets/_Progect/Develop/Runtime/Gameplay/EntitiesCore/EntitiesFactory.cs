@@ -123,6 +123,49 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
+        public Entity CreateBildingHero(Vector3 position, BildingHeroConfig heroConfig)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/Bilding");
+
+            entity
+                .AddMaxHealth(new ReactiveVeriable<float>(heroConfig.MaxHealth))
+                .AddCurrentHealth(new ReactiveVeriable<float>(heroConfig.MaxHealth))
+                .AddIsDead()
+                .AddInDeadProcess()
+                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(heroConfig.DeathProcessTime))
+                .AddDeathProcessCurrentTime()
+                .AddTakeDamegeRequest()
+                .AddTakeDamegeEvent();
+
+
+            ICompositCondition mustDie = new CompositCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositCondition mustSelfRealese = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
+
+            ICompositCondition canApplyDamage = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+
+            entity
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRealese)
+                .AddCanApplayDamage(canApplyDamage);
+
+            entity
+                .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            return entity;
+        }
+
         public Entity CreateSimpleEnemy(Vector3 position, SimpleEnemyConfig simpleEnemyConfig)
         {
             Entity entity = CreateEmpty();

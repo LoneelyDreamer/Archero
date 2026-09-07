@@ -19,6 +19,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
             { typeof(CurrencyIconConfig), "Configs/Meta/Wallet/CurrencyIconConfig"},
             { typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig"},
             { typeof(HeroConfig), "Configs/Gameplay/Entities/Characters/HeroConfig"},
+            { typeof(BildingHeroConfig), "Configs/Gameplay/Entities/Characters/BildingHeroConfig"},
         };
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
         {
