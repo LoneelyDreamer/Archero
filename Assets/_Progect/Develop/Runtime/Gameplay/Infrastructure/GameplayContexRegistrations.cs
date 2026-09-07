@@ -61,7 +61,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             return new ClickService(
                 c.Resolve<CollidersRegestryService>(),
                 c.Resolve<MainHeroHolderService>(),
-                c.Resolve<IInputService>());
+                c.Resolve<IInputService>(),
+                c.Resolve<EntitiesFactory>(),
+                c.Resolve<ConfigsProviderServise>());
         }
 
         private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c)

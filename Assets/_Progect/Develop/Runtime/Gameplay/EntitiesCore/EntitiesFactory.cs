@@ -13,9 +13,7 @@ using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
-using System;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
@@ -250,6 +248,61 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
+        public Entity CreateMine(Vector3 position, MineConfig mineConfig)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesactory.Create(entity, position, "Entities/Mine");
+
+            entity
+            
+              .AddIsDead()
+              .AddInDeadProcess()
+              .AddDeathProcessInitialTime(new ReactiveVeriable<float>(mineConfig.DeathProcessTime))
+              .AddDeathProcessCurrentTime()           
+              .AddContactsDetectingMask(Layers.CharactersMask)
+              .AddContactColliderBuffer(new Buffer<Collider>(64))
+              .AddContactEntitiesBuffer(new Buffer<Entity>(64))
+              .AddStartSelfDetonationRequest()
+              .AddStartSelfDetonationEvent()
+              .AddInSelfDetonationProcess()
+              .AddSelfDetonationProcessInitialTime(new ReactiveVeriable<float>(mineConfig.SelfDetonationTime))
+              .AddSelfDetonationProcessCurrentTime()
+              .AddEndSelfDetonationEvent()
+              .AddAOEDamage(new ReactiveVeriable<float>(mineConfig.AOEDamage))
+              .AddAOEDamageRadius(new ReactiveVeriable<float>(mineConfig.AOERadius))
+              .AddIsTouchAnotherTeam();          
+
+            ICompositCondition mustSelfRealese = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value))
+                .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
+
+            ICompositCondition canStartSelfDetonation = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            entity
+                .AddMustSelfRelease(mustSelfRealese)
+                .AddCanStartSelfDetonation(canStartSelfDetonation);
+
+            entity
+               .AddSystem(new RigidbodyMovementSystem())
+               .AddSystem(new RigidBodyRotationSystem())
+               .AddSystem(new BodyContactsDetectingSystem())
+               .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
+               .AddSystem(new AnotherTeamTouchDetectorSystem())         
+               .AddSystem(new StartSelfDetonationSystem())
+               .AddSystem(new SelfDetonationProcessTimerSystem())
+               .AddSystem(new EndSelfDetonationSystem())
+               .AddSystem(new AOEDetectingSystem(_collidersRegestryService))
+               .AddSystem(new InstantAOESystem())
+               .AddSystem(new DeathSystem())
+               .AddSystem(new DisableCollidersOnDeathSystem())
+               .AddSystem(new DeathProcessTimerSystem())
+               .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            return entity;
+        }
+
         public Entity CreateGhost(Vector3 position, GostConfig gostConfig)
         {
             Entity entity = CreateEmpty();
@@ -374,6 +427,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             return entity;
         }
+
+       
+
 
         public Entity CreateContactTrigger(Vector3 position)
         {
