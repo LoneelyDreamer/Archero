@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure;
@@ -20,6 +21,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private GameplayStatesContext _gameplayStatesContext;
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainContex _brainContex;
+        private Entity _mainHero;
+        private ClickService _clickService;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -44,7 +47,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainContex = _container.Resolve<AIBrainContex>();
 
-            _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
+            _mainHero = _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
+
+            _clickService = _container.Resolve<ClickService>();
 
             yield break;
         }
@@ -59,9 +64,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                Debug.Log("_mainHero.CurrentHealth.Value = " + _mainHero.CurrentHealth.Value);                
+            }
+
             _brainContex?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
             _gameplayStatesContext?.Update(Time.deltaTime);
+            _clickService?.Update();
 
             if (Input.GetKeyDown(KeyCode.F))
             {

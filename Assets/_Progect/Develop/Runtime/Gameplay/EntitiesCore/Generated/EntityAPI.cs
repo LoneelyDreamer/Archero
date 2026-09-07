@@ -1080,6 +1080,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.SelfDetonationProcessCurrentTime() { Value = value });
 		}
 
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.SelfDetonationDelayEndEvent SelfDetonationDelayEndEventC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.SelfDetonationDelayEndEvent>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent SelfDetonationDelayEndEvent => SelfDetonationDelayEndEventC.Value;
+
+		public bool TryGetSelfDetonationDelayEndEvent(out ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.SelfDetonationDelayEndEvent component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSelfDetonationDelayEndEvent()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.SelfDetonationDelayEndEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSelfDetonationDelayEndEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.SelfDetonationDelayEndEvent() { Value = value });
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.InSelfDetonationProcess InSelfDetonationProcessC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.InSelfDetonationProcess>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> InSelfDetonationProcess => InSelfDetonationProcessC.Value;
@@ -1102,6 +1126,54 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInSelfDetonationProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.InSelfDetonationProcess() { Value = value });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamageRadius AOEDamageRadiusC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamageRadius>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> AOEDamageRadius => AOEDamageRadiusC.Value;
+
+		public bool TryGetAOEDamageRadius(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamageRadius component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamageRadius()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamageRadius() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamageRadius(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamageRadius() { Value = value });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamage AOEDamageC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamage>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> AOEDamage => AOEDamageC.Value;
+
+		public bool TryGetAOEDamage(out ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamage component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamage()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamage() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamage() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest TakeDamegeRequestC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest>();

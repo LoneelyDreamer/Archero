@@ -32,7 +32,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
 
         private void OnSelfDetonationRequest()
         {
-            if (_canStartSelfDetonation.Evaluate())
+            if (_canStartSelfDetonation.Evaluate() && !_inSelfDetonationProcess.Value)
             {
                 _inSelfDetonationProcess.Value = true;
                 _startSelfDetonationEvent.Invoke();

@@ -14,7 +14,9 @@ namespace Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities
         [field: SerializeField, Min(0)] public float MoveSpeed { get; private set; } = 3;
         [field: SerializeField, Min(0)] public float RotationSpeed { get; private set; } = 900;
         [field: SerializeField, Min(0)] public float MaxHealth { get; private set; } = 100;
-        [field: SerializeField, Min(0)] public float BodyContactDamage { get; private set; } = 50;
+        [field: SerializeField, Min(0)] public float AOEDamage { get; private set; } = 25;
+        [field: SerializeField, Min(0)] public float AOERadius { get; private set; } = 4;
         [field: SerializeField, Min(0)] public float DeathProcessTime { get; private set; } = 0.2f;
+        [field: SerializeField, Min(0)] public float SelfDetonationTime { get; private set; } = 0.5f;
     }
 }

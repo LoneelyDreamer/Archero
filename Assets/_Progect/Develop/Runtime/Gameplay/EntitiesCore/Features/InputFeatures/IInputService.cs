@@ -13,6 +13,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
 
         Vector3 Direction { get; }
 
+        Vector3 TouchPosition { get; }
+
         bool IsAttackPressed { get; }
     }
 }

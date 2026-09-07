@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Utillitles;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.Timer;
@@ -96,32 +97,24 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
         {
             MoveToTargetState moveToTargetState = new MoveToTargetState(entity);
 
-            EmptyState emptyState = new EmptyState();
+            SelfDetonationTriggerState selfDetonationTriggerState = new SelfDetonationTriggerState(entity);
 
             ReactiveVeriable<Entity> currentTarget = entity.CurrentTarget;
 
-            ICompositCondition fromEmptyToMoveCondition = new CompositCondition()
-                .Add(new FuncCondition(() =>
-            {
-                Entity target = currentTarget.Value;
+            ICompositCondition fromselfDetonationToMoveCondition = new CompositCondition()
+                .Add(new FuncCondition(() => entity.InSelfDetonationProcess.Value == false));                
 
-                if (target == null)
-                    return false;
-
-                return true;
-            }));
-
-            ICompositCondition fromMoveToEmptyCondition = new CompositCondition()
-                .Add(new FuncCondition(() => currentTarget.Value != null));
-
+            ICompositCondition fromMoveToselfDetonationCondition = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value == true))
+                .Add(new FuncCondition(() => entity.InSelfDetonationProcess.Value == false));
 
             AIStateMashine stateMashine = new AIStateMashine();
 
-            stateMashine.AddState(emptyState);
+            stateMashine.AddState(selfDetonationTriggerState);
             stateMashine.AddState(moveToTargetState);
 
-            stateMashine.AddTransition(emptyState, moveToTargetState, fromEmptyToMoveCondition);
-            stateMashine.AddTransition(moveToTargetState, emptyState, fromMoveToEmptyCondition);
+            stateMashine.AddTransition(selfDetonationTriggerState, moveToTargetState, fromselfDetonationToMoveCondition);
+            stateMashine.AddTransition(moveToTargetState, selfDetonationTriggerState, fromMoveToselfDetonationCondition);
 
             return stateMashine;
         }

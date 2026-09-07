@@ -49,9 +49,19 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStageProviderService);
 
+            container.RegisterAsSingle(CreateClickService);
+
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static ClickService CreateClickService(DIContainer c)
+        {
+            return new ClickService(
+                c.Resolve<CollidersRegestryService>(),
+                c.Resolve<MainHeroHolderService>(),
+                c.Resolve<IInputService>());
         }
 
         private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c)

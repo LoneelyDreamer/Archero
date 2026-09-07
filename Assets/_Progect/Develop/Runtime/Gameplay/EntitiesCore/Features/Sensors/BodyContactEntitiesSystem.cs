@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.System;
 using Assets._Progect.Develop.Runtime.Utillitles;
 using UnityEngine;
 
@@ -40,4 +41,5 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
             }
         }
     }
+
 }

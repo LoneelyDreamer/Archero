@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation
 {
-    public class SelfDetonationProcessTimerSystem : IInitializableSystem, IDisposableSystem
+    public class SelfDetonationProcessTimerSystem : IInitializableSystem, IDisposableSystem, IUpdatableSystem
     {
         private ReactiveVeriable<float> _currentTime;
 

@@ -1,15 +1,16 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
-using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
 {
@@ -32,7 +33,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
         {
             Entity entity = null;
 
-            switch(config)
+            switch (config)
             {
                 case GostConfig gostConfig:
                     entity = _entitiesFactory.CreateGhost(position, gostConfig);
@@ -40,8 +41,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
                     break;
 
                 case SimpleEnemyConfig simpleEnemyConfig:
+
                     entity = _entitiesFactory.CreateSimpleEnemy(position, simpleEnemyConfig);
-                    entity.AddCurrentTarget();
+                    entity
+                        .AddCurrentTarget();
+
+
                     _brainsFactory.CreateSimpleEnemyBrain(entity, new NearestDamageableTargetSelector(entity));
                     break;
 

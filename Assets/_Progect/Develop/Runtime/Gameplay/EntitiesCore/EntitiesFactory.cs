@@ -15,6 +15,7 @@ using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
@@ -193,9 +194,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                .AddStartSelfDetonationRequest()
                .AddStartSelfDetonationEvent()
                .AddInSelfDetonationProcess()
-               .AddSelfDetonationProcessInitialTime()
+               .AddSelfDetonationProcessInitialTime(new ReactiveVeriable<float>(simpleEnemyConfig.SelfDetonationTime))
                .AddSelfDetonationProcessCurrentTime()
-               .AddEndSelfDetonationEvent();
+               .AddEndSelfDetonationEvent()
+               .AddAOEDamage(new ReactiveVeriable<float>(simpleEnemyConfig.AOEDamage))
+               .AddAOEDamageRadius(new ReactiveVeriable<float>(simpleEnemyConfig.AOERadius))
+               .AddIsTouchAnotherTeam();
 
 
 
@@ -223,7 +227,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
               .AddCanRotate(canRotate)
               .AddMustDie(mustDie)
               .AddMustSelfRelease(mustSelfRealese)
-              .AddMustSelfRelease(canStartSelfDetonation)
+              .AddCanStartSelfDetonation(canStartSelfDetonation)
               .AddCanApplayDamage(canApplyDamage);
 
             entity
@@ -231,10 +235,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new RigidBodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
+                .AddSystem(new AnotherTeamTouchDetectorSystem())
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new StartSelfDetonationSystem())
                 .AddSystem(new SelfDetonationProcessTimerSystem())
                 .AddSystem(new EndSelfDetonationSystem())
+                .AddSystem(new AOEDetectingSystem(_collidersRegestryService))
+                .AddSystem(new InstantAOESystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
