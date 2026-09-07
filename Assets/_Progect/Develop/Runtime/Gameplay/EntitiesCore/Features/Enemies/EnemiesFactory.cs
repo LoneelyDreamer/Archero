@@ -41,8 +41,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
 
                 case SimpleEnemyConfig simpleEnemyConfig:
                     entity = _entitiesFactory.CreateSimpleEnemy(position, simpleEnemyConfig);
-
-                    _brainsFactory.CreateGostBrain(entity);
                     entity.AddCurrentTarget();
                     _brainsFactory.CreateSimpleEnemyBrain(entity, new NearestDamageableTargetSelector(entity));
                     break;
