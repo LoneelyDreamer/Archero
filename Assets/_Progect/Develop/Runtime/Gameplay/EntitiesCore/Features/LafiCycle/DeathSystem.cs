@@ -8,14 +8,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
     public class DeathSystem : IInitializableSystem, IUpdatableSystem
     {
         private ReactiveVeriable<bool> _isDead;
-        //private ReactiveVeriable<float> _currentHealth;
 
         private ICompositCondition _mustDie;
 
         public void OnInit(Entity entity)
         {
             _isDead = entity.IsDead;
-           // _currentHealth = entity.CurrentHealth;
             _mustDie = entity.MustDie;
         }
 

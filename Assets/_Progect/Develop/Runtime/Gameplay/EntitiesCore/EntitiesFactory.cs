@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
@@ -189,7 +190,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                .AddContactsDetectingMask(Layers.CharactersMask)
                .AddContactColliderBuffer(new Buffer<Collider>(64))
                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-               .AddBodyContactDamage(new ReactiveVeriable<float>(simpleEnemyConfig.BodyContactDamage));
+               .AddStartSelfDetonationRequest()
+               .AddStartSelfDetonationEvent()
+               .AddInSelfDetonationProcess()
+               .AddSelfDetonationProcessInitialTime()
+               .AddSelfDetonationProcessCurrentTime()
+               .AddEndSelfDetonationEvent();
+
 
 
             ICompositCondition canMove = new CompositCondition()
@@ -205,14 +212,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.IsDead.Value))
                 .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
 
+            ICompositCondition canStartSelfDetonation = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
             ICompositCondition canApplyDamage = new CompositCondition()
-            .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             entity
               .AddCanMove(canMove)
               .AddCanRotate(canRotate)
               .AddMustDie(mustDie)
               .AddMustSelfRelease(mustSelfRealese)
+              .AddMustSelfRelease(canStartSelfDetonation)
               .AddCanApplayDamage(canApplyDamage);
 
             entity
@@ -220,8 +231,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new RigidBodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
-                .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new StartSelfDetonationSystem())
+                .AddSystem(new SelfDetonationProcessTimerSystem())
+                .AddSystem(new EndSelfDetonationSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())

@@ -12,9 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
         private ReactiveVeriable<float> _attackProcessInitialTime;
         private ReactiveVeriable<float> _attackProcessCurrentTime;
 
-        private IDisposable _timerDisposable;
-
-       
+        private IDisposable _timerDisposable;       
 
         public void OnInit(Entity entity)
         {

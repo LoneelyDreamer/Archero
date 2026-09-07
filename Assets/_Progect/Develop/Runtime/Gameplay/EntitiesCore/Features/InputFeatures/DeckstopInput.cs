@@ -26,5 +26,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
             }
         }
 
+        public bool IsAttackPressed => Input.GetMouseButtonDown(0);
     }
 }
