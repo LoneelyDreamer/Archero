@@ -9,6 +9,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFa
     public enum Teams
     {
         MainHero,
-        Enemies
+        Enemies,
+        Mines
     }
 }

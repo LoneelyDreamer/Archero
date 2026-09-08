@@ -197,6 +197,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                .AddEndSelfDetonationEvent()
                .AddAOEDamage(new ReactiveVeriable<float>(simpleEnemyConfig.AOEDamage))
                .AddAOEDamageRadius(new ReactiveVeriable<float>(simpleEnemyConfig.AOERadius))
+               .AddIsTouchHero()
                .AddIsTouchAnotherTeam();
 
 
@@ -233,7 +234,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new RigidBodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
-                .AddSystem(new AnotherTeamTouchDetectorSystem())
+                .AddSystem(new TouchHeroDetectorSystem())
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new StartSelfDetonationSystem())
                 .AddSystem(new SelfDetonationProcessTimerSystem())
@@ -255,11 +256,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntitiesactory.Create(entity, position, "Entities/Mine");
 
             entity
-            
+
               .AddIsDead()
               .AddInDeadProcess()
               .AddDeathProcessInitialTime(new ReactiveVeriable<float>(mineConfig.DeathProcessTime))
-              .AddDeathProcessCurrentTime()           
+              .AddDeathProcessCurrentTime()
               .AddContactsDetectingMask(Layers.CharactersMask)
               .AddContactColliderBuffer(new Buffer<Collider>(64))
               .AddContactEntitiesBuffer(new Buffer<Entity>(64))
@@ -271,7 +272,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
               .AddEndSelfDetonationEvent()
               .AddAOEDamage(new ReactiveVeriable<float>(mineConfig.AOEDamage))
               .AddAOEDamageRadius(new ReactiveVeriable<float>(mineConfig.AOERadius))
-              .AddIsTouchAnotherTeam();          
+              .AddIsTouchAnotherTeam()
+              .AddIsDetonatingOnInstall(new ReactiveVeriable<bool>(mineConfig.IsDetonatingOnInstall));
+
+            ICompositCondition mustDetonate = new CompositCondition()
+                .Add(new FuncCondition(() => entity.ContactEntitiesBuffer.Count > 0));
 
             ICompositCondition mustSelfRealese = new CompositCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value))
@@ -281,27 +286,27 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             entity
+                .AddMustDetonate(mustDetonate)
                 .AddMustSelfRelease(mustSelfRealese)
                 .AddCanStartSelfDetonation(canStartSelfDetonation);
 
             entity
-               .AddSystem(new RigidbodyMovementSystem())
-               .AddSystem(new RigidBodyRotationSystem())
-               .AddSystem(new BodyContactsDetectingSystem())
+               .AddSystem(new ContactDetonationSystem())
                .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
                .AddSystem(new AnotherTeamTouchDetectorSystem())         
+               .AddSystem(new BodyContactsDetectingSystem())
                .AddSystem(new StartSelfDetonationSystem())
                .AddSystem(new SelfDetonationProcessTimerSystem())
                .AddSystem(new EndSelfDetonationSystem())
                .AddSystem(new AOEDetectingSystem(_collidersRegestryService))
-               .AddSystem(new InstantAOESystem())
-               .AddSystem(new DeathSystem())
+               .AddSystem(new InstantAOESystem())            
                .AddSystem(new DisableCollidersOnDeathSystem())
                .AddSystem(new DeathProcessTimerSystem())
                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
             return entity;
         }
+
 
         public Entity CreateGhost(Vector3 position, GostConfig gostConfig)
         {

@@ -105,7 +105,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI
                 .Add(new FuncCondition(() => entity.InSelfDetonationProcess.Value == false));                
 
             ICompositCondition fromMoveToselfDetonationCondition = new CompositCondition()
-                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value == true))
+                .Add(new FuncCondition(() => entity.IsTouchHero.Value == true))
                 .Add(new FuncCondition(() => entity.InSelfDetonationProcess.Value == false));
 
             AIStateMashine stateMashine = new AIStateMashine();

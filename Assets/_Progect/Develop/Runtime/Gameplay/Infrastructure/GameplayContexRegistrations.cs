@@ -4,6 +4,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Mines;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Gameplay.States;
@@ -51,9 +52,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateClickService);
 
+            container.RegisterAsSingle(CreateMinesFactory);
+
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+        }
+
+        private static MinesFactory CreateMinesFactory(DIContainer c)
+        {
+            return new MinesFactory(c);
         }
 
         private static ClickService CreateClickService(DIContainer c)
@@ -62,8 +70,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<CollidersRegestryService>(),
                 c.Resolve<MainHeroHolderService>(),
                 c.Resolve<IInputService>(),
-                c.Resolve<EntitiesFactory>(),
-                c.Resolve<ConfigsProviderServise>());
+                c.Resolve<ConfigsProviderServise>(),
+                c.Resolve<StageProviderService>(),
+                c.Resolve<MinesFactory>());
         }
 
         private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c)

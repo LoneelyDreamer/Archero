@@ -18,6 +18,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
         public ICompositCondition Value;
     }
 
+    public class MustDetonate : IEntityComponent
+    {
+        public ICompositCondition Value;
+    }
+
     public class EndSelfDetonationEvent : IEntityComponent
     {
         public ReactiveEvent Value;
@@ -50,6 +55,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
     public class AOEDamage : IEntityComponent
     {
         public ReactiveVeriable<float> Value;
+    }
+
+    public class IsDetonatingOnInstall : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
     }
 
 }

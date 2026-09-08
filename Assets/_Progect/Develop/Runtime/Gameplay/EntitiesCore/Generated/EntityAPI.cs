@@ -177,6 +177,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchAnotherTeam() { Value = value });
 		}
 
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchHero IsTouchHeroC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchHero>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> IsTouchHero => IsTouchHeroC.Value;
+
+		public bool TryGetIsTouchHero(out ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchHero component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchHero()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchHero() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsTouchHero(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors.IsTouchHero() { Value = value });
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveDirection MoveDirectionC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature.MoveDirection>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::UnityEngine.Vector3> MoveDirection => MoveDirectionC.Value;
@@ -1008,6 +1032,25 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.CanStartSelfDetonation() { Value = value });
 		}
 
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.MustDetonate MustDetonateC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.MustDetonate>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition MustDetonate => MustDetonateC.Value;
+
+		public bool TryGetMustDetonate(out ICompositCondition value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.MustDetonate component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ICompositCondition);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustDetonate(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.MustDetonate() { Value = value });
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.EndSelfDetonationEvent EndSelfDetonationEventC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.EndSelfDetonationEvent>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent EndSelfDetonationEvent => EndSelfDetonationEventC.Value;
@@ -1174,6 +1217,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAOEDamage(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Single> value)
 		{
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.AOEDamage() { Value = value });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.IsDetonatingOnInstall IsDetonatingOnInstallC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.IsDetonatingOnInstall>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> IsDetonatingOnInstall => IsDetonatingOnInstallC.Value;
+
+		public bool TryGetIsDetonatingOnInstall(out ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.IsDetonatingOnInstall component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsDetonatingOnInstall()
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.IsDetonatingOnInstall() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsDetonatingOnInstall(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.SelfDetonation.IsDetonatingOnInstall() { Value = value });
 		}
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest TakeDamegeRequestC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.TakeDamegeRequest>();

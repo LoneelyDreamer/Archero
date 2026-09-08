@@ -23,6 +23,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
         }
 
         public IReadOnlyVeriable<int> CurrentStageNumber => _currentStageNumber;
+        //public IStage CurrentStage => _currentStage;
         public IReadOnlyVeriable<StageResult> CurrentStageResult => _currentStageResult;
 
         public int StagesCount => _levelConfig.StageConfigs.Count;

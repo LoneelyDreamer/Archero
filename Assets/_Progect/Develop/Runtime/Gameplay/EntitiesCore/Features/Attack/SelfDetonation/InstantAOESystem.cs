@@ -14,7 +14,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
         private ReactiveEvent _endSelfDetonationEvent;
         private Buffer<Entity> _contacts;
         private List<Entity> _processedEntities;
-        private IDisposable _startTeleportDisposable;
+        private IDisposable _startSelfDetonationDisposable;
         private Entity _entity;
 
         public void OnInit(Entity entity)
@@ -26,7 +26,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
 
             _contacts = entity.ContactEntitiesBuffer;
             _processedEntities = new List<Entity>(_contacts.Items.Length);
-            _startTeleportDisposable = _endSelfDetonationEvent.Subscribe(OnSelfDetonate);
+            _startSelfDetonationDisposable = _endSelfDetonationEvent.Subscribe(OnSelfDetonate);
         }
 
         private void OnSelfDetonate()
@@ -56,7 +56,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.
 
         public void OnDispose()
         {
-            _startTeleportDisposable.Dispose();
+            _startSelfDetonationDisposable.Dispose();
         }
 
         public bool ContainInContacts(Entity entity)

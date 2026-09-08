@@ -38,4 +38,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors
         public ReactiveVeriable<bool> Value;
     }
 
+    public class IsTouchHero : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
+    }
+
 }

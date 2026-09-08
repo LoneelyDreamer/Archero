@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: MineConfig
-  m_EditorClassIdentifier: Assembly-CSharp:Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities:MineConfig
+  m_Script: {fileID: 11500000, guid: 1d51f7e8d3bf10b4084c60c2ffbb81b9, type: 3}
+  m_Name: ConstMineConfig
+  m_EditorClassIdentifier: 
   <PrefabPath>k__BackingField: Entities/Mine
   <AOEDamage>k__BackingField: 100
   <AOERadius>k__BackingField: 4
   <DeathProcessTime>k__BackingField: 0.2
   <SelfDetonationTime>k__BackingField: 0.5
+  <IsDetonatingOnInstall>k__BackingField: 0
