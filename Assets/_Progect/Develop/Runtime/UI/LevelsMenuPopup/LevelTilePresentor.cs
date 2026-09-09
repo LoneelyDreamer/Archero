@@ -63,7 +63,7 @@ namespace Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup
             }
 
             _coroutinesPerformer
-                .StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(_levelNumber)));
+                .StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2), new GameplayInputArgs(_levelNumber)));
         }
 
         public void Subscribe()

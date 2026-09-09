@@ -1,5 +1,11 @@
-﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Progect.Develop.Runtime.Configs.Meta.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Configs.Meta.ShopPrises;
+using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
+using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Shop;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
@@ -16,7 +22,6 @@ using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Timer;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -39,13 +44,21 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
+            container.RegisterAsSingle(CreateCupchaServisce);
+
+            container.RegisterAsSingle(CreateBonusAndPenaltyServise);
+            
             container.RegisterAsSingle(CreateWalletServise).NonLazy();
+
+            container.RegisterAsSingle(CreateWinAndLoseCauntersServise).NonLazy();
 
             container.RegisterAsSingle(CreatePlayerDataProvider);
 
             container.RegisterAsSingle(CreateProgectPresentorFactory);
 
             container.RegisterAsSingle(CreateViewsFactory);
+
+            container.RegisterAsSingle(CreateShopServise);
 
             container.RegisterAsSingle(CreateTimerServiceFactory);
 
@@ -54,6 +67,42 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateLevelsProgressionServise).NonLazy();
         }
 
+        private static WinAndLoseCauntersServise CreateWinAndLoseCauntersServise(DIContainer c)
+        {
+            Dictionary<CauntersTypes, ReactiveVeriable<int>> caunters = new();
+            foreach (CauntersTypes caunterTypes in Enum.GetValues(typeof(CauntersTypes)))
+                caunters[caunterTypes] = new ReactiveVeriable<int>();
+
+            return new WinAndLoseCauntersServise(caunters, c.Resolve<PlayerDataProvider>());
+        }
+
+        private static CupchaServisce CreateCupchaServisce(DIContainer c)
+        {
+            ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
+            GameModeConfig config = configsProviderServise.GetConfig<GameModeConfig>();
+            return new CupchaServisce(config);
+        }
+
+        private static ShopServise CreateShopServise(DIContainer c)
+        {
+            ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
+            ShopPricesConfig config = configsProviderServise.GetConfig<ShopPricesConfig>();
+            return new ShopServise(
+                c.Resolve<WalletServise>(),
+                c.Resolve<WinAndLoseCauntersServise>(),
+                config,
+                c.Resolve<PlayerDataProvider>(),
+                c.Resolve<ICoroutinesPerformer>());
+        }
+
+        private static BonusAndPenaltyServise CreateBonusAndPenaltyServise(DIContainer c)
+        {
+            ConfigsProviderServise configsProviderServise = c.Resolve<ConfigsProviderServise>();
+            BonusAndPenaltyStartConfig config = configsProviderServise.GetConfig<BonusAndPenaltyStartConfig>();
+            return new BonusAndPenaltyServise(c.Resolve<WalletServise>(), config);
+        }
+
+       
         private static TimerServiceFactory CreateTimerServiceFactory(DIContainer c)
             => new TimerServiceFactory(c);
 

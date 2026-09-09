@@ -61,7 +61,6 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             Debug.Log("Начинается переход на другую сцену");
 
             yield return sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu);
-
         }
     }
 }

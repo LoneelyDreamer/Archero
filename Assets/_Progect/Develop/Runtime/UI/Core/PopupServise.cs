@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core.TestPopup;
+using Assets._Progect.Develop.Runtime.UI.CupchPopup;
 using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
@@ -28,6 +29,17 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             TestPopupPresentor popup = _presentorsFactory.CreateTestPopupPresentor(view);
 
             OnPopupCreated(popup, view, closedCallback);
+
+            return popup;
+        }
+
+        public CupchaPopupPresentor OpenCupchaPopup(int mode)
+        {
+            CupchPopupView view = ViewsFactory.Create<CupchPopupView>(ViewIDs.CupchaPopup, PopuoLayer);
+
+            CupchaPopupPresentor popup = _presentorsFactory.CreateCupchaPopupPresentor(view, mode);
+
+            OnPopupCreated(popup, view);
 
             return popup;
         }

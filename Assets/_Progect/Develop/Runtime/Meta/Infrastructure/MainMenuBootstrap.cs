@@ -1,13 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
-using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
-using Assets._Progect.Develop.Runtime.UI.CommonView;
-using Assets._Progect.Develop.Runtime.UI.Core;
-using Assets._Progect.Develop.Runtime.UI.Wallet;
-using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
-using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
-using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System.Collections;
 using UnityEngine;
 
@@ -16,12 +9,8 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
     public class MainMenuBootstrap : SceneBootstrap
     {
         private DIContainer _container;
-        private WalletServise _walletServise;
 
-        private PlayerDataProvider _playerDataProvider;
-        private ICoroutinesPerformer _coroutinesPerformer;
-
-        public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
+        public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null, IInputSceneArgs sceneArgs2 = null)
         {
             _container = container;
 
@@ -31,13 +20,6 @@ namespace Assets._Progect.Develop.Runtime.Meta.Infrastructure
         public override IEnumerator Initialize()
         {
             Debug.Log("Initialize MainMenu Scene");
-
-            _walletServise =_container.Resolve<WalletServise>();
-
-            _playerDataProvider = _container.Resolve<PlayerDataProvider>();
-            _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-
-           
 
             yield break;
         }
