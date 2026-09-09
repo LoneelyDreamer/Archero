@@ -1,5 +1,4 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
-using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies;
@@ -12,10 +11,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay;
-using Assets._Progect.Develop.Runtime.UI.MainMenu;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
-using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
-using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using UnityEngine;
@@ -33,40 +29,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayScreenPresentor).NonLazy();
             container.RegisterAsSingle(CreateGameplayPopupServise);
 
-        }
-
-        private static GameplayPopupServise CreateGameplayPopupServise(DIContainer c)
-        {
-            return new GameplayPopupServise(
-                c.Resolve<ViewsFactory>(),
-                c.Resolve<ProjectPresentorFactory>(),
-                c.Resolve<GameplayUIRoot>());
-        }
-
-
-        private static GameplayUIRoot CreateGamplayUIRoot(DIContainer c)
-        {
-            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
-
-            GameplayUIRoot gameplayUIRootPrefab = resourcesAssetsLoader.
-               Load<GameplayUIRoot>("UI/Gameplay/GamePlayUIRoot");
-
-            return Object.Instantiate(gameplayUIRootPrefab);
-        }
-
-        private static GameplayPresentorFactory CreateGameplayPresentorFactory(DIContainer c) 
-            => new GameplayPresentorFactory(c);
-
-        private static GameplayScreenPresentor CreateGameplayScreenPresentor(DIContainer c)
-        {
-            GameplayUIRoot uiRoot = c.Resolve<GameplayUIRoot>();
-            GameplayScreenView view = c
-                .Resolve<ViewsFactory>()
-                .Create<GameplayScreenView>(ViewIDs.GameplayScreen, uiRoot.HUDLayer);
-
-            GameplayScreenPresentor presentor = c.Resolve<GameplayPresentorFactory>().CreateGameplayScreenPresentor(view);
-
-            return presentor;
             _inputArgs = gameplayInputArgs;
 
             Debug.Log("Процесс регистрации сервисов на сцене геймплея");
@@ -103,6 +65,42 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+
+        }
+
+        private static GameplayPopupServise CreateGameplayPopupServise(DIContainer c)
+        {
+            return new GameplayPopupServise(
+                c.Resolve<ViewsFactory>(),
+                c.Resolve<ProjectPresentorFactory>(),
+                c.Resolve<GameplayUIRoot>());
+        }
+
+
+        private static GameplayUIRoot CreateGamplayUIRoot(DIContainer c)
+        {
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
+
+            GameplayUIRoot gameplayUIRootPrefab = resourcesAssetsLoader.
+               Load<GameplayUIRoot>("UI/Gameplay/GamePlayUIRoot");
+
+            return Object.Instantiate(gameplayUIRootPrefab);
+        }
+
+        private static GameplayPresentorFactory CreateGameplayPresentorFactory(DIContainer c) 
+            => new GameplayPresentorFactory(c);
+
+        private static GameplayScreenPresentor CreateGameplayScreenPresentor(DIContainer c)
+        {
+            GameplayUIRoot uiRoot = c.Resolve<GameplayUIRoot>();
+            GameplayScreenView view = c
+                .Resolve<ViewsFactory>()
+                .Create<GameplayScreenView>(ViewIDs.GameplayScreen, uiRoot.HUDLayer);
+
+            GameplayScreenPresentor presentor = c.Resolve<GameplayPresentorFactory>().CreateGameplayScreenPresentor(view);
+
+            return presentor;
+           
         }
 
         private static MinesFactory CreateMinesFactory(DIContainer c)

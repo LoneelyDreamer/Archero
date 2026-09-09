@@ -39,7 +39,7 @@ namespace Assets._Progect.Develop.Runtime.Meta.Feathers.Shop
             {
                 _walletServise.Spend(CurrenceTypes.Gold, _shopPricesConfig.ResetPrice);
                 _winAndLoseCauntersServise.ResetCaunters();
-                _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+                _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
 
                 Debug.Log("Reset");
             }

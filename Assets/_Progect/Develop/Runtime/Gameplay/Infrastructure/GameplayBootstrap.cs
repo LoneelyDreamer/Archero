@@ -6,6 +6,8 @@ using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.UI.Gameplay;
+using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -23,11 +25,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private Entity _mainHero;
         private ClickService _clickService;
 
+        //private GameplayInputArgs _mode;
+        //private GameplayPopupServise _popupServise;
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
-        private GameplayInputArgs _inputArgs;
-        private GameplayInputArgs _mode;
-        private GameplayPopupServise _popupServise;
-        public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null, IInputSceneArgs sceneArgs2 = null)
         {
             _container = container;
 
@@ -36,10 +36,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             _inputArgs = gameplayInputArgs;
 
-            if (sceneArgs2 is not GameplayInputArgs gameplayInputArgs2)
-                throw new ArgumentException($"{nameof(sceneArgs)} is not mathc with {typeof(GameplayInputArgs)} type");
+            //if (sceneArgs2 is not GameplayInputArgs gameplayInputArgs2)
+            //    throw new ArgumentException($"{nameof(sceneArgs)} is not mathc with {typeof(GameplayInputArgs)} type");
 
-            _mode = gameplayInputArgs2;
+            //_mode = gameplayInputArgs2;
 
             GameplayContexRegistrations.Process(_container, _inputArgs);
         }
@@ -49,7 +49,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log($"Вы попали на уровень {_inputArgs.LevalNumber}");
 
             Debug.Log("Initialize Gameplay Scene");
-            _popupServise = _container.Resolve<GameplayPopupServise>();
+            //_popupServise = _container.Resolve<GameplayPopupServise>();
 
             _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();
 
@@ -68,7 +68,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Start Gameplay Scene");
 
             _gameplayStatesContext.Run();
-            _popupServise.OpenCupchaPopup(_mode.LevalNumber);
+           // _popupServise.OpenCupchaPopup(_mode.LevalNumber);
         }
 
         private void Update()
@@ -89,8 +89,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
             }
-        }
-        private string _currentText = string.Empty;
-        
+        }        
     }
 }

@@ -26,7 +26,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.SceneManagment
             _projectContainer = projectContainer;
         }
 
-        public IEnumerator ProssesSwitchTo(string sceneName, IInputSceneArgs sceneArgs = null, IInputSceneArgs mode = null)
+        public IEnumerator ProssesSwitchTo(string sceneName, IInputSceneArgs sceneArgs = null)
         {
             _loadingScreen.Show();
 
@@ -42,7 +42,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.SceneManagment
 
             _currentSceneContainer = new DIContainer(_projectContainer);
 
-            sceneBootstrap.ProcessRegisration(_currentSceneContainer, sceneArgs, mode);
+            sceneBootstrap.ProcessRegisration(_currentSceneContainer, sceneArgs);
             sceneBootstrap.Initialize();
 
             _currentSceneContainer.Initialize();

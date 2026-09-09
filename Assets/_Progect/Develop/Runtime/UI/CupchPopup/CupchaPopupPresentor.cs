@@ -4,16 +4,10 @@ using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Core;
-using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
@@ -98,7 +92,7 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
                 _winAndLoseCauntersServise.Caunt(CauntersTypes.Wins);
                 _bonusAndPenaltyServise.AddGoldBonus();
 
-                _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
+                _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
                 _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
 
             }
@@ -109,8 +103,8 @@ namespace Assets._Progect.Develop.Runtime.UI.CupchPopup
 
                 _bonusAndPenaltyServise.AddGoldPenalty();
 
-                _coroutinesPerformer.StartPerform(_playerDataProvider.Save());
-                _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1), new GameplayInputArgs(_mode)));
+                _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
+                _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1)));
             }
         }
     }
