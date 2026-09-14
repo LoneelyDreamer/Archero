@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
 using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
 using Assets._Progect.Develop.Runtime.Gameplay.Cupcha;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
@@ -10,6 +11,7 @@ using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Core.TestPopup;
 using Assets._Progect.Develop.Runtime.UI.CupchPopup;
 using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
+using Assets._Progect.Develop.Runtime.UI.NextStagePopup;
 using Assets._Progect.Develop.Runtime.UI.WinAndLoseCaunters;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
@@ -105,6 +107,14 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
                view,
                _container.Resolve<ConfigsProviderServise>(),
                this);
+        }
+
+        public NextStagePopupPresentor CreateNextStagePopupPresentor(NextStagePopupView view)
+        {
+            return new NextStagePopupPresentor(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<ClickService>(),
+                view);
         }
     }
 }

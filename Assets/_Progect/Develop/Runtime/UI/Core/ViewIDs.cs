@@ -10,5 +10,6 @@
         public const string LevelsMenuPopup = nameof(LevelsMenuPopup);
         public const string CaunterView = nameof(CaunterView);
         public const string CupchaPopup = nameof(CupchaPopup);
+        public const string NextStagePopup = nameof(NextStagePopup);
     }
 }

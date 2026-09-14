@@ -1,6 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core.TestPopup;
 using Assets._Progect.Develop.Runtime.UI.CupchPopup;
 using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
+using Assets._Progect.Develop.Runtime.UI.NextStagePopup;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,17 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             LevelsMenuPopupView view = ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, PopuoLayer);
 
             LevelsMenuPopupPresentor popup = _presentorsFactory.CreateLevelsMenuPopupPresentor(view);
+
+            OnPopupCreated(popup, view);
+
+            return popup;
+        }
+
+        public NextStagePopupPresentor OpenNextStagePopupPresentor()
+        {
+            NextStagePopupView view = ViewsFactory.Create<NextStagePopupView>(ViewIDs.NextStagePopup, PopuoLayer);
+
+            NextStagePopupPresentor popup = _presentorsFactory.CreateNextStagePopupPresentor(view);
 
             OnPopupCreated(popup, view);
 

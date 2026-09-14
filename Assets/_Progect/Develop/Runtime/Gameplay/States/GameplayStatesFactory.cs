@@ -4,6 +4,8 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeatu
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.UI.Core;
+using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
@@ -25,9 +27,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             return new PreperationState(_container.Resolve<PreparationTrigerService>());
         }
 
+        public WaitingState CreateWaitingState()
+        {
+            return new WaitingState(_container.Resolve<GameplayPopupServise>(), _container.Resolve<ClickService>());
+        }
+
         public StageProcessState CreateStageProcessState()
         {
-            return new StageProcessState(_container.Resolve<StageProviderService>());
+            return new StageProcessState(_container.Resolve<StageProviderService>(), _container.Resolve<ClickService>());
         }
 
         public WinState CreateWinState(GameplayInputArgs gameplayInputArgs)
@@ -91,11 +98,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
             StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
 
-            PreperationState preperationState = CreatePreperationState();
+            WaitingState waitingState = CreateWaitingState();
+          //  PreperationState preperationState = CreatePreperationState();
             StageProcessState stageProcessState = CreateStageProcessState();
 
             ICompositCondition preparationTostageProcessCondition = new CompositCondition()
-                .Add(new FuncCondition(() => preparationTrigerService.HasMainHeroContact.Value))
+                .Add(new FuncCondition(() => waitingState.IsReady.Value))
                 .Add(new FuncCondition(() => stageProviderService.HasNextStage()));
 
             FuncCondition stageProcessToPreperationCondition =
@@ -103,11 +111,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
 
             GameplayStateMashine coreLoopState = new GameplayStateMashine();
 
-            coreLoopState.AddState(preperationState);
+            coreLoopState.AddState(waitingState);
             coreLoopState.AddState(stageProcessState);
 
-            coreLoopState.AddTransition(preperationState, stageProcessState, preparationTostageProcessCondition);
-            coreLoopState.AddTransition(stageProcessState, preperationState, stageProcessToPreperationCondition);
+            coreLoopState.AddTransition(waitingState, stageProcessState, preparationTostageProcessCondition);
+            coreLoopState.AddTransition(stageProcessState, waitingState, stageProcessToPreperationCondition);
 
 
             return coreLoopState;

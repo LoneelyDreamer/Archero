@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 
@@ -27,6 +28,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
         public IReadOnlyVeriable<StageResult> CurrentStageResult => _currentStageResult;
 
         public int StagesCount => _levelConfig.StageConfigs.Count;
+
+        public MineConfig InstallMineConfig => _levelConfig.InstallMine;
+        public MineConfig ExplodeMineConfig => _levelConfig.ExplodeMine;
 
         public bool HasNextStage() => CurrentStageNumber.Value < StagesCount;
 

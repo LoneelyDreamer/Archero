@@ -24,14 +24,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
         public static void Process(DIContainer container, GameplayInputArgs gameplayInputArgs)
         {
+            _inputArgs = gameplayInputArgs;
+
+            Debug.Log("Процесс регистрации сервисов на сцене геймплея");
+
             container.RegisterAsSingle(CreateGamplayUIRoot).NonLazy();
             container.RegisterAsSingle(CreateGameplayPresentorFactory);
             container.RegisterAsSingle(CreateGameplayScreenPresentor).NonLazy();
             container.RegisterAsSingle(CreateGameplayPopupServise);
 
-            _inputArgs = gameplayInputArgs;
-
-            Debug.Log("Процесс регистрации сервисов на сцене геймплея");
             container.RegisterAsSingle(CreateEntitiesFactory);
 
             container.RegisterAsSingle(CreateEntitiesLifeContext);
@@ -111,11 +112,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private static ClickService CreateClickService(DIContainer c)
         {
             return new ClickService(
-                c.Resolve<CollidersRegestryService>(),
                 c.Resolve<MainHeroHolderService>(),
                 c.Resolve<IInputService>(),
-                c.Resolve<ConfigsProviderServise>(),
-                c.Resolve<StageProviderService>(),
+                c.Resolve<StageProviderService>().InstallMineConfig,
+                c.Resolve<StageProviderService>().ExplodeMineConfig,
                 c.Resolve<MinesFactory>());
         }
 

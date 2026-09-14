@@ -24,7 +24,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
         private bool _inProcess;
         private TimerService _timer;
         private IDisposable _disposable;
-        public InstallMinesStage(InstallMinesStageConfig installMinesStageConfig, ClickService clickService, TimerServiceFactory timerServiceFactory)
+        public InstallMinesStage(InstallMinesStageConfig installMinesStageConfig,
+            ClickService clickService,
+            TimerServiceFactory timerServiceFactory)
         {
             _installMinesStageConfig = installMinesStageConfig;
             _clickService = clickService;
@@ -37,7 +39,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
         {
             _inProcess = false;
 
-            _clickService.SetRightConfig(_installMinesStageConfig.InstantMine);
+            //_clickService.SetRightConfig(_installMinesStageConfig.InstantMine);
         }
 
         public void Dispose()
@@ -50,7 +52,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
             if (_inProcess)
                 throw new InvalidOperationException("Game mod already started");
 
-            _clickService.SetRightConfig(_installMinesStageConfig.Const);
+            //_clickService.SetRightConfig(_installMinesStageConfig.Const);
 
             _inProcess = true;
 
@@ -72,7 +74,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesF
 
             _inProcess = false;
             _completed.Invoke();
-            _clickService.SetRightConfig(_installMinesStageConfig.InstantMine);
+            //_clickService.SetRightConfig(_installMinesStageConfig.InstantMine);
         }
     }
 }

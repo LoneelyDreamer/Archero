@@ -7,33 +7,36 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures
 {
+    public enum ClickMode
+    {
+        None,
+        InstallMines,   // клик = поставить мину (Const), списание золота
+        Explode         // клик = взрыв в точке (Instant), урон по площади
+    }
+
+
     public class ClickService
     {
         private readonly Camera _camera;    
         private readonly MainHeroHolderService _mainHeroHolder;
         private readonly IInputService _inputService;   
-        private readonly ConfigsProviderServise _configsProviderServise;
-      
-        private readonly StageProviderService _stageProviderService;
         private readonly MinesFactory _minesFactory;
 
-        private MineConfig _mineConfig;
+        private MineConfig _installConfig;   // Const
+        private MineConfig _explodeConfig;   // Instant
+
+        private ClickMode _mode = ClickMode.None;
 
         public ClickService(
-                CollidersRegestryService collidersRegestry,
                 MainHeroHolderService mainHeroHolder,
                 IInputService inputService,
-                ConfigsProviderServise configsProviderServise,
-                StageProviderService stageProviderService,
+                MineConfig installConfig,
+                MineConfig explodeConfig,
                 MinesFactory minesFactory)
         {
             _camera = Camera.main;        
             _mainHeroHolder = mainHeroHolder;
-            _inputService = inputService;         
-            _configsProviderServise = configsProviderServise;
-            _mineConfig = _configsProviderServise.GetConfig<MineConfig>();
-        
-            _stageProviderService = stageProviderService;
+            _inputService = inputService;  
             _minesFactory = minesFactory;
         }
 
@@ -57,15 +60,23 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
                 return;
 
             // Ограничиваем расстояние от героя
-            Vector3 spawnPosition = ClampDistanceFromHero(worldPosition, hero.Transform.position);
+            Vector3 spawnPosition = ClampDistanceFromHero(worldPosition, hero.Transform.position);         
 
-            _minesFactory.Create(spawnPosition, _mineConfig);
+            if (_mode == ClickMode.None) return;     
+
+            MineConfig configToUse = _mode == ClickMode.InstallMines ? _installConfig : _explodeConfig;
+
+            _minesFactory.Create(spawnPosition, configToUse);
         }
 
-        public void SetRightConfig(MineConfig mineConfig)
+        public void SetConfigs(MineConfig install, MineConfig explode)
         {
-            _mineConfig = mineConfig;
+            _installConfig = install;
+            _explodeConfig = explode;
         }
+
+        public void SetMode(ClickMode mode) => _mode = mode;
+
 
         private bool TryGetWorldPositionOnGround(Vector3 screenPosition, out Vector3 worldPosition)
         {

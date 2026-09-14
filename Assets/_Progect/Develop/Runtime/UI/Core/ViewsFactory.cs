@@ -19,6 +19,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             {ViewIDs.LevelsMenuPopup,"UI/LevelsMenuPopup/LevelsMenuPopup" },
             {ViewIDs.CaunterView,"UI/WinAndLoseRate/CaunterView" },
             {ViewIDs.CupchaPopup,"UI/Cupcha/CupchaPopup" },
+            {ViewIDs.NextStagePopup,"UI/NextStagePopup/NextStagePopup" },
             {ViewIDs.GameplayScreen,"UI/Gameplay/GameplayScrennView" }
         };
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)
