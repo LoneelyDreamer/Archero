@@ -1,6 +1,9 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
@@ -17,6 +20,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
         private readonly PlayerDataProvider _playerDataProvider;
         private readonly SceneSwitherService _sceneSwitherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly BonusAndPenaltyServise _bonusAndPenaltyServise;
+        private readonly WinAndLoseCauntersServise _winAndLoseCauntersServise;
 
         public WinState(
             IInputService inputService,
@@ -24,13 +29,17 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             GameplayInputArgs gameplayInputArgs,
             PlayerDataProvider playerDataProvider,
             SceneSwitherService sceneSwitherService,
-            ICoroutinesPerformer coroutinesPerformer) : base(inputService)
+            ICoroutinesPerformer coroutinesPerformer,
+            BonusAndPenaltyServise bonusAndPenaltyServise,
+            WinAndLoseCauntersServise winAndLoseCauntersServise) : base(inputService)
         {
             _levelsProgressionServise = levelsProgressionServise;
             _gameplayInputArgs = gameplayInputArgs;
             _playerDataProvider = playerDataProvider;
             _sceneSwitherService = sceneSwitherService;
             _coroutinesPerformer = coroutinesPerformer;
+            _bonusAndPenaltyServise = bonusAndPenaltyServise;
+            _winAndLoseCauntersServise = winAndLoseCauntersServise;
         }
 
         public override void Enter()
@@ -40,16 +49,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             Debug.Log("Victory");
 
             _levelsProgressionServise.AddLevelToCompleted(_gameplayInputArgs.LevalNumber);
+            _bonusAndPenaltyServise.AddGoldBonus();
+            _winAndLoseCauntersServise.Caunt(CauntersTypes.Wins);
 
-            _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());  
+            _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
+
+            _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
         }
 
         public void Update(float deltaTime)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
-            }
         }
     }
 }

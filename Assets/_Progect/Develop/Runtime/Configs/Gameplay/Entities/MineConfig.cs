@@ -10,6 +10,7 @@ namespace Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities
         [field: SerializeField, Min(0)] public float AOERadius { get; private set; } = 4;
         [field: SerializeField, Min(0)] public float DeathProcessTime { get; private set; } = 0.2f;
         [field: SerializeField, Min(0)] public float SelfDetonationTime { get; private set; } = 0.5f;
+        [field: SerializeField, Min(0)] public int Cost { get; private set; } = 0;
         [field: SerializeField] public bool IsDetonatingOnInstall { get; private set; } = false;
     }
 }

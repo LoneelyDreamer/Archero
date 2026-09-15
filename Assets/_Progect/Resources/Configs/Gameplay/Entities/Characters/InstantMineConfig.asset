@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PrefabPath>k__BackingField: Entities/Mine
   <AOEDamage>k__BackingField: 100
-  <AOERadius>k__BackingField: 3
+  <AOERadius>k__BackingField: 1
   <DeathProcessTime>k__BackingField: 0
   <SelfDetonationTime>k__BackingField: 0
   <IsDetonatingOnInstall>k__BackingField: 1

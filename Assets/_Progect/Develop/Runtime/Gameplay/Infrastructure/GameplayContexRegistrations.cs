@@ -9,6 +9,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeatu
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
@@ -59,7 +60,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStageProviderService);
 
-            container.RegisterAsSingle(CreateClickService);
+            container.RegisterAsSingle(CreateClickService).NonLazy(); ;
 
             container.RegisterAsSingle(CreateMinesFactory);
 
@@ -116,7 +117,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<IInputService>(),
                 c.Resolve<StageProviderService>().InstallMineConfig,
                 c.Resolve<StageProviderService>().ExplodeMineConfig,
-                c.Resolve<MinesFactory>());
+                c.Resolve<MinesFactory>(),
+                c.Resolve<WalletServise>());
         }
 
         private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c)

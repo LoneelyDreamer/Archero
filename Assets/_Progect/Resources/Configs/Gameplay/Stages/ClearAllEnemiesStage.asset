@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: ClearAllEnemiesStage
   m_EditorClassIdentifier: 
   _enemyItems:
-  - <SpawnPosition>k__BackingField: {x: -3, y: 0, z: 5}
+  - <SpawnPosition>k__BackingField: {x: -7, y: 0, z: 7}
     <EnemyConfig>k__BackingField: {fileID: 11400000, guid: bda6923681682424085631a33aa9897c,
       type: 2}
-  - <SpawnPosition>k__BackingField: {x: 3, y: 0, z: 5}
+  - <SpawnPosition>k__BackingField: {x: 7, y: 0, z: 7}
     <EnemyConfig>k__BackingField: {fileID: 11400000, guid: bda6923681682424085631a33aa9897c,
       type: 2}
-  - <SpawnPosition>k__BackingField: {x: 3, y: 0, z: -5}
+  - <SpawnPosition>k__BackingField: {x: 7, y: 0, z: -7}
     <EnemyConfig>k__BackingField: {fileID: 11400000, guid: bda6923681682424085631a33aa9897c,
       type: 2}
-  - <SpawnPosition>k__BackingField: {x: -3, y: 0, z: -5}
+  - <SpawnPosition>k__BackingField: {x: -7, y: 0, z: -7}
+    <EnemyConfig>k__BackingField: {fileID: 11400000, guid: bda6923681682424085631a33aa9897c,
+      type: 2}
+  - <SpawnPosition>k__BackingField: {x: -10, y: 0, z: -10}
+    <EnemyConfig>k__BackingField: {fileID: 11400000, guid: bda6923681682424085631a33aa9897c,
+      type: 2}
+  - <SpawnPosition>k__BackingField: {x: -10, y: 0, z: -10}
     <EnemyConfig>k__BackingField: {fileID: 11400000, guid: bda6923681682424085631a33aa9897c,
       type: 2}

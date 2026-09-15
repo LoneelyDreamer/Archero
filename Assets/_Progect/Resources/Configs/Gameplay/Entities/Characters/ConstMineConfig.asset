@@ -17,4 +17,5 @@ MonoBehaviour:
   <AOERadius>k__BackingField: 4
   <DeathProcessTime>k__BackingField: 0.2
   <SelfDetonationTime>k__BackingField: 0.5
+  <Cost>k__BackingField: 15
   <IsDetonatingOnInstall>k__BackingField: 0

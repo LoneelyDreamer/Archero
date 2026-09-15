@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 181ebf009df2d4b4a857906ce0867af1, type: 2}
   _installMine: {fileID: 11400000, guid: 80fb275df93c6104183240def4260b48, type: 2}
   _explodeMine: {fileID: 11400000, guid: a62127d4a3825d541a0184037698f10d, type: 2}
+  <MainBildingHp>k__BackingField: 120

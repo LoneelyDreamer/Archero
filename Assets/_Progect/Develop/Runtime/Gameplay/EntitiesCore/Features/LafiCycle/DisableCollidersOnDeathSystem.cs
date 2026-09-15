@@ -23,12 +23,22 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
 
         private void OnIsDeadChanged(bool arg1, bool isDead)
         {
-            if(isDead)
+            //if(isDead)
+            //{
+            //    foreach (Collider collider in _colliders)
+            //        collider.enabled = false;
+            //}
+
+            if (isDead == false) return;
+            if (_colliders == null) return;
+
+            for (int i = 0; i < _colliders.Count; i++)
             {
-                foreach (Collider collider in _colliders)
-                    collider.enabled = false;
+                Collider collider = _colliders[i];
+                if (collider == null) continue;
+                collider.enabled = false;
             }
-               
+
         }
 
         public void OnDispose()

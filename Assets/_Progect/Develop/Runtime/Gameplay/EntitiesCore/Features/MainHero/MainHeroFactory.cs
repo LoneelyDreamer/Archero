@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
@@ -47,11 +48,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
             return entity;
         }
 
-        public Entity CreateMainHeroBilding(Vector3 position)
+        public Entity CreateMainHeroBilding(Vector3 position, int currentLevel)
         {
             BildingHeroConfig config = _configProvidersServise.GetConfig<BildingHeroConfig>();
+            LevelsListConfig Levelconfig = _configProvidersServise.GetConfig<LevelsListConfig>();
 
-            Entity entity = _entitiesFactory.CreateBildingHero(position, config);
+            LevelConfig levelconfig = Levelconfig.Levels[currentLevel];
+            Entity entity = _entitiesFactory.CreateBildingHero(position, levelconfig.MaxHealth);
 
             entity
                 .AddIsMainHero()

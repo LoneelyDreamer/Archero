@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2beea6c8aa4e83e43bc90a0d683a1e8d, type: 3}
   m_Name: BonusAndPenalty
   m_EditorClassIdentifier: 
-  <WinGoldBonus>k__BackingField: 15
+  <WinGoldBonus>k__BackingField: 150
   <LoseGoldPenalty>k__BackingField: 10

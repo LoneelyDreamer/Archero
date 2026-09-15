@@ -184,12 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498c3c03566358b419d9589c39617940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainGroup: {fileID: 0}
-  _anticlicker: {fileID: 0}
-  _body: {fileID: 0}
-  _animationType: 0
-  _nextStageText: {fileID: 0}
-  _nextStageButton: {fileID: 0}
+  _mainGroup: {fileID: 6420284867266715454}
+  _anticlicker: {fileID: 3063768981467321192}
+  _body: {fileID: 6016283802867103406}
+  _animationType: 1
+  _nextStageText: {fileID: 2530326202370079839}
+  _nextStageButton: {fileID: 3868375744469572521}
 --- !u!1 &4890756436676262696
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,11 +433,11 @@ RectTransform:
   - {fileID: 3130418877494191642}
   m_Father: {fileID: 7783449082429842464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 400}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 23.83081, y: 0}
+  m_SizeDelta: {x: 564.9829, y: 302.8433}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!225 &6016283802867103406
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 6075922294708692407}
   - component: {fileID: 2530326202370079839}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -484,8 +484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 400, y: 150}
+  m_AnchoredPosition: {x: 0, y: -51.422}
+  m_SizeDelta: {x: 400, y: 102.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6075922294708692407
 CanvasRenderer:
@@ -732,6 +732,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f9dc4875773b7344aad71df7d28f83b, type: 3}
+--- !u!114 &3063768981467321192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6114452595474734151, guid: 7f9dc4875773b7344aad71df7d28f83b,
+    type: 3}
+  m_PrefabInstance: {fileID: 9105811817992867631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6854438583318382102 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2396350449946478905, guid: 7f9dc4875773b7344aad71df7d28f83b,

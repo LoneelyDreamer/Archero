@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: SimpleEnemyConfig
   m_EditorClassIdentifier: 
   <PrefabPath>k__BackingField: Entities/SimpleEnemy
-  <MoveSpeed>k__BackingField: 3
+  <MoveSpeed>k__BackingField: 1
   <RotationSpeed>k__BackingField: 900
   <MaxHealth>k__BackingField: 100
-  <BodyContactDamage>k__BackingField: 50
+  <AOEDamage>k__BackingField: 25
+  <AOERadius>k__BackingField: 4
   <DeathProcessTime>k__BackingField: 0.2
+  <SelfDetonationTime>k__BackingField: 0.5

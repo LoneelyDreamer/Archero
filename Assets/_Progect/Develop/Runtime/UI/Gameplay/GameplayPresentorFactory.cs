@@ -22,7 +22,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
 
         public GameplayScreenPresentor CreateGameplayScreenPresentor(GameplayScreenView view)
         {
-            return new GameplayScreenPresentor(view);
+            return new GameplayScreenPresentor(view, _container.Resolve<ProjectPresentorFactory>());
         }
     }
 }

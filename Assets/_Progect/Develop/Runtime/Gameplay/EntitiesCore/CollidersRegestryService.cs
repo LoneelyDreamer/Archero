@@ -10,6 +10,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
         public void Regester(Collider collider, Entity entity)
         {
             _colliderToEntity.Add(collider, entity);
+
         }
 
         public void Unregester(Collider collider)

@@ -5,7 +5,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
-using Assets._Progect.Develop.Runtime.UI.Gameplay;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
@@ -18,15 +18,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
     {
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
-
         private GameplayStatesContext _gameplayStatesContext;
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainContex _brainContex;
         private Entity _mainHero;
         private ClickService _clickService;
-
-        //private GameplayInputArgs _mode;
-        //private GameplayPopupServise _popupServise;
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
             _container = container;
@@ -35,12 +31,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                 throw new ArgumentException($"{nameof(sceneArgs)} is not mathc with {typeof(GameplayInputArgs)} type");
 
             _inputArgs = gameplayInputArgs;
-
-            //if (sceneArgs2 is not GameplayInputArgs gameplayInputArgs2)
-            //    throw new ArgumentException($"{nameof(sceneArgs)} is not mathc with {typeof(GameplayInputArgs)} type");
-
-            //_mode = gameplayInputArgs2;
-
+           
             GameplayContexRegistrations.Process(_container, _inputArgs);
         }
 
@@ -49,14 +40,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log($"Вы попали на уровень {_inputArgs.LevalNumber}");
 
             Debug.Log("Initialize Gameplay Scene");
-            //_popupServise = _container.Resolve<GameplayPopupServise>();
 
-            _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();
-
+            _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();         
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainContex = _container.Resolve<AIBrainContex>();
 
-            _mainHero = _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
+            _mainHero = _container.Resolve<MainHeroFactory>().CreateMainHeroBilding(Vector3.zero, _inputArgs.LevalNumber);
 
             _clickService = _container.Resolve<ClickService>();
 

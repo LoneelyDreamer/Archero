@@ -18,15 +18,13 @@ namespace Assets._Progect.Develop.Runtime.UI.NextStagePopup
 
         private const string _text = "NextStage";
 
-        private readonly ClickService _clickService;
         private readonly NextStagePopupView _view;
 
         public NextStagePopupPresentor(
             ICoroutinesPerformer coroutinesPerformer,        
-            ClickService clickService,
+          
             NextStagePopupView view) : base(coroutinesPerformer)
         {
-            _clickService = clickService;
             _view = view;
         }
         protected override PopupViewBase PopupView => _view;

@@ -112,8 +112,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
         public NextStagePopupPresentor CreateNextStagePopupPresentor(NextStagePopupView view)
         {
             return new NextStagePopupPresentor(
-                _container.Resolve<ICoroutinesPerformer>(),
-                _container.Resolve<ClickService>(),
+                _container.Resolve<ICoroutinesPerformer>(),               
                 view);
         }
     }

@@ -24,18 +24,35 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
         public void Update(float deltaTime)
         {
+            //for (int i = 0; i < _entities.Count; i++)
+            //{
+            //    _entities[i].OnUpdate(deltaTime);
+            //}
+
+            //foreach (Entity entity in _releaseRequest)
+            //{
+            //    _entities.Remove(entity);
+            //    entity.Dispose();
+            //    Released?.Invoke(entity);
+            //}
+
+            //_releaseRequest.Clear();
+
             for (int i = 0; i < _entities.Count; i++)
             {
                 _entities[i].OnUpdate(deltaTime);
             }
 
-            foreach (Entity entity in _releaseRequest)
+            for (int i = 0; i < _releaseRequest.Count; i++)
             {
-                _entities.Remove(entity);
+                Entity entity = _releaseRequest[i];
+
+                if (_entities.Remove(entity) == false) continue;
+
                 entity.Dispose();
                 Released?.Invoke(entity);
-            }
 
+            }
             _releaseRequest.Clear();
         }
 
@@ -49,7 +66,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             foreach (Entity entity in _entities)
                 entity.Dispose();
 
-            _entities.Clear();      
+            _entities.Clear();
             _releaseRequest.Clear();
         }
     }

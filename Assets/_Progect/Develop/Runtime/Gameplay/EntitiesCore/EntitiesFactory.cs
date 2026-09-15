@@ -123,18 +123,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateBildingHero(Vector3 position, BildingHeroConfig heroConfig)
+        public Entity CreateBildingHero(Vector3 position, float bildingMaxHp)
         {
             Entity entity = CreateEmpty();
 
             _monoEntitiesactory.Create(entity, position, "Entities/Bilding");
 
             entity
-                .AddMaxHealth(new ReactiveVeriable<float>(heroConfig.MaxHealth))
-                .AddCurrentHealth(new ReactiveVeriable<float>(heroConfig.MaxHealth))
+                .AddMaxHealth(new ReactiveVeriable<float>(bildingMaxHp))
+                .AddCurrentHealth(new ReactiveVeriable<float>(bildingMaxHp))
                 .AddIsDead()
                 .AddInDeadProcess()
-                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(heroConfig.DeathProcessTime))
+                .AddDeathProcessInitialTime(new ReactiveVeriable<float>(0.2f))
                 .AddDeathProcessCurrentTime()
                 .AddTakeDamegeRequest()
                 .AddTakeDamegeEvent();

@@ -19,7 +19,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
         {
             base.Enter();
 
-            _clickService.SetMode(ClickMode.InstallMines);
+            _clickService.SetMode(ClickMode.Explode);
 
             _stageProviderService.SwitchToNext();
             _stageProviderService.StartCurrent();

@@ -20,6 +20,8 @@ namespace Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression
 
         public bool IsLevelCompleted(int levelNumber) => _completedLevels.Contains(levelNumber);
 
+        public int CompletedLevelsCount => _completedLevels.Count;
+
         public void AddLevelToCompleted(int levelNumber)
         {
             if(IsLevelCompleted(levelNumber))

@@ -2,6 +2,7 @@
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Mines;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
         private readonly MainHeroHolderService _mainHeroHolder;
         private readonly IInputService _inputService;   
         private readonly MinesFactory _minesFactory;
+        private readonly WalletServise _walletServise;
 
         private MineConfig _installConfig;   // Const
         private MineConfig _explodeConfig;   // Instant
@@ -32,12 +34,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
                 IInputService inputService,
                 MineConfig installConfig,
                 MineConfig explodeConfig,
-                MinesFactory minesFactory)
+                MinesFactory minesFactory,
+                WalletServise walletServise)
         {
-            _camera = Camera.main;        
+            _camera = Camera.main;
+            _installConfig = installConfig;
+            _explodeConfig = explodeConfig;
             _mainHeroHolder = mainHeroHolder;
-            _inputService = inputService;  
+            _inputService = inputService;
             _minesFactory = minesFactory;
+            _walletServise = walletServise;
         }
 
         private readonly float _minSpawnDistance = 1f;  // Минимальное расстояние от героя
@@ -66,14 +72,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFe
 
             MineConfig configToUse = _mode == ClickMode.InstallMines ? _installConfig : _explodeConfig;
 
-            _minesFactory.Create(spawnPosition, configToUse);
+
+            if(_walletServise.Enough(CurrenceTypes.Gold, configToUse.Cost))
+            {
+                _walletServise.Spend(CurrenceTypes.Gold, configToUse.Cost);
+                _minesFactory.Create(spawnPosition, configToUse);
+            }
         }
 
-        public void SetConfigs(MineConfig install, MineConfig explode)
-        {
-            _installConfig = install;
-            _explodeConfig = explode;
-        }
 
         public void SetMode(ClickMode mode) => _mode = mode;
 

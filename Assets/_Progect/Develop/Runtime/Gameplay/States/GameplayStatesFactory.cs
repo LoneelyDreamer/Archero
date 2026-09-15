@@ -1,8 +1,10 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.BonusAndPenalty;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Caunter;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay;
@@ -45,7 +47,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
                  gameplayInputArgs,
                  _container.Resolve<PlayerDataProvider>(),
                  _container.Resolve<SceneSwitherService>(),
-                 _container.Resolve<ICoroutinesPerformer>());
+                 _container.Resolve<ICoroutinesPerformer>(),
+                 _container.Resolve<BonusAndPenaltyServise>(),
+                 _container.Resolve<WinAndLoseCauntersServise>());
         }
 
         public DefeatState CreateDefeatState()
@@ -53,12 +57,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             return new DefeatState(
                  _container.Resolve<IInputService>(),
                  _container.Resolve<SceneSwitherService>(),
-                 _container.Resolve<ICoroutinesPerformer>());
+                 _container.Resolve<ICoroutinesPerformer>(),
+                 _container.Resolve<WinAndLoseCauntersServise>(),
+                 _container.Resolve<PlayerDataProvider>());
         }
 
         public GameplayStateMashine CreateGameplayStateMashine(GameplayInputArgs gameplayInputArgs)
         {
-            PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
+            //PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
             StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
             MainHeroHolderService mainHeroHolderService = _container.Resolve<MainHeroHolderService>();
 
@@ -68,7 +74,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             WinState winState = CreateWinState(gameplayInputArgs);
 
             ICompositCondition coreLoopToWinStateCondition = new CompositCondition()
-                .Add(new FuncCondition(() => preparationTrigerService.HasMainHeroContact.Value))
                 .Add(new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResult.Completed))
                 .Add(new FuncCondition(() => stageProviderService.HasNextStage() == false));
 
@@ -95,7 +100,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
 
         public GameplayStateMashine CreateCoreLoopState()
         {
-            PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
+            //PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
             StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
 
             WaitingState waitingState = CreateWaitingState();
