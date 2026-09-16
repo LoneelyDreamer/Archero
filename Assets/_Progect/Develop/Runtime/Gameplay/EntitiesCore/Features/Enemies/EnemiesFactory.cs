@@ -34,7 +34,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Enemies
 
             switch(config)
             {
-                case GostConfig gostConfig:
+                case GhostConfig gostConfig:
                     entity = _entitiesFactory.CreateGhost(position, gostConfig);
                     _brainsFactory.CreateGostBrain(entity);
                     break;

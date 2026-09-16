@@ -6,6 +6,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTake
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MovementFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Sensors;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.SpawnFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
@@ -123,7 +124,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateGhost(Vector3 position, GostConfig gostConfig)
+        public Entity CreateGhost(Vector3 position, GhostConfig gostConfig)
         {
             Entity entity = CreateEmpty();
 
@@ -146,14 +147,19 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddContactsDetectingMask(Layers.CharactersMask)
                 .AddContactColliderBuffer(new Buffer<Collider>(64))
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
-                .AddBodyContactDamage(new ReactiveVeriable<float>(gostConfig.BodyContactDamage));
+                .AddBodyContactDamage(new ReactiveVeriable<float>(gostConfig.BodyContactDamage))
+                .AddSpawnCurrentTime()
+                .AddSpawnInitialTime(new ReactiveVeriable<float>(gostConfig.SpawnProcessTime))
+                .AddInSpawnProcess();
 
 
             ICompositCondition canMove = new CompositCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
 
             ICompositCondition canRotate = new CompositCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
 
             ICompositCondition mustDie = new CompositCondition()
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
@@ -163,7 +169,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .Add(new FuncCondition(() => entity.InDeadProcess.Value == false));
 
             ICompositCondition canApplyDamage = new CompositCondition()
-            .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
 
             entity
                 .AddCanMove(canMove)
@@ -173,6 +180,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddCanApplayDamage(canApplyDamage);
 
             entity
+                .AddSystem(new SpawnProcessTimerSystem())
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidBodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
