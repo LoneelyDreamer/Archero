@@ -4560,6 +4560,7 @@ GameObject:
   - component: {fileID: 6530957960433498692}
   - component: {fileID: 3035578242731030823}
   - component: {fileID: 4263041234927479490}
+  - component: {fileID: 763531543961921746}
   m_Layer: 0
   m_Name: HeroView
   m_TagString: Untagged
@@ -4667,6 +4668,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92ca90351dd69c44b2a2baef802130d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 4521035321615668957}
+--- !u!114 &763531543961921746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7380462673171253684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10f464658bd15b48b505b8254424c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationClip: {fileID: 7400000, guid: e8355530ccc20ed4cbbf8b30771b8f75, type: 2}
   _animator: {fileID: 4521035321615668957}
 --- !u!1 &7447912431943546093
 GameObject:
