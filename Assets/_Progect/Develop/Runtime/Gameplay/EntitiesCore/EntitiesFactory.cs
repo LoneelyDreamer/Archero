@@ -195,7 +195,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddMoveDirection(new ReactiveVeriable<Vector3>(direction))
-                .AddMoveSpeed(new ReactiveVeriable<float>(10))
+                .AddMoveSpeed(new ReactiveVeriable<float>(25))
                 .AddIsMoving()
                 .AddRotationDirection(new ReactiveVeriable<Vector3>(direction))
                 .AddRotationSpeed(new ReactiveVeriable<float>(9999))
