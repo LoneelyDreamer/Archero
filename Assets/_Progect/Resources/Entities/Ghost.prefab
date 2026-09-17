@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d2577059bc69940ab1061d50c7af26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnEffectPrefab: {fileID: 19802486, guid: 8f75fe73ef3ce1e4ab33ff60e0cf9996, type: 3}
+  _spawnEffectPrefab: {fileID: 19884194, guid: 8f3db2ef4b3fd674eafb97a117b99408, type: 3}
   _animator: {fileID: 6248142173958900352}
 --- !u!95 &6248142173958900352 stripped
 Animator:
