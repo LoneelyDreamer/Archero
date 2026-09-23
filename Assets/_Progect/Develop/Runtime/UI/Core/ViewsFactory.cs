@@ -16,9 +16,10 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             {ViewIDs.MainMenuScreen,"UI/MainMenu/MainMenuScreenView" },
             {ViewIDs.TestPopup,"UI/TestPopup" },
             {ViewIDs.LevelTile,"UI/LevelsMenuPopup/LevelTile" },
+            {ViewIDs.GameplayScreen,"UI/Gameplay/GameplayScreenView" },
             {ViewIDs.LevelsMenuPopup,"UI/LevelsMenuPopup/LevelsMenuPopup" }
         };
-        public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)
+        public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)        
         {
             _resourcesAssetsLoader = resourcesAssetsLoader;
         }
