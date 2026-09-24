@@ -7,7 +7,8 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
     public enum PopupAnimationTypes
     {
         None,
-        Expand
+        Expand,
+        Fade
     }
 
 }

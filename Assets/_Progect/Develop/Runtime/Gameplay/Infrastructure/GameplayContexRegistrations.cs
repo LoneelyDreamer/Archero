@@ -68,8 +68,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             return new GameplayPopupServise(
                 c.Resolve<ViewsFactory>(),
                 c.Resolve<ProjectPresentorFactory>(),
-                c.Resolve<GameplayUIRoot>()
-                /*c.Resolve<GameplayPresentorFactory>()*/);
+                c.Resolve<GameplayUIRoot>(),
+                c.Resolve<GameplayPresentorFactory>());
         }
 
         private static GameplayUIRoot CreateGameplayUIRoot(DIContainer c)
@@ -96,7 +96,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
         private static GameplayPresentorFactory CreateGameplayPresentorFactory(DIContainer c)
         {
-            return new GameplayPresentorFactory(c);
+            return new GameplayPresentorFactory(c, _inputArgs);
         }
 
         private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c)
