@@ -4,6 +4,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeatu
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders;
@@ -37,16 +38,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
                  _container.Resolve<LevelsProgressionServise>(),
                  gameplayInputArgs,
                  _container.Resolve<PlayerDataProvider>(),
-                 _container.Resolve<SceneSwitherService>(),
-                 _container.Resolve<ICoroutinesPerformer>());
+                 _container.Resolve<ICoroutinesPerformer>(),
+                 _container.Resolve<GameplayPopupServise>());
         }
 
         public DefeatState CreateDefeatState()
         {
             return new DefeatState(
                  _container.Resolve<IInputService>(),
-                 _container.Resolve<SceneSwitherService>(),
-                 _container.Resolve<ICoroutinesPerformer>());
+                 _container.Resolve<GameplayPopupServise>());
         }
 
         public GameplayStateMashine CreateGameplayStateMashine(GameplayInputArgs gameplayInputArgs)

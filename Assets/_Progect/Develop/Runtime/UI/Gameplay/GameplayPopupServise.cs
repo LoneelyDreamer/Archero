@@ -1,12 +1,7 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.ResultsPopup;
-using Assets._Progect.Develop.Runtime.UI.MainMenu;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.UI.Gameplay

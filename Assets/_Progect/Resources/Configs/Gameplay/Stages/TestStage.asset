@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0a04ecf7447d645af33ad19dd72f97, type: 3}
-  m_Name: LavelConfig
+  m_Script: {fileID: 11500000, guid: 5b952a2cf9ce35c478828e5c7932ce9f, type: 3}
+  m_Name: TestStage
   m_EditorClassIdentifier: 
-  _stageConfigs:
-  - {fileID: 11400000, guid: 4129e59b2317ba74ea42a9a8a7d85b48, type: 2}
+  _enemyItems:
+  - <SpawnPosition>k__BackingField: {x: -3, y: 0, z: 5}
+    <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 0171ab41531a7c548808065c04a16a14,
+      type: 2}

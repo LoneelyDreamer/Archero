@@ -81,17 +81,17 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             return Object.Instantiate(uiRootPrefab);
         }
 
-        private static GameplayScreenPresentor CreateGameplayScreenPresentor(DIContainer c)
+        private static GameplayScreenPresenter CreateGameplayScreenPresentor(DIContainer c)
         {
             GameplayUIRoot uiRoot = c.Resolve<GameplayUIRoot>();
 
             GameplayScreenView gameplayScreenView = c.Resolve<ViewsFactory>()
                 .Create<GameplayScreenView>(ViewIDs.GameplayScreen, uiRoot.HUDLayer);
 
-            GameplayScreenPresentor presentor = c.Resolve<GameplayPresentorFactory>()
+            GameplayScreenPresenter presentor = c.Resolve<GameplayPresentorFactory>()
                 .CreateGameplayScreenPresentor(gameplayScreenView);
 
-            return null;
+            return presentor;
         }
 
         private static GameplayPresentorFactory CreateGameplayPresentorFactory(DIContainer c)

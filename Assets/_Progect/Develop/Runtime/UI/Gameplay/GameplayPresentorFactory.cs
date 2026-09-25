@@ -1,6 +1,11 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
+using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.UI.CommonView;
+using Assets._Progect.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.ResultsPopup;
+using Assets._Progect.Develop.Runtime.UI.Gameplay.Stages;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
@@ -39,10 +44,20 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
                   _gameplayInputArgs);
         }
 
-
-        public GameplayScreenPresentor CreateGameplayScreenPresentor(GameplayScreenView view)
+        public StagePresenter CreateStagePresenter(IconTextView view)
         {
-            return new GameplayScreenPresentor(view, _container.Resolve<ProjectPresentorFactory>());
+            return new StagePresenter(view, _container.Resolve<StageProviderService>());
+        }
+
+        public GameplayScreenPresenter CreateGameplayScreenPresentor(GameplayScreenView view)
+        {
+            return new GameplayScreenPresenter(view, 
+                _container.Resolve<GameplayPresentorFactory>());
+        }
+
+        public EntityHealthPrethenter CreateEntityHealthPrethenter(Entity entity, BarWithText view)
+        {
+            return new EntityHealthPrethenter(view, entity);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core;
+using Assets._Progect.Develop.Runtime.UI.Gameplay.Stages;
 using Assets._Progect.Develop.Runtime.UI.MainMenu;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
@@ -9,34 +10,34 @@ using System.Threading.Tasks;
 
 namespace Assets._Progect.Develop.Runtime.UI.Gameplay
 {
-    public class GameplayScreenPresentor : IPresentor
+    public class GameplayScreenPresenter : IPresentor
     {
         private readonly GameplayScreenView _screen;
-        //private readonly ProjectPresentorFactory _projectPresentorFactory;
+        private readonly GameplayPresentorFactory _gameplayPresentorFactory;
 
         private readonly List<IPresentor> _childPresenters = new();
 
-        public GameplayScreenPresentor(GameplayScreenView screen,
-            ProjectPresentorFactory projectPresentorFactory)
+        public GameplayScreenPresenter(GameplayScreenView screen,         
+            GameplayPresentorFactory gameplayPresentorFactory)
         {
             _screen = screen;
-            //_projectPresentorFactory = projectPresentorFactory;
+            _gameplayPresentorFactory = gameplayPresentorFactory;
         }
 
         public void Initialise()
         {
-            //CreateWallet();
+            CreateStageNumber();
 
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Initialise();         
         }
 
-        //private void CreateWallet()
-        //{
-        //    WalletPresentor walletPresentor = _projectPresentorFactory.CreateWalletPresentor(_screen.WalletView);
+        private void CreateStageNumber()
+        {
+            StagePresenter stagePresenter = _gameplayPresentorFactory.CreateStagePresenter(_screen.StageNumberView);
 
-        //    _childPresenters.Add(walletPresentor);
-        //}
+            _childPresenters.Add(stagePresenter);
+        }
 
         public void Dispose()
         {

@@ -1,23 +1,19 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
-using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
-using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
+using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.Utillitles.StateMachineCore;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.States
 {
     public class DefeatState : EndGameState, IUpdatableState
-    {
-        private readonly SceneSwitherService _sceneSwitherService;
-        private readonly ICoroutinesPerformer _coroutinesPerformer;
+    {   
+        private readonly GameplayPopupServise _popupServise;
 
         public DefeatState(
-            IInputService inputService,         
-            SceneSwitherService sceneSwitherService,
-            ICoroutinesPerformer coroutinesPerformer) : base(inputService)
+            IInputService inputService,
+            GameplayPopupServise popupServise) : base(inputService)
         {
-            _sceneSwitherService = sceneSwitherService;
-            _coroutinesPerformer = coroutinesPerformer;
+            _popupServise = popupServise;
         }
 
         public override void Enter()
@@ -25,14 +21,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             base.Enter();
 
             Debug.Log("Defeat");
+
+            _popupServise.OpenDefeatPopup();
         }
 
         public void Update(float deltaTime)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _coroutinesPerformer.StartPerform(_sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
-            }
+           
         }
     }
 }
