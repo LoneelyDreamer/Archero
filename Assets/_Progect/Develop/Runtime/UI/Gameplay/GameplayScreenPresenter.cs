@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core;
+using Assets._Progect.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.Stages;
 using Assets._Progect.Develop.Runtime.UI.MainMenu;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
@@ -17,6 +18,8 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
 
         private readonly List<IPresentor> _childPresenters = new();
 
+        private EntitiesHealthDispleyPresentor _healthDispleyPresentor;
+
         public GameplayScreenPresenter(GameplayScreenView screen,         
             GameplayPresentorFactory gameplayPresentorFactory)
         {
@@ -27,9 +30,15 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
         public void Initialise()
         {
             CreateStageNumber();
+            CreateEntitiesHealthDispleyPresentor();
 
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Initialise();         
+        }
+
+        public void LateUpdate()
+        {
+            _healthDispleyPresentor.LateUpdate();
         }
 
         private void CreateStageNumber()
@@ -45,6 +54,13 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
                 presentor.Dispose();
 
             _childPresenters.Clear();
+        }
+
+        private void CreateEntitiesHealthDispleyPresentor()
+        {
+            _healthDispleyPresentor = _gameplayPresentorFactory.CreateEntitiesHealthDispleyPresentor(_screen.EntitiesHealthDispley);
+
+            _childPresenters.Add(_healthDispleyPresentor);
         }
     }
 }

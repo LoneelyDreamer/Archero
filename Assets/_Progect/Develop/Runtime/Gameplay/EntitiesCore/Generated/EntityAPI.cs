@@ -462,6 +462,25 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.MaxHealth() { Value = value });
 		}
 
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.HealthBarPoint HealthBarPointC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.HealthBarPoint>();
+
+		public global::UnityEngine.Transform HealthBarPoint => HealthBarPointC.Value;
+
+		public bool TryGetHealthBarPoint(out Transform value)
+		{
+			bool result = TryGetComponent(out Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.HealthBarPoint component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(Transform);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddHealthBarPoint(global::UnityEngine.Transform value)
+		{
+			return AddComponent(new Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.HealthBarPoint() { Value = value });
+		}
+
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.IsDead IsDeadC => GetComponent<Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.IsDead>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::System.Boolean> IsDead => IsDeadC.Value;

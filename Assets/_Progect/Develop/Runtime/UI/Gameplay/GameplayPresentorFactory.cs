@@ -3,6 +3,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeatu
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.UI.CommonView;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.Stages;
@@ -58,6 +59,15 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
         public EntityHealthPrethenter CreateEntityHealthPrethenter(Entity entity, BarWithText view)
         {
             return new EntityHealthPrethenter(view, entity);
+        }
+
+        public EntitiesHealthDispleyPresentor CreateEntitiesHealthDispleyPresentor(EntitiesHealthDispley view)
+        {
+            return new EntitiesHealthDispleyPresentor(
+                _container.Resolve<EntitiesLifeContext>(),
+                view,
+                this,
+                _container.Resolve<ViewsFactory>());
         }
     }
 }

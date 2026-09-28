@@ -19,6 +19,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCyc
         public ReactiveVeriable<float> Value;
     }
 
+    public class HealthBarPoint : IEntityComponent
+    {
+        public Transform Value;
+    }
+
+
     public class IsDead : IEntityComponent
     {
         public ReactiveVeriable<bool> Value;

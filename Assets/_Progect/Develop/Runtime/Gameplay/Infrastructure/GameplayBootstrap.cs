@@ -4,6 +4,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.States;
 using Assets._Progect.Develop.Runtime.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
@@ -20,6 +21,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private GameplayStatesContext _gameplayStatesContext;
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainContex _brainContex;
+
+        private GameplayScreenPresenter _gameplayScreenPresenter;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -43,8 +46,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainContex = _container.Resolve<AIBrainContex>();
+            _gameplayScreenPresenter = _container.Resolve<GameplayScreenPresenter>();
 
             _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
+
 
             yield break;
         }
@@ -69,6 +74,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
             }
+        }
+
+        private void LateUpdate()
+        {
+            _gameplayScreenPresenter?.LateUpdate();
         }
     }
 }

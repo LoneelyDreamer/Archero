@@ -4546,6 +4546,37 @@ Transform:
   - {fileID: 5044707632048192708}
   m_Father: {fileID: 5715798281886258880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7065151437722417031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7793272752810498735}
+  m_Layer: 0
+  m_Name: HelthBarPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7793272752810498735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7065151437722417031}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5561446200625089357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7373832354881486289
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,6 +5861,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9082985042114348483, guid: 4c07ad0fe4f571a49b42a69a1ae82ed7,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7793272752810498735}
+    - targetCorrespondingSourceObject: {fileID: 9082985042114348483, guid: 4c07ad0fe4f571a49b42a69a1ae82ed7,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1376813463974757510}
     - targetCorrespondingSourceObject: {fileID: 6893385744348377620, guid: 4c07ad0fe4f571a49b42a69a1ae82ed7,
         type: 3}
@@ -5864,6 +5899,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4101898398228136311}
+    - targetCorrespondingSourceObject: {fileID: 6571346526520267283, guid: 4c07ad0fe4f571a49b42a69a1ae82ed7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6000868348948673393}
   m_SourcePrefab: {fileID: 100100000, guid: 4c07ad0fe4f571a49b42a69a1ae82ed7, type: 3}
 --- !u!4 &5561446200625089357 stripped
 Transform:
@@ -5979,6 +6018,19 @@ CapsuleCollider:
   m_Height: 2.5605192
   m_Direction: 1
   m_Center: {x: 0, y: 1.1506755, z: 0}
+--- !u!114 &6000868348948673393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7498805393374649501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8ca49d78f389b4da12ebaa9cc25217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _point: {fileID: 7793272752810498735}
 --- !u!4 &7820851294762810522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6893385744348377620, guid: 4c07ad0fe4f571a49b42a69a1ae82ed7,
