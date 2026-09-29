@@ -18,7 +18,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFe
         {
             _maxHealth = entity.MaxHealth;
             _currentHealth = entity.CurrentHealth;
-            //_modifiedStats = entity.ModifiedStats;
+            _modifiedStats = entity.ModifiedStats;
         }
 
         public void OnUpdate(float deltaTime)

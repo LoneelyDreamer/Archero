@@ -16,7 +16,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFe
         public void OnInit(Entity entity)
         {
             _damage = entity.InstantAttackDamage;
-            //_modifiedStats = entity.ModifiedStats;
+            _modifiedStats = entity.ModifiedStats;
         }
 
         public void OnUpdate(float deltaTime)

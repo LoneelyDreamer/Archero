@@ -8,20 +8,20 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFe
 {
     public class StatsFeatureComponents
     {
-        //public class BaseStats : IEntityComponent
-        //{
-        //    public Dictionary<StatTypes, float> Value;
-        //}
+        public class BaseStats : IEntityComponent
+        {
+            public Dictionary<StatTypes, float> Value;
+        }
 
-        //public class ModifiedStats : IEntityComponent
-        //{
-        //    public Dictionary<StatTypes, float> Value;
-        //}
+        public class ModifiedStats : IEntityComponent
+        {
+            public Dictionary<StatTypes, float> Value;
+        }
 
-        //public class StatsEffects : IEntityComponent
-        //{
-        //    public StatsEffectsList Value;
-        //}
+        public class StatsEffects : IEntityComponent
+        {
+            public StatsEffectsList Value;
+        }
 
 
     }
