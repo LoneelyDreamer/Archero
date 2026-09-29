@@ -118,6 +118,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddMustCanselAttack(mustCansolAttack);
 
             entity
+                .AddSystem(new StatsEffectsApplySystem())
                 .AddSystem(new MaxHealthStatsSynchronizerSystem())
                 .AddSystem(new DamageStatsSynchronizerSystem())
                 .AddSystem(new MoveSpeedStatsSynchronizerSystem())
