@@ -51,7 +51,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             Dictionary<StatTypes, float> modifiedStats = new(baseStats);
 
             entity
+                .AddStatsEffects()
                 .AddBaseStats(baseStats)
+                .AddModifiedStats(modifiedStats)
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVeriable<float>(baseStats[StatTypes.MoveSpeed]))
                 .AddIsMoving()

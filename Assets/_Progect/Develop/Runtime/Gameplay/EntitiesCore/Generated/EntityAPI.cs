@@ -72,6 +72,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.CurrentTarget() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesComponent AbilitiesC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesComponent>();
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesList Abilities => AbilitiesC.Value;
+
+		public bool TryGetAbilities(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesList value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesComponent component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesList);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAbilities()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesComponent() { Value = new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesList() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAbilities(global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesList value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.AbilitiesComponent() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.CanApplayDamage CanApplayDamageC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage.CanApplayDamage>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition CanApplayDamage => CanApplayDamageC.Value;

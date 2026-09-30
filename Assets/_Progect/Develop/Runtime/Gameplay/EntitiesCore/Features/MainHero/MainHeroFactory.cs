@@ -32,12 +32,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
 
             Entity entity = _entitiesFactory.CreateHero(position, config);
 
-
-
             entity
                 .AddIsMainHero()
                 .AddTeam(new ReactiveVeriable<Teams>(Teams.MainHero));
 
+            entity.AddAbilities();
 
             entity.AddCurrentTarget();
 
