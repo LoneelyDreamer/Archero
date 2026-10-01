@@ -2,7 +2,7 @@
 
 namespace Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup
 {
-    public class LevelTileListView : ElementsLisyView<LevelTileView>
+    public class LevelTileListView : ElementsListView<LevelTileView>
     {
 
     }

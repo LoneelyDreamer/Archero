@@ -1,4 +1,6 @@
-﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
@@ -36,7 +38,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
                 .AddIsMainHero()
                 .AddTeam(new ReactiveVeriable<Teams>(Teams.MainHero));
 
-            entity.AddAbilities();
+
+            entity
+                .AddAbilities()
+                .AddSystem(new AbilityOnAddActivatorSystem());
+
+           
 
             entity.AddCurrentTarget();
 

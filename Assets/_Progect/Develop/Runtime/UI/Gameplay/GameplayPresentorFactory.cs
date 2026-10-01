@@ -1,4 +1,8 @@
-﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.View;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AbilitiesDropingFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
@@ -68,6 +72,31 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
                 view,
                 this,
                 _container.Resolve<ViewsFactory>());
+        }
+
+        public SelectableAbilityPresenter CreateSelectableAbilityPresentor(
+            AbilitiyConfig abilitiyConfig,
+            SelectableAbilityView view,
+            Entity entity)
+        {
+            return new SelectableAbilityPresenter(
+                _container.Resolve<AbilitiesFactory>(),
+                entity,
+                abilitiyConfig,
+                view);
+        }
+
+        public AbilitySelectPopupPresentor CreateAbilitySelectPopupPresentor(
+            AbilitySelectPopupView view,
+            Entity entity)
+        {
+            return new AbilitySelectPopupPresentor(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                entity,
+                _container.Resolve<AbilityDropingService>(),
+                this,
+                 _container.Resolve<ViewsFactory>());
         }
     }
 }

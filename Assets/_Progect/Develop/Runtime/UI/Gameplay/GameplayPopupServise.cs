@@ -1,4 +1,6 @@
-﻿using Assets._Progect.Develop.Runtime.UI.Core;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.View;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
@@ -40,6 +42,17 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
             DefeatPopupView view = ViewsFactory.Create<DefeatPopupView>(ViewIDs.DefeatPopup, PopuoLayer);
 
             DefeatPopupPresentor popup = _gameplayPresentorFactory.CreateDefeatPopupPresentor(view);
+
+            OnPopupCreated(popup, view, closeCallback);
+
+            return popup;
+        }
+
+        public AbilitySelectPopupPresentor OpenAbilitySelectPopup(Entity entity, Action closeCallback = null)
+        {
+            AbilitySelectPopupView view = ViewsFactory.Create<AbilitySelectPopupView>(ViewIDs.SelectAbilityPopup, PopuoLayer);
+
+            AbilitySelectPopupPresentor popup = _gameplayPresentorFactory.CreateAbilitySelectPopupPresentor(view, entity);
 
             OnPopupCreated(popup, view, closeCallback);
 

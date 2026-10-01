@@ -13,7 +13,10 @@ using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.AssetsManager;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
 using UnityEngine;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AbilitiesDropingFeature;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -50,8 +53,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateGameplayStatesFactory);
 
+            container.RegisterAsSingle(CreateAbilitiesFactory);
 
             container.RegisterAsSingle(CreateStageProviderService);
+
+            container.RegisterAsSingle(CreateAbilityDropingService);
+            container.RegisterAsSingle(CreateAbilityDropingRuleService);
 
             container.RegisterAsSingle(CreateGameplayPresentorFactory);
             container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
@@ -63,6 +70,23 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
         }
 
+        private static AbilityDropingService CreateAbilityDropingService(DIContainer c)
+        {
+            return new AbilityDropingService(
+                c.Resolve <ConfigsProviderServise>().GetConfig<AbilitiyConfigsContainer>(),
+                c.Resolve<AbilityDropingRuleService>());
+        }
+
+        private static AbilityDropingRuleService CreateAbilityDropingRuleService(DIContainer c)
+        {
+            return new AbilityDropingRuleService();
+        }
+
+
+        private static AbilitiesFactory CreateAbilitiesFactory(DIContainer c)
+        {
+            return new AbilitiesFactory(c);
+        }
         private static GameplayPopupServise CreateGameplayPopupServise(DIContainer c)
         {
             return new GameplayPopupServise(

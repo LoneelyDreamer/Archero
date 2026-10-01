@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.UI.CommonView
 {
-    public class ElementsLisyView<TElement> : MonoBehaviour,IView where TElement : MonoBehaviour, IView
+    public class ElementsListView<TElement> : MonoBehaviour,IView where TElement : MonoBehaviour, IView
     {
         [SerializeField] private Transform _parant;
 

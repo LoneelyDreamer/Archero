@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.UI.Gameplay.HealthDisplay
 {
-    public class EntitiesHealthDispley : ElementsLisyView<BarWithText>
+    public class EntitiesHealthDispley : ElementsListView<BarWithText>
     {
         private Camera _camera;
 

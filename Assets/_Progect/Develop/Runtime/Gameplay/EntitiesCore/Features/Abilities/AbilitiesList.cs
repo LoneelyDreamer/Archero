@@ -10,9 +10,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
     {
         public event Action<Ability> Added;
 
-        private List<Ability> _elements;
+        private List<Ability> _elements = new();
 
-        private IReadOnlyList<Ability> Elements => _elements;
+        public IReadOnlyList<Ability> Elements => _elements;
 
         public virtual void Add(Ability element)
         {

@@ -12,7 +12,7 @@ namespace Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities
     {
         [SerializeField] private List<AbilitiyConfig> _abilitiyConfigs;
 
-        public IReadOnlyList<AbilitiyConfig> AbilitiyConfig => _abilitiyConfigs;
+        public IReadOnlyList<AbilitiyConfig> AbilitiyConfigs => _abilitiyConfigs;
 
         public AbilitiyConfig GetConfigBy(string ID) => _abilitiyConfigs.First(config => config.ID == ID);
     }
