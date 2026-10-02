@@ -88,7 +88,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
 
         public AbilitySelectPopupPresentor CreateAbilitySelectPopupPresentor(
             AbilitySelectPopupView view,
-            Entity entity)
+            Entity entity, int level)
         {
             return new AbilitySelectPopupPresentor(
                 _container.Resolve<ICoroutinesPerformer>(),
@@ -96,7 +96,8 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
                 entity,
                 _container.Resolve<AbilityDropingService>(),
                 this,
-                 _container.Resolve<ViewsFactory>());
+                 _container.Resolve<ViewsFactory>(),
+                 level);
         }
     }
 }

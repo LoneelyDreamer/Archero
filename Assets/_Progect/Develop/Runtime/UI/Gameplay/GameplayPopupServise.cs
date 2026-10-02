@@ -48,11 +48,14 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
             return popup;
         }
 
-        public AbilitySelectPopupPresentor OpenAbilitySelectPopup(Entity entity, Action closeCallback = null)
+        public AbilitySelectPopupPresentor OpenAbilitySelectPopup(
+            Entity entity,
+            int level,
+            Action closeCallback = null)
         {
             AbilitySelectPopupView view = ViewsFactory.Create<AbilitySelectPopupView>(ViewIDs.SelectAbilityPopup, PopuoLayer);
 
-            AbilitySelectPopupPresentor popup = _gameplayPresentorFactory.CreateAbilitySelectPopupPresentor(view, entity);
+            AbilitySelectPopupPresentor popup = _gameplayPresentorFactory.CreateAbilitySelectPopupPresentor(view, entity, level);
 
             OnPopupCreated(popup, view, closeCallback);
 

@@ -21,6 +21,7 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             {ViewIDs.WinPopup,"UI/Gameplay/ResultsPopups/WinPopup" },
             {ViewIDs.DefeatPopup,"UI/Gameplay/ResultsPopups/DefeatPopup" },
             {ViewIDs.MainHeroHealthBar,"UI/Gameplay/HealthBars/HeroHelthBar" },
+            {ViewIDs.SimpleHealthBar,   "UI/Gameplay/HealthBars/SimpleHelthBar" },
             {ViewIDs.SelectionAbilityView,"UI/Gameplay/AbilitySelectPopup/SelectionAbilityView" },
             {ViewIDs.SelectAbilityPopup,"UI/Gameplay/AbilitySelectPopup/SelectAbilityPopup" }
         };

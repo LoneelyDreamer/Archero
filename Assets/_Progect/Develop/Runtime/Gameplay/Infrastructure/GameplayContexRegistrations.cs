@@ -17,6 +17,9 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
 using UnityEngine;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AbilitiesDropingFeature;
 using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature;
+using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.PauseFeature;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -56,6 +59,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateAbilitiesFactory);
 
             container.RegisterAsSingle(CreateStageProviderService);
+     
 
             container.RegisterAsSingle(CreateAbilityDropingService);
             container.RegisterAsSingle(CreateAbilityDropingRuleService);
@@ -68,8 +72,24 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
             container.RegisterAsSingle(CreateEntitesFactory).NonLazy();
+            container.RegisterAsSingle(CreateDropAbilityOnMainHeroLevelUpService).NonLazy();
+
+            container.RegisterAsSingle<IPauseService>(CrateTimeScalePouseService);
         }
 
+        private static TimeScalePouseService CrateTimeScalePouseService(DIContainer c)
+        {
+            return new TimeScalePouseService();
+        }
+
+        private static DropAbilityOnMainHeroLevelUpService CreateDropAbilityOnMainHeroLevelUpService(DIContainer c)
+        {
+            return new DropAbilityOnMainHeroLevelUpService(
+                c.Resolve<MainHeroHolderService>(),
+                c.Resolve<GameplayPopupServise>(),
+                c.Resolve<ICoroutinesPerformer>(),
+                c.Resolve<IPauseService>());
+        }
         private static AbilityDropingService CreateAbilityDropingService(DIContainer c)
         {
             return new AbilityDropingService(

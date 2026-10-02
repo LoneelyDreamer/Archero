@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.PauseFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
 using Assets._Progect.Develop.Runtime.UI.Gameplay;
@@ -25,7 +26,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
             GameplayInputArgs gameplayInputArgs,
             PlayerDataProvider playerDataProvider,
             ICoroutinesPerformer coroutinesPerformer,
-            GameplayPopupServise gameplayPopupServise) : base(inputService)
+            IPauseService pauseService,
+            GameplayPopupServise gameplayPopupServise) : base(inputService, pauseService)
         {
             _levelsProgressionServise = levelsProgressionServise;
             _gameplayInputArgs = gameplayInputArgs;

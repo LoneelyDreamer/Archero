@@ -23,6 +23,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
         private AIBrainContex _brainContex;
 
         private GameplayScreenPresenter _gameplayScreenPresenter;
+        private MainHeroHolderService _mainHeroHolderService;
 
         public override void ProcessRegisration(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -50,7 +51,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             _container.Resolve<MainHeroFactory>().Create(Vector3.zero);
 
-
+            _mainHeroHolderService = _container.Resolve<MainHeroHolderService>();
             yield break;
         }
 
@@ -73,6 +74,12 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
                 SceneSwitherService sceneSwitherService = _container.Resolve<SceneSwitherService>();
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
                 coroutinesPerformer.StartPerform(sceneSwitherService.ProssesSwitchTo(Scenes.MainMenu));
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _mainHeroHolderService.MainHero.Experience.Value += 700; 
+
             }
         }
 

@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 4684280878424092429}
   - component: {fileID: 5600039266020976371}
   - component: {fileID: 423843921345850235}
+  - component: {fileID: 2937379507946540274}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -157,6 +158,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2937379507946540274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554957300987794364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 423843921345850235}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2015965740771572250
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8675031460186929845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -243,6 +288,8 @@ GameObject:
   - component: {fileID: 3468682838889307850}
   - component: {fileID: 5989569962043928651}
   - component: {fileID: 5842810917836855988}
+  - component: {fileID: 1629913662857948598}
+  - component: {fileID: 4320700082340507664}
   m_Layer: 5
   m_Name: SelectionAbilityView
   m_TagString: Untagged
@@ -308,6 +355,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1629913662857948598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652250432683804179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8ffba63bcd0a9488285d01afa3a56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 4320700082340507664}
+  _button: {fileID: 2937379507946540274}
+  _icon: {fileID: 5632548754623515663}
+  _name: {fileID: 2703734435185679434}
+  _description: {fileID: 1122042190944190712}
+  _textOnTablet: {fileID: 1327752591366633750}
+  _selectImage: {fileID: 7457251230147245619}
+--- !u!225 &4320700082340507664
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652250432683804179}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2810197344671120438
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,3 +1076,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2307563593102365497}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5632548754623515663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7938942221353148214, guid: ad71f90f5f733a34c985fc1b81c57d3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2307563593102365497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787fbcf2e178e71438cf131dc9fe6058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -21,10 +21,10 @@ namespace Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities
             switch (_operation)
             {
                 case StatChangeOperation.Add:
-                    return stat => stat += stat;
+                    return stat => stat += _value;
 
                 case StatChangeOperation.Multiply:
-                    return stat => stat *= stat;
+                    return stat => stat *= _value;
 
                 default:
                     throw new InvalidOperationException();

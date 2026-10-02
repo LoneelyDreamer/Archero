@@ -29,6 +29,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
         public void Dispose()
         {
             _isRunning = false;
+            _gameplayStateMashine.Exit();
             _gameplayStateMashine.Dispose();
         }
     }

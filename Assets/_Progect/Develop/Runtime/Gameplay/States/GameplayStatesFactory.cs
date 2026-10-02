@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.PauseFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
@@ -39,6 +40,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
                  gameplayInputArgs,
                  _container.Resolve<PlayerDataProvider>(),
                  _container.Resolve<ICoroutinesPerformer>(),
+                 _container.Resolve<IPauseService>(),
                  _container.Resolve<GameplayPopupServise>());
         }
 
@@ -46,6 +48,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
         {
             return new DefeatState(
                  _container.Resolve<IInputService>(),
+                 _container.Resolve<IPauseService>(),
                  _container.Resolve<GameplayPopupServise>());
         }
 

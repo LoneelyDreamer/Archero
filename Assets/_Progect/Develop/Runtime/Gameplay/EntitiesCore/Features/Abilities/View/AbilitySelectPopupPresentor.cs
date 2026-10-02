@@ -28,19 +28,23 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
         private List<SelectableAbilityPresenter> _presenters = new();
         private SelectableAbilityPresenter _selectedPresenter;
 
+        private int _level;
+
         public AbilitySelectPopupPresentor
             (ICoroutinesPerformer coroutinesPerformer,
             AbilitySelectPopupView view,
-            Entity entity,  
-            AbilityDropingService abilityDropper, 
-            GameplayPresentorFactory gameplayPresentorFactory, 
-            ViewsFactory viewsFactory) : base(coroutinesPerformer)
+            Entity entity,
+            AbilityDropingService abilityDropper,
+            GameplayPresentorFactory gameplayPresentorFactory,
+            ViewsFactory viewsFactory,
+            int level) : base(coroutinesPerformer)
         {
             _view = view;
             _entity = entity;
             _abilityDropper = abilityDropper;
             _presentorFactory = gameplayPresentorFactory;
             _viewsFactory = viewsFactory;
+            _level = level;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -49,7 +53,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
         {
             base.Initialise();
 
-            _view.SetTitle(string.Format(Title, _entity.Level.Value));
+            _view.SetTitle(string.Format(Title, _level));
             _view.SetAdditionalText(SelectAbilityText);
             _view.SelectButtonOff();
 
@@ -59,7 +63,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
 
             for (int i = 0; i < dropOptions.Count; i++)
             {
-                SelectableAbilityView selectableAbilityView = _viewsFactory.Create<SelectableAbilityView>(ViewIDs.SelectAbilityPopup);
+                SelectableAbilityView selectableAbilityView = _viewsFactory.Create<SelectableAbilityView>(ViewIDs.SelectionAbilityView);
                 _view.AbilityListView.Add(selectableAbilityView);
 
                 SelectableAbilityPresenter presenter = _presentorFactory
