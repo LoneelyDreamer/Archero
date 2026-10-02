@@ -1,8 +1,10 @@
-﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
@@ -43,7 +45,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
                 .AddAbilities()
                 .AddSystem(new AbilityOnAddActivatorSystem());
 
-           
+            entity
+                .AddLevel(new ReactiveVeriable<int>(1))
+                .AddExperience()
+                .AddSystem(new LevelUpSystem(_configProvidersServise.GetConfig<ExperienceForUpgradeLevelConfig>()));
+
+            
+
+
+
 
             entity.AddCurrentTarget();
 

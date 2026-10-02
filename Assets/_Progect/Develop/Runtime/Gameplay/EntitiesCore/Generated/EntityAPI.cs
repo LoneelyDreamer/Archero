@@ -781,6 +781,54 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle.MustSelfRelease() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Experience ExperienceC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Experience>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> Experience => ExperienceC.Value;
+
+		public bool TryGetExperience(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Experience component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddExperience()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Experience() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddExperience(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Experience() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level LevelC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> Level => LevelC.Value;
+
+		public bool TryGetLevel(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLevel()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLevel(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero IsMainHeroC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero>();
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsMainHero()

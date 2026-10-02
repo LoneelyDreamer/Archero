@@ -49,7 +49,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
         {
             base.Initialise();
 
-            _view.SetTitle(string.Format(Title, 2));
+            _view.SetTitle(string.Format(Title, _entity.Level.Value));
             _view.SetAdditionalText(SelectAbilityText);
             _view.SelectButtonOff();
 

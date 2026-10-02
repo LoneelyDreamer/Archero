@@ -1,3 +1,4 @@
+using Assets._Progect.Develop.Runtime.Configs.Gameplay;
 using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Progect.Develop.Runtime.Configs.Gameplay.Entities;
 using Assets._Progect.Develop.Runtime.Configs.Gameplay.Levels;
@@ -21,6 +22,7 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment
             { typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig"},
             { typeof(HeroConfig), "Configs/Gameplay/Entities/Characters/HeroConfig"},
             { typeof(AbilitiyConfigsContainer), "Configs/Gameplay/Abilities/AbilitiyConfigsContainer"},
+            { typeof(ExperienceForUpgradeLevelConfig), "Configs/Gameplay/ExperienceForUpgradeLevelConfig"},
         };
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)
         {
