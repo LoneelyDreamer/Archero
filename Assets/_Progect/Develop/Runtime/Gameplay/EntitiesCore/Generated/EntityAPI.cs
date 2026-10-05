@@ -829,6 +829,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins CoinsC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> Coins => CoinsC.Value;
+
+		public bool TryGetCoins(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCoins()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCoins(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected IsCollectedC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> IsCollected => IsCollectedC.Value;

@@ -22,4 +22,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFea
         public ReactiveVeriable<bool> Value;
     }
 
+    public class Coins : IEntityComponent
+    {
+        public ReactiveVeriable<int> Value;
+    }
+
+
 }

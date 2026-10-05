@@ -40,6 +40,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
                 .AddIsMainHero()
                 .AddTeam(new ReactiveVeriable<Teams>(Teams.MainHero));
 
+            entity
+                .AddCoins();
 
             entity
                 .AddAbilities()

@@ -20,6 +20,8 @@ using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.PauseFeature;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Loot;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -68,6 +70,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
             container.RegisterAsSingle(CreateGameplayScreenPresentor).NonLazy();
             container.RegisterAsSingle(CreateGameplayPopupServise);
+           
 
             container.RegisterAsSingle<IInputService>(CreateDeckstopInput);
 
@@ -75,6 +78,21 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateDropAbilityOnMainHeroLevelUpService).NonLazy();
 
             container.RegisterAsSingle<IPauseService>(CrateTimeScalePouseService);
+
+            container.RegisterAsSingle(CrateLootFactory);
+            container.RegisterAsSingle(CrateDropLootService);
+        }
+
+        private static DropLootService CrateDropLootService(DIContainer c)
+        {
+            return new DropLootService(
+                c.Resolve<LootListConfig>(),
+                c.Resolve<LootFactory>());
+        }
+
+        private static LootFactory CrateLootFactory(DIContainer c)
+        {
+            return new LootFactory(c);
         }
 
         private static TimeScalePouseService CrateTimeScalePouseService(DIContainer c)
