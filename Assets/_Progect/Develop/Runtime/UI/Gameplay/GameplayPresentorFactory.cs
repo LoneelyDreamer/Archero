@@ -1,17 +1,21 @@
-﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
+﻿using Assets._Progect.Develop.Runtime.Configs.Gameplay;
+using Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities.View;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AbilitiesDropingFeature;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.UI.CommonView;
 using Assets._Progect.Develop.Runtime.UI.Core;
+using Assets._Progect.Develop.Runtime.UI.Gameplay.Exsperience;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.Stages;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
+using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.SceneManagment;
 using System;
@@ -98,6 +102,14 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
                 this,
                  _container.Resolve<ViewsFactory>(),
                  level);
+        }
+
+        public MainHeroExsperiencePresentor CreateMainHeroExsperiencePresentor(BarWithText view)
+        {
+            return new MainHeroExsperiencePresentor(
+                view,
+                _container.Resolve<MainHeroHolderService>(),
+                _container.Resolve<ConfigsProviderServise>().GetConfig<ExperienceForUpgradeLevelConfig>());
         }
     }
 }

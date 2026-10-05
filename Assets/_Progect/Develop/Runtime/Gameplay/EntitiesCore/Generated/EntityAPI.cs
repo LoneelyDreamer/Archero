@@ -829,6 +829,61 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected IsCollectedC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> IsCollected => IsCollectedC.Value;
+
+		public bool TryGetIsCollected(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsCollected()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsCollected(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsCollected() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullable IsPullableC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullable>();
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullable()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullable());
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullingProcess IsPullingProcessC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullingProcess>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> IsPullingProcess => IsPullingProcessC.Value;
+
+		public bool TryGetIsPullingProcess(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullingProcess component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullingProcess()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullingProcess() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullingProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullingProcess() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero IsMainHeroC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero>();
 
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsMainHero()
