@@ -1,10 +1,12 @@
 ﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.PauseFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StagesFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Gameplay;
 using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.CorutineManagment;
@@ -20,6 +22,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
         public GameplayStatesFactory(DIContainer container)
         {
             _container = container;
+        }
+
+        public CollectLootState CreateCollectLootState()
+        {
+            return new CollectLootState(
+                _container.Resolve<LootPullingService>(),
+                _container.Resolve<MainHeroHolderService>());
         }
 
         public PreperationState CreatePreperationState()
@@ -41,7 +50,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
                  _container.Resolve<PlayerDataProvider>(),
                  _container.Resolve<ICoroutinesPerformer>(),
                  _container.Resolve<IPauseService>(),
-                 _container.Resolve<GameplayPopupServise>());
+                 _container.Resolve<GameplayPopupServise>(),
+                 _container.Resolve <WalletServise>(),
+                 _container.Resolve<MainHeroHolderService>());
         }
 
         public DefeatState CreateDefeatState()
@@ -93,7 +104,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
         {
             PreparationTrigerService preparationTrigerService = _container.Resolve<PreparationTrigerService>();
             StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
+            LootPullingService lootPullingService = _container.Resolve<LootPullingService>();
 
+            CollectLootState collectLootState =  CreateCollectLootState();
             PreperationState preperationState = CreatePreperationState();
             StageProcessState stageProcessState = CreateStageProcessState();
 
@@ -101,16 +114,21 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.States
                 .Add(new FuncCondition(() => preparationTrigerService.HasMainHeroContact.Value))
                 .Add(new FuncCondition(() => stageProviderService.HasNextStage()));
 
-            FuncCondition stageProcessToPreperationCondition =
-                new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResult.Completed);
+            FuncCondition stageProcessToCollectStateCondition =
+               new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResult.Completed);
 
-            GameplayStateMashine coreLoopState = new GameplayStateMashine();
+            FuncCondition collectStateToPreperationStateCondition =
+                new FuncCondition(() => lootPullingService.AllCollected.Value);
+
+           GameplayStateMashine coreLoopState = new GameplayStateMashine();
 
             coreLoopState.AddState(preperationState);
+            coreLoopState.AddState(collectLootState);
             coreLoopState.AddState(stageProcessState);
 
             coreLoopState.AddTransition(preperationState, stageProcessState, preparationTostageProcessCondition);
-            coreLoopState.AddTransition(stageProcessState, preperationState, stageProcessToPreperationCondition);
+            coreLoopState.AddTransition(stageProcessState, collectLootState, stageProcessToCollectStateCondition);
+            coreLoopState.AddTransition(collectLootState, preperationState, collectStateToPreperationStateCondition);
 
 
             return coreLoopState;

@@ -829,6 +829,25 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature.Level() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.CanDropLoot CanDropLootC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.CanDropLoot>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition CanDropLoot => CanDropLootC.Value;
+
+		public bool TryGetCanDropLoot(out global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.CanDropLoot component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanDropLoot(global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.CanDropLoot() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins CoinsC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.Coins>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> Coins => CoinsC.Value;
@@ -906,6 +925,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsPullingProcess(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
 		{
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.IsPullingProcess() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.LootIsDropped LootIsDroppedC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.LootIsDropped>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> LootIsDropped => LootIsDroppedC.Value;
+
+		public bool TryGetLootIsDropped(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.LootIsDropped component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLootIsDropped()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.LootIsDropped() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLootIsDropped(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<bool> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFeature.LootIsDropped() { Value = value });
 		}
 
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero IsMainHeroC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero.IsMainHero>();

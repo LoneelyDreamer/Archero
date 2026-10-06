@@ -61,7 +61,9 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
         public GameplayScreenPresenter CreateGameplayScreenPresentor(GameplayScreenView view)
         {
             return new GameplayScreenPresenter(view, 
-                _container.Resolve<GameplayPresentorFactory>());
+                _container.Resolve<GameplayPresentorFactory>(),
+                _container.Resolve<ProjectPresentorFactory>(),
+                _container.Resolve<MainHeroHolderService>());
         }
 
         public EntityHealthPrethenter CreateEntityHealthPrethenter(Entity entity, BarWithText view)

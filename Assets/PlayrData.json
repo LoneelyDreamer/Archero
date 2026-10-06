@@ -1,10 +1,14 @@
 {
   "WalletData": {
-    "Gold": 200,
+    "Gold": 205,
     "Dimond": 25
   },
   "CompletedLevels": [
-    1,
-    2
-  ]
+    1
+  ],
+  "StatsUpgradeLevel": {
+    "MoveSpeed": 1,
+    "MaxHealth": 1,
+    "Damage": 1
+  }
 }

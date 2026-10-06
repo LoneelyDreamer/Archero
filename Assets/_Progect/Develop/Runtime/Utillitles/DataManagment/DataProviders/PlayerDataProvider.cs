@@ -1,4 +1,5 @@
 ﻿using Assets._Progect.Develop.Runtime.Configs.Meta.Wallet;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
@@ -24,8 +25,19 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.DataManagment.DataProviders
             {
                 WalletData = InitWalletData(),
                 CompletedLevels = new(),
+                StatsUpgradeLevel = InitStatsUpgradeLavel(),
             };
 
+        }
+
+        private Dictionary<StatTypes, int> InitStatsUpgradeLavel()
+        {
+            Dictionary<StatTypes, int> statUpgradeLavels = new Dictionary<StatTypes, int>();
+
+            foreach (StatTypes statTypes in Enum.GetValues(typeof(StatTypes)))
+                statUpgradeLavels.Add(statTypes, 1);
+
+            return statUpgradeLavels;            
         }
 
         private Dictionary<CurrenceTypes, int> InitWalletData()

@@ -120,6 +120,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinLoot
       objectReference: {fileID: 0}
+    - target: {fileID: 5504895879854828974, guid: c70ea55d2c1af3b45b5c5551a81b671f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504895879854828974, guid: c70ea55d2c1af3b45b5c5551a81b671f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504895879854828974, guid: c70ea55d2c1af3b45b5c5551a81b671f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504895879854828974, guid: c70ea55d2c1af3b45b5c5551a81b671f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504895879854828974, guid: c70ea55d2c1af3b45b5c5551a81b671f,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8495533451179941561, guid: c70ea55d2c1af3b45b5c5551a81b671f,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,4 +1,5 @@
-﻿using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
+﻿using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
+using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LootFea
     public class Coins : IEntityComponent
     {
         public ReactiveVeriable<int> Value;
+    }
+
+    public class LootIsDropped : IEntityComponent
+    {
+        public ReactiveVeriable<bool> Value;
+    }
+
+    public class CanDropLoot : IEntityComponent 
+    {
+        public ICompositCondition Value;
     }
 
 

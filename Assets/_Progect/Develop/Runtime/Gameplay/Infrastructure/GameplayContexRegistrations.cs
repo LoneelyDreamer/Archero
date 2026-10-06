@@ -81,12 +81,19 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CrateLootFactory);
             container.RegisterAsSingle(CrateDropLootService);
+
+            container.RegisterAsSingle(CreateLootPullingService).NonLazy();
+        }
+
+        private static LootPullingService CreateLootPullingService(DIContainer c)
+        {
+            return new LootPullingService(c.Resolve<EntitiesLifeContext>());
         }
 
         private static DropLootService CrateDropLootService(DIContainer c)
         {
             return new DropLootService(
-                c.Resolve<LootListConfig>(),
+                c.Resolve<ConfigsProviderServise>().GetConfig<LootListConfig>(),
                 c.Resolve<LootFactory>());
         }
 

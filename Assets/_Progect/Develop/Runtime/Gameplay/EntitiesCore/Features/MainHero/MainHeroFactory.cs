@@ -5,10 +5,13 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abilities;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.AI.States;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeature;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero
@@ -34,7 +37,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
         {
             HeroConfig config = _configProvidersServise.GetConfig<HeroConfig>();
 
-            Entity entity = _entitiesFactory.CreateHero(position, config);
+            Entity entity = _entitiesFactory.CreateHero(position, config, GetStats());
 
             entity
                 .AddIsMainHero()
@@ -51,12 +54,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
                 .AddLevel(new ReactiveVeriable<int>(1))
                 .AddExperience()
                 .AddSystem(new LevelUpSystem(_configProvidersServise.GetConfig<ExperienceForUpgradeLevelConfig>()));
-
-            
-
-
-
-
+                        
             entity.AddCurrentTarget();
 
             _brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
@@ -64,6 +62,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
             _entitiesLifeContext.Add(entity);
 
             return entity;
+        }
+
+        private Dictionary<StatTypes, float> GetStats()
+        {
+            Dictionary<StatTypes, float> stats = new();
+
+            foreach (StatTypes statTypes in Enum.GetValues(typeof(StatTypes)))
+                stats.Add(statTypes, 15);
+            
+            return stats;
         }
     }
 }

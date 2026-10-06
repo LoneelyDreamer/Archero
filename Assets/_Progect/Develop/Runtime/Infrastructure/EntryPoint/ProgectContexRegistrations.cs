@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.Infrastructure.DI;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.LevelsProgression;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.StatsUpgrade;
 using Assets._Progect.Develop.Runtime.Meta.Feathers.Wallet;
 using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
@@ -53,6 +54,10 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateLevelsProgressionServise).NonLazy();
         }
+
+        private static StatsUpgradeService CreateStatsUpgradeService(DIContainer c)
+            => new StatsUpgradeService(c.Resolve<PlayerDataProvider>(), c.Resolve<ConfigsProviderServise>());
+        
 
         private static TimerServiceFactory CreateTimerServiceFactory(DIContainer c)
             => new TimerServiceFactory(c);

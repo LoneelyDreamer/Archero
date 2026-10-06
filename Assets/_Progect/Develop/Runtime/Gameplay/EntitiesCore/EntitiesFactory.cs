@@ -37,18 +37,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _collidersRegestryService = _container.Resolve<CollidersRegestryService>();
         }
 
-        public Entity CreateHero(Vector3 position, HeroConfig heroConfig)
+        public Entity CreateHero(Vector3 position, HeroConfig heroConfig, Dictionary<StatTypes, float> baseStats)
         {
             Entity entity = CreateEmpty();
 
             _monoEntitiesactory.Create(entity, position, "Entities/Hero");
 
-            Dictionary<StatTypes, float> baseStats = new()
-            {
-                {StatTypes.MoveSpeed, heroConfig.MoveSpeed },
-                {StatTypes.MaxHealth, heroConfig.MaxHealth },
-                {StatTypes.Damage, heroConfig.InstantAttackDamage },
-            };
+            //Dictionary<StatTypes, float> baseStats = new()
+            //{
+            //    {StatTypes.MoveSpeed, heroConfig.MoveSpeed },
+            //    {StatTypes.MaxHealth, heroConfig.MaxHealth },
+            //    {StatTypes.Damage, heroConfig.InstantAttackDamage },
+            //};
 
             Dictionary<StatTypes, float> modifiedStats = new(baseStats);
 

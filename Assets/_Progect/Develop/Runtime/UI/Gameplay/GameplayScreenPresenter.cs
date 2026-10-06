@@ -1,4 +1,6 @@
-﻿using Assets._Progect.Develop.Runtime.UI.Core;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHero;
+using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.Exsperience;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.HealthDisplay;
 using Assets._Progect.Develop.Runtime.UI.Gameplay.Stages;
@@ -17,16 +19,25 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
     {
         private readonly GameplayScreenView _screen;
         private readonly GameplayPresentorFactory _gameplayPresentorFactory;
+        private readonly ProjectPresentorFactory _projectPresentorFactory;
 
         private readonly List<IPresentor> _childPresenters = new();
 
         private EntitiesHealthDispleyPresentor _healthDispleyPresentor;
 
-        public GameplayScreenPresenter(GameplayScreenView screen,         
-            GameplayPresentorFactory gameplayPresentorFactory)
+        private readonly MainHeroHolderService _mainHeroHolderService;
+        private IDisposable _mainHeroHolderServiceDisposable;
+        private CurrencyPresentor _mainHeroCoinsPresentor;
+
+        public GameplayScreenPresenter(GameplayScreenView screen,
+            GameplayPresentorFactory gameplayPresentorFactory,
+            ProjectPresentorFactory projectPresentorFactory,
+            MainHeroHolderService mainHeroHolderService)
         {
             _screen = screen;
             _gameplayPresentorFactory = gameplayPresentorFactory;
+            _projectPresentorFactory = projectPresentorFactory;
+            _mainHeroHolderService = mainHeroHolderService;
         }
 
         public void Initialise()
@@ -35,13 +46,22 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
             CreateEntitiesHealthDispleyPresentor();
             CreateMainHeroExsperiencePresentor();
 
+            _mainHeroHolderServiceDisposable = _mainHeroHolderService.HeroRegistred.Subscribe(OnHeroRegistred);
+
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Initialise();         
-        }
+        }     
 
         public void LateUpdate()
         {
             _healthDispleyPresentor.LateUpdate();
+        }
+
+        private void OnHeroRegistred(Entity entity)
+        {
+            _mainHeroCoinsPresentor = _projectPresentorFactory.CreateCurrencyPresentor(_screen.CoinsView, entity.Coins, Meta.Feathers.Wallet.CurrenceTypes.Gold);
+
+            _mainHeroCoinsPresentor.Initialise();
         }
 
         private void CreateStageNumber()
@@ -53,6 +73,9 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
 
         public void Dispose()
         {
+            _mainHeroHolderServiceDisposable.Dispose();
+            _mainHeroCoinsPresentor.Dispose();
+
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Dispose();
 
