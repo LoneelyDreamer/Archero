@@ -8,6 +8,7 @@ using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LevelUpFeat
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.TeamsFactory;
 using Assets._Progect.Develop.Runtime.Infrastructure.DI;
+using Assets._Progect.Develop.Runtime.Meta.Feathers.StatsUpgrade;
 using Assets._Progect.Develop.Runtime.Utillitles.ConfigsManagment;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
@@ -23,6 +24,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
         private readonly BrainsFactory _brainsFactory;
         private readonly ConfigsProviderServise _configProvidersServise;
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly StatsUpgradeService _statsUpgradeService;
 
         public MainHeroFactory(DIContainer container)
         {
@@ -31,6 +33,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
             _brainsFactory = _container.Resolve<BrainsFactory>();
             _configProvidersServise = _container.Resolve<ConfigsProviderServise>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _statsUpgradeService = _container.Resolve<StatsUpgradeService>();
         }
 
         public Entity Create(Vector3 position)
@@ -69,7 +72,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.MainHer
             Dictionary<StatTypes, float> stats = new();
 
             foreach (StatTypes statTypes in Enum.GetValues(typeof(StatTypes)))
-                stats.Add(statTypes, 15);
+                stats.Add(statTypes, _statsUpgradeService.GetCurrentStatValueFor(statTypes));
             
             return stats;
         }

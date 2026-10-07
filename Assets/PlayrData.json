@@ -7,8 +7,8 @@
     1
   ],
   "StatsUpgradeLevel": {
-    "MoveSpeed": 1,
-    "MaxHealth": 1,
+    "MoveSpeed": 3,
+    "MaxHealth": 3,
     "Damage": 1
   }
 }

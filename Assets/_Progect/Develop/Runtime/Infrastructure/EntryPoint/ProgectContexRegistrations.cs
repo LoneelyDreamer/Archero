@@ -53,6 +53,8 @@ namespace Assets._Progect.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ISaveLoadServise>(CreateSaveLoadServise);
 
             container.RegisterAsSingle(CreateLevelsProgressionServise).NonLazy();
+
+            container.RegisterAsSingle(CreateStatsUpgradeService).NonLazy();
         }
 
         private static StatsUpgradeService CreateStatsUpgradeService(DIContainer c)

@@ -14,7 +14,7 @@ namespace Assets._Progect.Develop.Runtime.Configs.Meta.Stats
     {
         [SerializeField] private List<StatViewConfig> _statsShowData;
 
-        public StatViewConfig getStatViewData(StatTypes statType) 
+        public StatViewConfig GetStatViewData(StatTypes statType) 
             => _statsShowData.First(s => s.Type == statType);
 
         [Serializable]
