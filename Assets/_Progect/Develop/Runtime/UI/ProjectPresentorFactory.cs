@@ -83,5 +83,21 @@ namespace Assets._Progect.Develop.Runtime.UI.Wallet
                 statType,
                 _container.Resolve<ConfigsProviderServise>().GetConfig<CurrencyIconConfig>());
         }
+
+        public StatsUpgradePopupPresentor CreateStatsUpgradePopupPresentor(StatsUpgradablePopupView view)
+        {
+            return new StatsUpgradePopupPresentor(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                _container.Resolve<ViewsFactory>(),
+                _container.Resolve<ProjectPresentorFactory>(),
+                _container.Resolve<StatsUpgradeService>());
+        }
+
+        public CharacterPreviewPresentor CreateCharacterPreviewPresentor()
+        {
+            return new CharacterPreviewPresentor(_container.Resolve<SceneLoaderServise>(),
+                _container.Resolve<ICoroutinesPerformer>());
+        }
     }
 }

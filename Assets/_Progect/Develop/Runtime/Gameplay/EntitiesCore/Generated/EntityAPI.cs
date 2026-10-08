@@ -446,6 +446,25 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantAttackDamage() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantShootingDirections InstantShootingDirectionsC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantShootingDirections>();
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot.InstantShootingDirectionArgs InstantShootingDirections => InstantShootingDirectionsC.Value;
+
+		public bool TryGetInstantShootingDirections(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot.InstantShootingDirectionArgs value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantShootingDirections component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot.InstantShootingDirectionArgs);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstantShootingDirections(global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot.InstantShootingDirectionArgs value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantShootingDirections() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.MustCanselAttack MustCanselAttackC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.MustCanselAttack>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition MustCanselAttack => MustCanselAttackC.Value;

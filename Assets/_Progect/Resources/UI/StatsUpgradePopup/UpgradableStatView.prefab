@@ -516,7 +516,7 @@ MonoBehaviour:
   _statName: {fileID: 6516414977267551075}
   _statIcon: {fileID: 4001176961840984776}
   _statValueText: {fileID: 1114714413052808717}
-  <_buyButtonView>k__BackingField: {fileID: 8521496630031420035}
+  <BuyButtonView>k__BackingField: {fileID: 8521496630031420035}
 --- !u!1001 &8017551099934289003
 PrefabInstance:
   m_ObjectHideFlags: 0

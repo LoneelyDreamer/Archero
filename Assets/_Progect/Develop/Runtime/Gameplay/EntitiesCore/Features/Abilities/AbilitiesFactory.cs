@@ -17,12 +17,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
             _container = container;
         }
 
-        public Ability CreateAbilityFor(Entity entity, AbilitiyConfig config)
+        public Ability CreateAbilityFor(Entity entity, AbilitiyConfig config, int currentLevel)
         {
             switch (config)
             {
                 case StatChangedAbilityConfig changedAbilityConfig:
-                    return new StatChangedAbility(entity, changedAbilityConfig);
+                    return new StatChangedAbility(entity, changedAbilityConfig, currentLevel);
+
+                case AditionalDirectionsShootAbilityConfig aditionalDirectionsShootAbilityConfig:
+                    return new AbilitiesDirectionsShootAbilty(aditionalDirectionsShootAbilityConfig, entity, currentLevel);
 
                 default:
                     throw new ArgumentException();

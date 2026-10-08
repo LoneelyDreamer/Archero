@@ -12,5 +12,6 @@ namespace Assets._Progect.Develop.Runtime.Utillitles.SceneManagment
         public const string Empty = "Empty";
         public const string Gameplay = "Gameplay";
         public const string MainMenu = "MainMenu";
+        public const string CharecterPreviewScene = "CharecterPreviewScene";
     }
 }

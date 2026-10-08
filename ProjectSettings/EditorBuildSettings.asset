@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Progect/Scenes/Gameplay.unity
     guid: be643a6879e60b74e9dfcc71b80bc9a8
+  - enabled: 1
+    path: Assets/_Progect/Scenes/CharecterPreviewScene.unity
+    guid: ba5395bb17a8b7640b8e673d8f827fc3
   m_configObjects: {}

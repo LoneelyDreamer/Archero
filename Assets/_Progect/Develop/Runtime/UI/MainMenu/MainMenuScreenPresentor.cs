@@ -2,6 +2,7 @@
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Device;
 
 namespace Assets._Progect.Develop.Runtime.UI.MainMenu
 {
@@ -28,6 +29,7 @@ namespace Assets._Progect.Develop.Runtime.UI.MainMenu
         public void Initialise()
         {
             _screen.OpenLevelsMenuButtonClicked += OnOpenLevelsMenuButtonClicked;
+            _screen.OpenUpgradeStatsButtonClicked += OnOpenUpgradeStatsButtonClicked;
 
             CreateWallet();
 
@@ -36,10 +38,10 @@ namespace Assets._Progect.Develop.Runtime.UI.MainMenu
                 presentor.Initialise();
         }
 
-
         public void Dispose()
         {
             _screen.OpenLevelsMenuButtonClicked -= OnOpenLevelsMenuButtonClicked;
+            _screen.OpenUpgradeStatsButtonClicked -= OnOpenUpgradeStatsButtonClicked;
 
             foreach (IPresentor presentor in _childPresenters)
                 presentor.Dispose();
@@ -57,6 +59,11 @@ namespace Assets._Progect.Develop.Runtime.UI.MainMenu
         private void OnOpenLevelsMenuButtonClicked()
         {
             _popupServise.OpenLevelsMenuPopup();
+        }
+
+        private void OnOpenUpgradeStatsButtonClicked()
+        {
+            _popupServise.OpenStatsUpgradePopup();
         }
 
     }

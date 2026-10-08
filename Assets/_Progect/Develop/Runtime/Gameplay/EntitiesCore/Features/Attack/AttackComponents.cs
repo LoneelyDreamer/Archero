@@ -1,9 +1,15 @@
-﻿using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
+﻿using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot;
+using Assets._Progect.Develop.Runtime.Utillitles.Conditions;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 {
+    public class InstantShootingDirections : IEntityComponent
+    {
+        public InstantShootingDirectionArgs Value;
+    }
+
     public class StartAttackRequest : IEntityComponent
     {
         public ReactiveEvent Value;

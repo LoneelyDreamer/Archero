@@ -9,8 +9,18 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
 {
     public class AbilityDropingRuleService
     {
-        public bool IsAvailable(AbilitiyConfig config, Entity entity)
+        public bool IsAvailable(AbilitiyConfig config, Entity entity, int abilityLevel)
         {
+            if(config.IsUpgradable())
+            {
+                if(entity.Abilities.Elements.Any(ability =>
+                ability.ID == config.ID 
+                && ability.CurrentLevel.Value + abilityLevel > ability.MaxLevel))
+                {
+                    return false;
+                }
+            }
+
             switch (config)
             {
                 case StatChangedAbilityConfig statChangedAbilityConfig:

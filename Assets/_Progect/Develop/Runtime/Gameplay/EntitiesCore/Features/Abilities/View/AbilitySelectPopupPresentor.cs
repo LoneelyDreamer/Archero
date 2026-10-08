@@ -59,7 +59,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
 
             _view.SelectButtonClicked += OnSelectButtonClicked;
 
-            List<AbilitiyConfig> dropOptions = _abilityDropper.Drop(AbilitiesCount, _entity);
+            List<AbilitiyDropOption> dropOptions = _abilityDropper.Drop(AbilitiesCount, _entity);
 
             for (int i = 0; i < dropOptions.Count; i++)
             {
@@ -67,7 +67,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
                 _view.AbilityListView.Add(selectableAbilityView);
 
                 SelectableAbilityPresenter presenter = _presentorFactory
-                    .CreateSelectableAbilityPresentor(dropOptions[i], selectableAbilityView, _entity);
+                    .CreateSelectableAbilityPresentor(dropOptions[i].Config, selectableAbilityView, _entity, dropOptions[i].Level);
 
                 presenter.Selected += OnPresenterSelected;
                 presenter.Initialise();

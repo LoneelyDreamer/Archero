@@ -8,7 +8,9 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
         private Entity _entity;
         private StatChangedAbilityConfig _config;
 
-        public StatChangedAbility(Entity entity, StatChangedAbilityConfig config) : base(config.ID)
+        public StatChangedAbility(Entity entity, 
+            StatChangedAbilityConfig config,
+            int currentLevel) : base(config.ID, currentLevel, config.MaxLevel)
         {
             _entity = entity;
             _config = config;

@@ -15,6 +15,7 @@ namespace Assets._Progect.Develop.Runtime.Configs.Gameplay.Abilities
 
         [SerializeField] private StatChangeOperation _operation;
         [SerializeField] private float _value;
+        public override int MaxLevel => 1;
 
         public Func<float, float> GetApplyEffect()
         {

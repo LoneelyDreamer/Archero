@@ -17,7 +17,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
         [SerializeField] private TMP_Text _level;
 
         public void HideLevel() => _level.gameObject.SetActive(false);
-        public void showLevel() => _levelParant.gameObject.SetActive(true);
+        public void ShowLevel() => _levelParant.gameObject.SetActive(true);
 
         public void SetIcon(Sprite icon)
         {

@@ -42,14 +42,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             Entity entity = CreateEmpty();
 
             _monoEntitiesactory.Create(entity, position, "Entities/Hero");
-
-            //Dictionary<StatTypes, float> baseStats = new()
-            //{
-            //    {StatTypes.MoveSpeed, heroConfig.MoveSpeed },
-            //    {StatTypes.MaxHealth, heroConfig.MaxHealth },
-            //    {StatTypes.Damage, heroConfig.InstantAttackDamage },
-            //};
-
+                        
             Dictionary<StatTypes, float> modifiedStats = new(baseStats);
 
             entity
@@ -72,6 +65,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddAttackProcessInitialTime(new ReactiveVeriable<float>(heroConfig.AttackProcessTime))
                 .AddAttackProcessCurrentTime()
                 .AddInAttackProcess()
+                .AddInstantShootingDirections(new InstantShootingDirectionArgs(
+                    new InstantShootDirectionArgs(0, 1)))
                 .AddStartAttackRequest()
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
@@ -131,7 +126,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new AttackCanselSystem())
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackProcessTimerSystem())
-                .AddSystem(new InstantShootSystem(this))
+                .AddSystem(new DirectionsInstantShootSystem(this))
                 .AddSystem(new AttackDelayEndTriggerSystem())
                 .AddSystem(new EndAttackSystem())
                 .AddSystem(new AttackCooldownTimerSystem())

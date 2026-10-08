@@ -1,5 +1,6 @@
 ﻿using Assets._Progect.Develop.Runtime.UI.Core.TestPopup;
 using Assets._Progect.Develop.Runtime.UI.LevelsMenuPopup;
+using Assets._Progect.Develop.Runtime.UI.StatsUpgradePopup;
 using Assets._Progect.Develop.Runtime.UI.Wallet;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,17 @@ namespace Assets._Progect.Develop.Runtime.UI.Core
             TestPopupPresentor popup = _presentorsFactory.CreateTestPopupPresentor(view);
 
             OnPopupCreated(popup, view, closedCallback);
+
+            return popup;
+        }
+
+        public StatsUpgradePopupPresentor OpenStatsUpgradePopup()
+        {
+            StatsUpgradablePopupView view = ViewsFactory.Create<StatsUpgradablePopupView>(ViewIDs.StatsUpgradablePopupView, PopuoLayer);
+
+            StatsUpgradePopupPresentor popup = _presentorsFactory.CreateStatsUpgradePopupPresentor(view);
+
+            OnPopupCreated(popup, view);
 
             return popup;
         }

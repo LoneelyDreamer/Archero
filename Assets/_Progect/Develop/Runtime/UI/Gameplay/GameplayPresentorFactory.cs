@@ -83,13 +83,15 @@ namespace Assets._Progect.Develop.Runtime.UI.Gameplay
         public SelectableAbilityPresenter CreateSelectableAbilityPresentor(
             AbilitiyConfig abilitiyConfig,
             SelectableAbilityView view,
-            Entity entity)
+            Entity entity,
+            int level)
         {
             return new SelectableAbilityPresenter(
                 _container.Resolve<AbilitiesFactory>(),
                 entity,
                 abilitiyConfig,
-                view);
+                view,
+                level);
         }
 
         public AbilitySelectPopupPresentor CreateAbilitySelectPopupPresentor(

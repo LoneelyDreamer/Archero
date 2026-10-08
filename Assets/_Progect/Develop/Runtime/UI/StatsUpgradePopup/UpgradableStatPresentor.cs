@@ -7,10 +7,6 @@ using Assets._Progect.Develop.Runtime.UI.Core;
 using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Assets._Progect.Develop.Runtime.Configs.Meta.Stats.StatsViewConfig;
 
