@@ -27,6 +27,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Abiliti
                 case AditionalDirectionsShootAbilityConfig aditionalDirectionsShootAbilityConfig:
                     return new AbilitiesDirectionsShootAbilty(aditionalDirectionsShootAbilityConfig, entity, currentLevel);
 
+                case BounceProgectileAbilityConfig bounceProgectileAbilityConfig:
+                    return new BounceProjectileAbility
+                        (bounceProgectileAbilityConfig, 
+                        entity,
+                        _container.Resolve<EntitiesLifeContext>(),
+                        currentLevel);
+
                 default:
                     throw new ArgumentException();
             }

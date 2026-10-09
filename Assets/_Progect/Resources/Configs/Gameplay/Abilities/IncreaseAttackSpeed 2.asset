@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeac9757ea3558149bd4280ab2523730, type: 3}
+  m_Name: IncreaseAttackSpeed 2
+  m_EditorClassIdentifier: 
+  <ID>k__BackingField: AttackPerSecond2
+  <Name>k__BackingField: Attack Second+
+  <Discription>k__BackingField: Smail Icrease AttackSpeed
+  <Icon>k__BackingField: {fileID: 21300000, guid: c49bb137cb3d34a91a59c4967ce30a08,
+    type: 3}
+  <StatType>k__BackingField: 4
+  _operation: 0
+  _value: 1.2

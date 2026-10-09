@@ -10,6 +10,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 {
 	public partial class Entity
 	{
+		public global::Assets._Progect.Develop.Runtime.Gameplay.Common.Owner OwnerC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.Common.Owner>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> Owner => OwnerC.Value;
+
+		public bool TryGetOwner(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.Common.Owner component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOwner()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.Common.Owner() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOwner(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.Common.Owner() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.Common.RigidbodyComponent RigidbodyC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.Common.RigidbodyComponent>();
 
 		public global::UnityEngine.Rigidbody Rigidbody => RigidbodyC.Value;
@@ -235,6 +259,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownInitialTime() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownModifiedTime AttackCooldownModifiedTimeC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownModifiedTime>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> AttackCooldownModifiedTime => AttackCooldownModifiedTimeC.Value;
+
+		public bool TryGetAttackCooldownModifiedTime(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownModifiedTime component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCooldownModifiedTime()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownModifiedTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackCooldownModifiedTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackCooldownModifiedTime() { Value = value });
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayEndEvent AttackDelayEndEventC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayEndEvent>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent AttackDelayEndEvent => AttackDelayEndEventC.Value;
@@ -257,6 +305,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayEndEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayEndEvent() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayModifiedTime AttackDelayModifiedTimeC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayModifiedTime>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> AttackDelayModifiedTime => AttackDelayModifiedTimeC.Value;
+
+		public bool TryGetAttackDelayModifiedTime(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayModifiedTime component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayModifiedTime()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayModifiedTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackDelayModifiedTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayModifiedTime() { Value = value });
 		}
 
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayTime AttackDelayTimeC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackDelayTime>();
@@ -329,6 +401,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
 		{
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessInitialTime() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessModifiedTime AttackProcessModifiedTimeC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessModifiedTime>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> AttackProcessModifiedTime => AttackProcessModifiedTimeC.Value;
+
+		public bool TryGetAttackProcessModifiedTime(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessModifiedTime component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessModifiedTime()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessModifiedTime() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackProcessModifiedTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.AttackProcessModifiedTime() { Value = value });
 		}
 
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.CanStartAttack CanStartAttackC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.CanStartAttack>();
@@ -465,6 +561,13 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.InstantShootingDirections() { Value = value });
 		}
 
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.IsProjectile IsProjectileC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.IsProjectile>();
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsProjectile()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.IsProjectile());
+		}
+
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.MustCanselAttack MustCanselAttackC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.MustCanselAttack>();
 
 		public global::Assets._Progect.Develop.Runtime.Utillitles.Conditions.ICompositCondition MustCanselAttack => MustCanselAttackC.Value;
@@ -549,6 +652,73 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartAttackRequest(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent value)
 		{
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.StartAttackRequest() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceCount BounceCountC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceCount>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> BounceCount => BounceCountC.Value;
+
+		public bool TryGetBounceCount(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceCount component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceCount()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceCount() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceCount(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<int> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceCount() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceEvent BounceEventC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceEvent>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::UnityEngine.RaycastHit> BounceEvent => BounceEventC.Value;
+
+		public bool TryGetBounceEvent(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::UnityEngine.RaycastHit> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceEvent component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::UnityEngine.RaycastHit>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceEvent()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceEvent() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::UnityEngine.RaycastHit>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBounceEvent(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveEvent<global::UnityEngine.RaycastHit> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.BounceEvent() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.LayerToBounceReaction LayerToBounceReactionC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.LayerToBounceReaction>();
+
+		public global::UnityEngine.LayerMask LayerToBounceReaction => LayerToBounceReactionC.Value;
+
+		public bool TryGetLayerToBounceReaction(out global::UnityEngine.LayerMask value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.LayerToBounceReaction component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::UnityEngine.LayerMask);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLayerToBounceReaction(global::UnityEngine.LayerMask value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature.LayerToBounceReaction() { Value = value });
 		}
 
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage.BodyContactDamage BodyContactDamageC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage.BodyContactDamage>();
@@ -1348,6 +1518,30 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSpawnInitialTime(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
 		{
 			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.SpawnFeature.SpawnInitialTime() { Value = value });
+		}
+
+		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.AttackPerSecond AttackPerSecondC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.AttackPerSecond>();
+
+		public global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> AttackPerSecond => AttackPerSecondC.Value;
+
+		public bool TryGetAttackPerSecond(out global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			bool result = TryGetComponent(out global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.AttackPerSecond component);
+			if (result)
+				value = component.Value;
+			else
+				value = default(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>);
+			return result;
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackPerSecond()
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.AttackPerSecond() { Value = new global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float>() });
+		}
+
+		public Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttackPerSecond(global::Assets._Progect.Develop.Runtime.Utillitles.Reactivre.ReactiveVeriable<float> value)
+		{
+			return AddComponent(new global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.AttackPerSecond() { Value = value });
 		}
 
 		public global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.BaseStats BaseStatsC => GetComponent<global::Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFeature.StatsFeatureComponents.BaseStats>();

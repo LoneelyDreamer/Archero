@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets._Progect.Develop.Runtime.Utillitles.Reactivre;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,11 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFe
         public class StatsEffects : IEntityComponent
         {
             public StatsEffectsList Value;
+        }
+
+        public class AttackPerSecond : IEntityComponent
+        {
+            public ReactiveVeriable<float> Value;
         }
 
 

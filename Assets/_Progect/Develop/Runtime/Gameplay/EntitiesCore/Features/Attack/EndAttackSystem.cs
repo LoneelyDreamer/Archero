@@ -9,7 +9,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
     {
         private ReactiveEvent _endAttackEvent;
         private ReactiveVeriable<bool> _inAttackProcess;
-        private ReactiveVeriable<float> _attackProcessInitialTime;
+        private ReactiveVeriable<float> _attackProcessModifiedTime;
         private ReactiveVeriable<float> _attackProcessCurrentTime;
 
         private IDisposable _timerDisposable;
@@ -20,7 +20,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
         {
             _endAttackEvent = entity.EndAttackEvent;
             _inAttackProcess = entity.InAttackProcess;
-            _attackProcessInitialTime = entity.AttackProcessInitialTime;
+            _attackProcessModifiedTime = entity.AttackProcessModifiedTime;
             _attackProcessCurrentTime = entity.AttackProcessCurrentTime;
 
             _timerDisposable = _attackProcessCurrentTime.Subscribe(OnTimerChanged);
@@ -36,7 +36,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
             }
         }
 
-        private bool TimerIsDone(float currentTime) => currentTime >= _attackProcessInitialTime.Value;
+        private bool TimerIsDone(float currentTime) => currentTime >= _attackProcessModifiedTime.Value;
 
         public void OnDispose()
         {

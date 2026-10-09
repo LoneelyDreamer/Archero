@@ -11,5 +11,6 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.StatsFe
         MoveSpeed = 1,
         MaxHealth = 2,
         Damage = 3,
+        AttackPerSecond = 4,
     }
 }

@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 {
+    public class IsProjectile : IEntityComponent
+    { }
+
+
     public class InstantShootingDirections : IEntityComponent
     {
         public InstantShootingDirectionArgs Value;
@@ -34,6 +38,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
     {
         public ReactiveVeriable<float> Value;
     }
+    public class AttackProcessModifiedTime : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
 
     public class AttackProcessCurrentTime : IEntityComponent
     {
@@ -47,6 +55,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
 
 
     public class AttackDelayTime : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
+    public class AttackDelayModifiedTime : IEntityComponent
     {
         public ReactiveVeriable<float> Value;
     }
@@ -76,6 +88,10 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack
     }
 
     public class AttackCooldownInitialTime : IEntityComponent
+    {
+        public ReactiveVeriable<float> Value;
+    }
+    public class AttackCooldownModifiedTime : IEntityComponent
     {
         public ReactiveVeriable<float> Value;
     }

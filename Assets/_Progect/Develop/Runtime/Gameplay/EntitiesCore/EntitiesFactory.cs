@@ -2,6 +2,7 @@
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ApplyDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.Attack.Shoot;
+using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.BounceFeature;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.ContactTakeDamage;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.InputFeatures;
 using Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore.Features.LafiCycle;
@@ -63,6 +64,7 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTakeDamegeRequest()
                 .AddTakeDamegeEvent()
                 .AddAttackProcessInitialTime(new ReactiveVeriable<float>(heroConfig.AttackProcessTime))
+                .AddAttackProcessModifiedTime(new ReactiveVeriable<float>(heroConfig.AttackProcessTime))
                 .AddAttackProcessCurrentTime()
                 .AddInAttackProcess()
                 .AddInstantShootingDirections(new InstantShootingDirectionArgs(
@@ -71,12 +73,15 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
                 .AddAttackDelayTime(new ReactiveVeriable<float>(heroConfig.AttackDelayTime))
+                .AddAttackDelayModifiedTime(new ReactiveVeriable<float>(heroConfig.AttackDelayTime))
                 .AddAttackDelayEndEvent()
                 .AddInstantAttackDamage(new ReactiveVeriable<float>(baseStats[StatTypes.Damage]))
                 .AddAttackCanseledEvent()
                 .AddAttackCooldownInitialTime(new ReactiveVeriable<float>(heroConfig.AttackColdown))
+                .AddAttackCooldownModifiedTime(new ReactiveVeriable<float>(heroConfig.AttackColdown))
                 .AddAttackCooldownCurrentTime()
-                .AddInAttackCooldown();
+                .AddInAttackCooldown()
+                .AddAttackPerSecond(new ReactiveVeriable<float>(baseStats[StatTypes.AttackPerSecond]));
 
 
 
@@ -118,6 +123,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddSystem(new StatsEffectsApplySystem())
+                .AddSystem(new AttackPerSecondStatsSynchronizerSystem())
+                .AddSystem(new AttackTimeByAttackSpeedStatsSynchronizerSystem())
                 .AddSystem(new MaxHealthStatsSynchronizerSystem())
                 .AddSystem(new DamageStatsSynchronizerSystem())
                 .AddSystem(new MoveSpeedStatsSynchronizerSystem())
@@ -217,6 +224,8 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntitiesactory.Create(entity, position, "Entities/Projectile");
 
             entity
+                .AddIsProjectile()
+                .AddOwner(new ReactiveVeriable<Entity>(owner))
                 .AddMoveDirection(new ReactiveVeriable<Vector3>(direction))
                 .AddMoveSpeed(new ReactiveVeriable<float>(25))
                 .AddIsMoving()
@@ -234,15 +243,16 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
 
 
 
+
             ICompositCondition canMove = new CompositCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             ICompositCondition canRotate = new CompositCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
-            ICompositCondition mustDie = new CompositCondition(LogicOperation.Or)
-                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value))
-                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value));
+            ICompositCondition mustDie = new CompositCondition()
+                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value), 0)
+                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value), 10, LogicOperation.Or);
 
 
             ICompositCondition mustSelfRealese = new CompositCondition()
@@ -259,12 +269,14 @@ namespace Assets._Progect.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new RigidBodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactEntitiesSystem(_collidersRegestryService))
+
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
                 .AddSystem(new AnotherTeamTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
 
             _entitiesLifeContext.Add(entity);
 
